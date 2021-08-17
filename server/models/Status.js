@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 const statusSchema = new Schema(
     {
@@ -12,9 +13,15 @@ const statusSchema = new Schema(
         },
         date: {
             type: Date,
-            default: Date.now
+            default: Date.now,
+            get: timestamp => dateFormat(timestamp)
+        }
+    },
+    {
+        toJSON: {
+            getters: true
         }
     }
-)
+);
 
 module.exports = statusSchema;
