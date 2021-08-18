@@ -1,17 +1,11 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 const Bike = require('./Bike');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
-        first_name: {
-            type: String,
-            required: true
-        },
-        last_name: {
-            type: String,
-            required: true
-        },
         username: {
             type: String,
             required: true
@@ -27,7 +21,7 @@ const userSchema = new Schema(
             required: true,
             minlength: 5
         },
-        bikes: [Bike]
+        bikes: [Bike.schema]
     },
     {
         toJSON: {
@@ -53,6 +47,6 @@ userSchema.virtual('bikeCount').get(function() {
     return this.bikes.length;
 });
 
-const User = model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
