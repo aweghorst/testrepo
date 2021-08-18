@@ -11,6 +11,7 @@ import Dashboard from '../../pages/Dashboard';
 import Search from '../../pages/Search';
 import Tips from '../../pages/Tips';
 import Login from '../../pages/Login';
+import Signup from '../../pages/Signup';
 
 import NoMatch from '../../pages/NoMatch';
 
@@ -47,6 +48,7 @@ const Nav = () => {
                             <Route path="/Search" component={Search} />
                             <Route path="/Tips" component={Tips} />
                             <Route path="/Login" component={Login} />
+                            <Route path="/Signup" component={Signup} />
                             <Route component={NoMatch} />
                         </Switch>
                     </div>

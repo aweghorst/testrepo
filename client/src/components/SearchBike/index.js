@@ -32,7 +32,7 @@ const SearchBike = () => {
 
                             <div className="bg-gray-300 p-6 rounded-3xl shadow-2xl max-w-sm">
                                 <div className="">
-                                        <img className="object-contain h-48 w-full p-1" src={bike}></img>
+                                        <img className="object-contain h-48 w-full p-1" src={bike} alt="the users bike"></img>
                                     <div className="bg-gray-200 rounded-3xl p-2">
                                         <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
                                         <div>
