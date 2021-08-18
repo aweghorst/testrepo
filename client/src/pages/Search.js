@@ -1,9 +1,10 @@
 import React from 'react';
+import SearchBike from '../components/SearchBike';
 
 const Search = () => {
     return (
         <div className="">
-            This is the Search page
+            <SearchBike />
         </div>
     )
 }
