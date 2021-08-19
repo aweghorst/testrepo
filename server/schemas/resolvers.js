@@ -3,6 +3,7 @@ const { User, Bike } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
+
     Query: {
         bikes: async () => {
             return await Bike.find();
@@ -13,28 +14,41 @@ const resolvers = {
                 .select('-__v -password')
                 .populate('bikes');
 
-                return user;
-            }
-            throw new AuthenticationError("Not logged in");
-        },
+
+        return user;
+      }
+      throw new AuthenticationError("Not logged in");
     },
-    Mutation: {
-        addUser: async (parent, args) => {
-            console.log(args);
-            const user = await User.create(args);
-            const token = signToken(user);
+  },
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-            return { token, user };
-        },
-        addBike: async (parent, args, context) => {
-            if (context.user) {
-                const bike = await Bike.create(args);
+      return { token, user };
+    },
+    addBike: async (parent) => {},
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
 
-                await User.findByIdAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { bikes: bike._id }},
-                    { new: true }
-                );
+      throw new AuthenticationError("Not logged in");
+    },
+    addComment: async (parent, { bikeId, commentBody }, context) => {
+      if (context.user) {
+        const updatedBike = await Bike.findOneAndUpdate(
+          { _id: bikeId },
+          {
+            $push: {
+              comments: { commentBody, username: context.user.username },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+
 
                 return bike;
             }
@@ -90,25 +104,29 @@ const resolvers = {
                 });
             }
 
-            throw new AuthenticationError("Not logged in");
-        },
-        login: async (parent, { username, password }) => {
-            const user = await User.findOne({ username });
+        return updatedBike;
+      }
 
-            if (!user) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
 
-            const correctPw = await user.isCorrectPassword(password);
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
-            if (!correctPw) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-            const token = signToken(user);
-            return { token, user };
-        }
-    }
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+  },
 };
 
 module.exports = resolvers;

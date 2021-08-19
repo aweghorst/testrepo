@@ -28,9 +28,9 @@ const UserBike = () => {
     return (
         <span className="">
 
-            <Carousel responsive={responsive} infinite={true} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20">
+            <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
 
-                            <div className="bg-gray-300 p-6 rounded-3xl shadow-2xl max-w-sm">
+                            <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
                                 <div className="">
                                         <img className="object-contain h-48 w-full p-1" src={bike} alt="your bike"></img>
                                     <div className="bg-gray-200 rounded-3xl p-2">
@@ -40,31 +40,12 @@ const UserBike = () => {
                                         </div>
                                         <div className="flex justify-around">
                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Edit</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Comment</button>
+                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Comments</button>
                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Delete</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div className="bg-gray-300 p-6 rounded-3xl shadow-2xl max-w-sm">
-                                <div className="">
-                                        <img className="object-contain h-48 w-full p-1" src={bike} alt="your bike"></img>
-                                    <div className="bg-gray-200 rounded-3xl p-2">
-                                        <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
-                                        <div>
-                                            <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        </div>
-                                        <div className="flex justify-around">
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Edit</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Comment</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
             </Carousel>
 
         </span>
