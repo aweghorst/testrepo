@@ -17,7 +17,7 @@ const bikeSchema = new Schema(
             type: String
         },
         serial: {
-            type: Number
+            type: String
         },
         description: {
             type: String,
