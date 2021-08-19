@@ -35,7 +35,23 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    addComment: async (parent, { bikeId, commentBody }, context) => {
+      if (context.user) {
+        const updatedBike = await Bike.findOneAndUpdate(
+          { _id: bikeId },
+          {
+            $push: {
+              comments: { commentBody, username: context.user.username },
+            },
+          },
+          { new: true, runValidators: true }
+        );
 
+        return updatedBike;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 

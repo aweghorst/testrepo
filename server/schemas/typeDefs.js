@@ -37,6 +37,13 @@ const typeDefs = gql`
     user: User
   }
 
+  type Comment {
+    _id: ID
+    commentBody: String
+    createdAt: String
+    username: String
+  }
+
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     addBike(
@@ -55,6 +62,7 @@ const typeDefs = gql`
     ): User
     updateBike(_id: ID!, status: Boolean, description: String): Bike
     login(username: String!, password: String!): Auth
+    addComment(bikeId: ID!, commentBody: String!): Bike
   }
 `;
 

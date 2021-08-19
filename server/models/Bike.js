@@ -30,12 +30,7 @@ const bikeSchema = new Schema({
     required: true,
   },
   status: [statusSchema],
-  Comment: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Comment",
-    },
-  ],
+  comments: [commentSchema],
 });
 
 const Bike = mongoose.model("Bike", bikeSchema);
