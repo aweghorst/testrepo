@@ -4,6 +4,7 @@ export const QUERY_USER = gql`
     {
         user {
             username
+            bikeCount
             bikes {
                 _id
                 brand
@@ -12,10 +13,15 @@ export const QUERY_USER = gql`
                 serial
                 description
                 image
-                status
+                status {
+                    isLost
+                    location
+                    date
+                }
             }
         }
     }
+}
 `;
 
 export const QUERY_ALL_BIKES = gql`
@@ -28,7 +34,12 @@ export const QUERY_ALL_BIKES = gql`
             serial
             description
             image
-            status
+            status {
+                isLost
+                location
+                date
+            }
         }
     }
+}
 `;

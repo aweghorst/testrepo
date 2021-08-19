@@ -1,4 +1,4 @@
-const jwt = require('jsontwebtoken');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 // create .env file with JWT_SECRET='your secret code' locally!!
