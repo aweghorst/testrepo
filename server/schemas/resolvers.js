@@ -9,7 +9,9 @@ const resolvers = {
         },
         user: async (parent, args, context) => {
             if (context.user) {
-                const user = await User.findById(context.user._id);
+                const user = await User.findById(context.user._id)
+                .select('-__v')
+                .populate('bikes');
 
                 return user;
             }
@@ -24,7 +26,19 @@ const resolvers = {
 
             return { token, user };
         },
-        addBike: async (parent) => {},
+        addBike: async (parent, args, context) => {
+            if (context.user) {
+                const bike = await Bike.create(args);
+
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { bikes: bike._id }},
+                    { new: true }
+                );
+
+                return bike;
+            }
+        },
         updateUser: async (parent, args, context) => {
             if (context.user) {
                 return await User.findByIdAndUpdate(context.user._id, args, {

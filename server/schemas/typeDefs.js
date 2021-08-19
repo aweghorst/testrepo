@@ -6,7 +6,7 @@ const typeDefs = gql`
         brand: String
         bike_model: String
         year: String
-        serial: Int
+        serial: String
         description: String
         image: String
         status: [Status]
@@ -38,7 +38,7 @@ const typeDefs = gql`
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
-        addBike(brand: String, model: String, year: String, serial: Int, description: String, image: String): Bike
+        addBike(brand: String, bike_model: String, year: String, serial: String, description: String, image: String): Bike
         updateUser(firstName: String, lastName: String, email: String, password: String): User
         updateBike(_id: ID!, status: Boolean, description: String): Bike
         login(username: String!, password: String!): Auth
