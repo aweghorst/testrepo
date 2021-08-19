@@ -6,7 +6,7 @@ const typeDefs = gql`
         brand: String
         bike_model: String
         year: String
-        serial: Int
+        serial: String
         description: String
         image: String
         status: [Status]
