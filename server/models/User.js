@@ -45,8 +45,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 
 userSchema.virtual("bikeCount").get(function() {
-    return this.bikes.length;
-
+    return this.bikes.length
+});
 
 const User = mongoose.model("User", userSchema);
 
