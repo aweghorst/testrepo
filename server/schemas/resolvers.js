@@ -41,6 +41,17 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in!');
         },
+        updateBike: async (parent, { bikeId, description, image }, context) => {
+            if (context.user) {
+                const updatedBike = await Bike.findByIdAndUpdate( 
+                    { _id: bikeId },
+                    { description: description, image: image },
+                    { new: true }
+                )
+
+                return updatedBike;
+            }
+        },
         updateStatus: async (parent, { bikeId, isLost, location }, context) => {
             if (context.user) {
                 const updatedBike = await Bike.findByIdAndUpdate(
@@ -54,15 +65,15 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in!');
         },
-        // updateUser: async (parent, args, context) => {
-        //     if (context.user) {
-        //         return await User.findByIdAndUpdate(context.user._id, args, {
-        //             new: true,
-        //         });
-        //     }
+        updateUser: async (parent, args, context) => {
+            if (context.user) {
+                return await User.findByIdAndUpdate(context.user._id, args, {
+                    new: true,
+                });
+            }
 
-        //     throw new AuthenticationError("Not logged in");
-        // },
+            throw new AuthenticationError("Not logged in");
+        },
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });
 

@@ -46,7 +46,30 @@ export const ADD_BIKE = gql`
             serial
             description
             image
-            status
+            status {
+                isLost
+                location
+                date
+            }
+        }
+    }
+`;
+
+export const UPDATE_BIKE = gql`
+    mutation updateBike($bikeId: ID!, $description: String, $image: String) {
+        updateBike (bikeId: $bikeId, description: $description, image: $image) {
+            _id
+            brand
+            bike_model
+            year
+            serial
+            description
+            image
+            status {
+                isLost
+                location
+                date
+            }
         }
     }
 `;
@@ -56,13 +79,13 @@ export const UPDATE_STATUS = gql`
         updateStatus(bikeId: $bikeId, isLost: $isLost, location: $location) {
             _id
             brand
-        bike_model
-        description
-        status {
-            isLost
-            location
-            date
-      }
+            bike_model
+            description
+            status {
+                isLost
+                location
+                date
+            }
+        }
     }
-  }
 `;

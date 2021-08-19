@@ -42,7 +42,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addBike(brand: String, bike_model: String, year: String, serial: String, description: String, image: String): Bike
         updateUser(email: String, password: String): User
-        updateBike(_id: ID!, status: Boolean, description: String): Bike
+        updateBike(bikeId: ID!, description: String, image: String): Bike
         updateStatus(bikeId: ID!, isLost: Boolean, location: String): Bike
         login(username: String!, password: String!): Auth
     }
