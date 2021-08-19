@@ -9,9 +9,9 @@ const resolvers = {
     },
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          populate: "bikes",
-        });
+        const user = await User.findById(context.user._id)
+          .select("-__v -password")
+          .populate("bikes");
 
         return user;
       }
@@ -47,28 +47,77 @@ const resolvers = {
           { new: true, runValidators: true }
         );
 
+        return bike;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    updateBike: async (parent, { bikeId, description, image }, context) => {
+      if (context.user) {
+        const updatedBike = await Bike.findByIdAndUpdate(
+          { _id: bikeId },
+          { description: description, image: image },
+          { new: true }
+        );
+
         return updatedBike;
       }
 
       throw new AuthenticationError("You need to be logged in!");
     },
+    deleteBike: async (parent, { bikeId }, context) => {
+      if (context.user) {
+        Bike.findOneAndDelete({ _id: bikeId });
 
-    login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { bikes: bikeId } },
+          { new: true }
+        ).populate("bikes");
 
-      if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
+        return updatedUser;
       }
 
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
-
-      const token = signToken(user);
-      return { token, user };
+      throw new AuthenticationError("You need to be logged in!");
     },
+    updateStatus: async (parent, { bikeId, isLost, location }, context) => {
+      if (context.user) {
+        const updatedBike = await Bike.findByIdAndUpdate(
+          { _id: bikeId },
+          { status: { isLost: isLost, location: location } },
+          { new: true }
+        );
+
+        return updatedBike;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
+
+      return updatedBike;
+    },
+  },
+  login: async (parent, { username, password }) => {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      throw new AuthenticationError("Incorrect credentials");
+    }
+
+    const correctPw = await user.isCorrectPassword(password);
+
+    if (!correctPw) {
+      throw new AuthenticationError("Incorrect credentials");
+    }
+
+    const token = signToken(user);
+    return { token, user };
   },
 };
 
