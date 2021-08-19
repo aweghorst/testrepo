@@ -74,6 +74,30 @@ export const UPDATE_BIKE = gql`
     }
 `;
 
+export const DELETE_BIKE = gql`
+    mutation deleteBike($bikeId: ID!) {
+        deleteBike(bikeId: $bikeId) {
+            _id
+            username
+            bikeCount
+            bikes {
+                _id
+                brand
+                bike_model
+                year
+                serial
+                description
+                image
+                status {
+                    isLost
+                    location
+                    date
+                }
+            }
+        }
+    }
+`;
+
 export const UPDATE_STATUS = gql`
     mutation updateStatus($bikeId: ID!, $isLost: Boolean, $location: String) {
         updateStatus(bikeId: $bikeId, isLost: $isLost, location: $location) {

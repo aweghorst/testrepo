@@ -44,6 +44,7 @@ const typeDefs = gql`
         updateUser(email: String, password: String): User
         updateBike(bikeId: ID!, description: String, image: String): Bike
         updateStatus(bikeId: ID!, isLost: Boolean, location: String): Bike
+        deleteBike(bikeId: ID!): User
         login(username: String!, password: String!): Auth
     }
 `;
