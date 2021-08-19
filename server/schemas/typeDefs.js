@@ -6,13 +6,14 @@ const typeDefs = gql`
         brand: String
         bike_model: String
         year: String
-        serial: String
+        serial: Int
         description: String
         image: String
         status: [Status]
     }
 
     type Status {
+        _id: ID
         isLost: Boolean
         location: String
         date: String
@@ -23,6 +24,7 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
+        bikeCount: Int
         bikes: [Bike]
     }
 
@@ -39,8 +41,10 @@ const typeDefs = gql`
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         addBike(brand: String, bike_model: String, year: String, serial: String, description: String, image: String): Bike
-        updateUser(firstName: String, lastName: String, email: String, password: String): User
-        updateBike(_id: ID!, status: Boolean, description: String): Bike
+        updateUser(email: String, password: String): User
+        updateBike(bikeId: ID!, description: String, image: String): Bike
+        updateStatus(bikeId: ID!, isLost: Boolean, location: String): Bike
+        deleteBike(bikeId: ID!): User
         login(username: String!, password: String!): Auth
     }
 `;
