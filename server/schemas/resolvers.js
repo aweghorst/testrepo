@@ -3,55 +3,56 @@ const { User, Bike } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
-    Query: {
-        bikes: async () => {
-            return await Bike.find();
-        },
-        user: async (parent, args, context) => {
-            if (context.user) {
-                const user = await User.findById(context.user._id).populate({
-                    populate: "bikes",
-                });
-
-                return user;
-            }
-            throw new AuthenticationError("Not logged in");
-        },
+  Query: {
+    bikes: async () => {
+      return await Bike.find();
     },
-    Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
-            const token = signToken(user);
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          populate: "bikes",
+        });
 
-            return { token, user };
-        },
-        addBike: async (parent) => {},
-        updateUser: async (parent, args, context) => {
-            if (context.user) {
-                return await User.findByIdAndUpdate(context.user._id, args, {
-                    new: true,
-                });
-            }
+        return user;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+  },
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-            throw new AuthenticationError("Not logged in");
-        },
-        login: async (parent, { username, password }) => {
-            const user = await User.findOne({ username });
+      return { token, user };
+    },
+    addBike: async (parent) => {},
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
 
-            if (!user) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      throw new AuthenticationError("Not logged in");
+    },
 
-            const correctPw = await user.isCorrectPassword(password);
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
-            if (!correctPw) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-            const token = signToken(user);
-            return { token, user };
-        }
-    }
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+  },
 };
 
 module.exports = resolvers;
