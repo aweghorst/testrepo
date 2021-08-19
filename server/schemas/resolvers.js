@@ -52,6 +52,7 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
+
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
