@@ -38,7 +38,7 @@ const resolvers = {
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { bikes: bike._id }},
-                    { new: true, runValidators: true }
+                    { new: true }
                 );
 
                 return bike;
