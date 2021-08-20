@@ -4,6 +4,7 @@ export const QUERY_USER = gql`
     {
         user {
             username
+            email
             bikeCount
             bikes {
                 _id
