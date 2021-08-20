@@ -11,6 +11,7 @@ const typeDefs = gql`
         description: String
         image: String
         status: [Status]
+        comments: [Comment]
     }
 
     type Status {
@@ -18,6 +19,13 @@ const typeDefs = gql`
         isLost: Boolean
         location: String
         date: String
+    }
+
+    type Comment {
+        _id: ID
+        commentBody: String
+        createdAt: String
+        username: String
     }
 
     type User {
@@ -37,6 +45,7 @@ const typeDefs = gql`
     type Query {
         bikes(_id: ID!): Bike
         user: User
+        users: [User]
     }
     type Comment {
         _id: ID

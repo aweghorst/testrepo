@@ -25,4 +25,8 @@ const commentSchema = new Schema(
     }
 );
 
+<<<<<<< HEAD
 module.exports = commentSchema;
+=======
+module.exports = commentSchema;
+>>>>>>> c31c68e9b34d6a998537b88c5c0c73269a24076c

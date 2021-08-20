@@ -1,9 +1,12 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_USER = gql`
+// for testing purposes with seed data
+export const QUERY_USERS = gql`
     {
-        user {
+        users {
             username
+            password
+            email
             bikeCount
             bikes {
                 _id
@@ -17,6 +20,41 @@ export const QUERY_USER = gql`
                     isLost
                     location
                     date
+                }
+                comments {
+                    username
+                    commentBody
+                    createdAt
+                }
+            }
+        }
+    }
+`;
+
+
+export const QUERY_USER = gql`
+    {
+        user {
+            username
+            email
+            bikeCount
+            bikes {
+                _id
+                brand
+                bike_model
+                year
+                serial
+                description
+                image
+                status {
+                    isLost
+                    location
+                    date
+                }
+                comments {
+                    username
+                    commentBody
+                    createdAt
                 }
             }
         }
@@ -38,6 +76,11 @@ export const QUERY_ALL_BIKES = gql`
                 isLost
                 location
                 date
+            }
+            comment {
+                username
+                commentBody
+                createdAt
             }
         }
     }

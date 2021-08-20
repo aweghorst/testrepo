@@ -22,23 +22,33 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+    mutation updateUser($email: String!, $password: String!) {
+        updateUser(email: $email, password: $password) {
+            _id
+            username
+            email
+        }
+    }
+`;
+
 export const ADD_BIKE = gql`
-  mutation addBike(
-    $brand: String
-    $bike_model: String
-    $year: String
-    $serial: Int
-    $description: String
-    $image: String
-  ) {
-    addBike(
-      brand: $brand
-      bike_model: $bike_model
-      year: $year
-      serial: $serial
-      description: $description
-      image: $image
-    ) 
+    mutation addBike(
+        $brand: String
+        $bike_model: String
+        $year: String
+        $serial: String
+        $description: String
+        $image: String
+    ) {
+        addBike(
+            brand: $brand
+            bike_model: $bike_model
+            year: $year
+            serial: $serial
+            description: $description
+            image: $image
+        ) {
             _id
             brand
             bike_model
@@ -75,23 +85,30 @@ export const UPDATE_BIKE = gql`
 `;
 
 export const DELETE_BIKE = gql`
-  mutation deleteBike($bikeId: ID!) {
-    deleteBike(bikeId: $bikeId) {
-      _id
-      username
-      bikeCount
-      bikes {
-        _id
-        brand
-        bike_model
-        year
-        serial
-        description
-        image
-        status {
-          isLost
-          location
-          date
+    mutation deleteBike($bikeId: ID!) {
+        deleteBike(bikeId: $bikeId) {
+            _id
+            username
+            bikeCount
+            bikes {
+                _id
+                brand
+                bike_model
+                year
+                serial
+                description
+                image
+                status {
+                    isLost
+                    location
+                    date
+                }
+                comments {
+                    username
+                    commentBody
+                    createdAt
+                }
+            }
         }
       }
     }
@@ -104,7 +121,9 @@ export const UPDATE_STATUS = gql`
             _id
             brand
             bike_model
+            serial
             description
+            image
             status {
                 isLost
                 location
@@ -116,15 +135,23 @@ export const UPDATE_STATUS = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($bikeId: ID!, $commentBody: String!) {
-    addComment(bikeId: $thoughtId, commentBody: $commentBody) {
-      _id
-      comments {
-        _id
-        commentBody
-        createdAt
-        username
-      }
+    mutation addComment($bikeId: ID!, $commentBody: String!) {
+       addComment(bikeId: $bikeId, commentBody: $commentBody) {
+            _id
+            brand
+            bike_model
+            description
+            status {
+                isLost
+                location
+                date
+            }
+            comments {
+                _id
+                commentBody
+                createdAt
+                username
+            }
+        }
     }
-  }
 `;
