@@ -1,25 +1,25 @@
 import { gql } from "@apollo/client";
 
 export const LOGIN = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      token
-      user {
-        _id
-      }
+    mutation login($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
+            token
+            user {
+                _id
+            }
+        }
     }
-  }
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-      }
+    mutation addUser($username: String!, $email: String!, $password: String!) {
+        addUser(username: $username, email: $email, password: $password) {
+            token
+            user {
+                _id
+            }
+        }
     }
-  }
 `;
 
 export const UPDATE_USER = gql`
@@ -66,22 +66,22 @@ export const ADD_BIKE = gql`
 `;
 
 export const UPDATE_BIKE = gql`
-  mutation updateBike($bikeId: ID!, $description: String, $image: String) {
-    updateBike(bikeId: $bikeId, description: $description, image: $image) {
-      _id
-      brand
-      bike_model
-      year
-      serial
-      description
-      image
-      status {
-        isLost
-        location
-        date
-      }
+    mutation updateBike($bikeId: ID!, $description: String, $image: String) {
+        updateBike (bikeId: $bikeId, description: $description, image: $image) {
+            _id
+            brand
+            bike_model
+            year
+            serial
+            description
+            image
+            status {
+                isLost
+                location
+                date
+            }
+        }
     }
-  }
 `;
 
 export const DELETE_BIKE = gql`
@@ -110,9 +110,7 @@ export const DELETE_BIKE = gql`
                 }
             }
         }
-      }
     }
-  }
 `;
 
 export const UPDATE_STATUS = gql`
@@ -131,7 +129,6 @@ export const UPDATE_STATUS = gql`
             }
         }
     }
-  }
 `;
 
 export const ADD_COMMENT = gql`
