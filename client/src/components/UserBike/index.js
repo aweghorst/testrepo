@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import bike from '../../assets/images/bike.jpg';
-import BikeComment from '../BikeComment';
+import BikeMessage from '../BikeMessage';
 
 const UserBike = () => {
 
