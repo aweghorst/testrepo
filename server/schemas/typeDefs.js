@@ -11,7 +11,7 @@ const typeDefs = gql`
         description: String
         image: String
         status: [Status]
-        comments: [Comment]
+        messages: [Message]
     }
 
     type Status {
@@ -21,9 +21,9 @@ const typeDefs = gql`
         date: String
     }
 
-    type Comment {
+    type Message {
         _id: ID
-        commentBody: String
+        messageBody: String
         createdAt: String
         username: String
     }
@@ -43,7 +43,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        bikes(_id: ID!): Bike
+        bikes: [Bike]
         user: User
         users: [User]
     }
@@ -56,7 +56,7 @@ const typeDefs = gql`
         updateStatus(bikeId: ID!, isLost: Boolean, location: String): Bike
         deleteBike(bikeId: ID!): User
         login(username: String!, password: String!): Auth
-        addComment(bikeId: ID!, commentBody: String!): Bike
+        addMessage(bikeId: ID!, messageBody: String!): Bike
     }
 `;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BikeMessage = ( {messages }) => {
+const BikeMessage = ( {messages } ) => {
 
     return (
         <div className="container text-center">
@@ -11,10 +11,7 @@ const BikeMessage = ( {messages }) => {
                         {message.messageBody}
                         </p>
                     ))}
-            <p>From: User</p>
-            <p>Sent on: Monday</p>
             </div>
-            <p>Message Text</p>
         </div>
     )
 }

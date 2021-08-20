@@ -97,14 +97,14 @@ const resolvers = {
 
             throw new AuthenticationError("Not logged in");
         },
-        addComment: async (parent, { bikeId, commentBody }, context) => {
+        addMessage: async (parent, { bikeId, messageBody }, context) => {
             if (context.user) {
               const updatedBike = await Bike.findOneAndUpdate(
                 { _id: bikeId },
                 {
                   $push: {
-                    comments: {
-                      commentBody,
+                    messages: {
+                      messageBody,
                       username: context.user.username,
                     },
                   },

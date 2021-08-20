@@ -21,9 +21,9 @@ export const QUERY_USERS = gql`
                     location
                     date
                 }
-                comments {
+                messages {
                     username
-                    commentBody
+                    messageBody
                     createdAt
                 }
             }
@@ -51,9 +51,9 @@ export const QUERY_USER = gql`
                     location
                     date
                 }
-                comments {
+                messages {
                     username
-                    commentBody
+                    messageBody
                     createdAt
                 }
             }
@@ -76,9 +76,9 @@ export const QUERY_ALL_BIKES = gql`
                 location
                 date
             }
-            comment {
+            messages {
                 username
-                commentBody
+                messageBody
                 createdAt
             }
         }
