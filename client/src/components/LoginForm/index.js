@@ -7,7 +7,7 @@ import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 const LoginForm = props => {
-    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [formState, setFormState] = useState({ username: '', password: '' });
     const [login, { error }] = useMutation(LOGIN);
 
     //update state based on form input changes 
@@ -50,8 +50,8 @@ const LoginForm = props => {
                         </label>
                         <input className="focus:outline-none focus:ring focus:border-blue-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="username"
-                            type="text"
-                            placeholder="Username" value={formState.email}
+                            type="username"
+                            placeholder="Username" value={formState.username}
                             onChange={handleChange} />
                     </div>
                     <div className="mb-6">
@@ -72,8 +72,7 @@ const LoginForm = props => {
                     </div>
                 </form>
                 {error && <div>Login failed</div>}
-            </div>
-            <HashRouter>
+                <HashRouter>
                 <div className="flex justify-center">
                     <p className="pt-2 pr-6">Not a member?</p>
                     <NavLink exact to="/Signup" activeClassName="current-nav" className="nav-link" replace>
@@ -87,6 +86,7 @@ const LoginForm = props => {
                     </Switch>
                 </div>
             </HashRouter>
+            </div>
         </div>
     );
 };
