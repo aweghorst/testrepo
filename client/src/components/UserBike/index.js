@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import bike from '../../assets/images/bike.jpg';
+import BikeComment from '../BikeComment';
 
 const UserBike = () => {
 
@@ -25,6 +26,21 @@ const UserBike = () => {
         },
     };
 
+    function handleMessagesClick(e) {
+        e.preventDefault();
+        console.log("clicked message!");
+    }
+
+    function handleEditClick(e) {
+        e.preventDefault();
+        console.log('clicked edit!')
+    }
+
+    function handleDeleteClick(e) {
+        e.preventDefault();
+        console.log('clicked delete!')
+    }
+
     return (
         <span className="">
 
@@ -39,15 +55,14 @@ const UserBike = () => {
                                             <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                         </div>
                                         <div className="flex justify-around">
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Edit</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Comments</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Delete</button>
+                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleEditClick}>Edit</button>
+                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleMessagesClick}>Messages</button>
+                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleDeleteClick}>Delete</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
             </Carousel>
-
         </span>
             
     )
