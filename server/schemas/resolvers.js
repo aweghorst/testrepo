@@ -3,19 +3,25 @@ const { User, Bike } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
-  Query: {
-    bikes: async () => {
-      return await Bike.find();
-    },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          populate: "bikes",
-        });
+    Query: {
+        bikes: async () => {
+            return await Bike.find();
+        },
+        user: async (parent, args, context) => {
+            if (context.user) {
+                const user = await User.findById(context.user._id)
+                .select('-__v -password')
+                .populate('bikes');
 
-        return user;
-      }
-      throw new AuthenticationError("Not logged in");
+                return user;
+            }
+            throw new AuthenticationError("Not logged in");
+        },
+        users: async () => {
+            return User.find()
+                .select('-__v')
+                .populate('bikes');
+        }
     },
   },
   Mutation: {
@@ -33,27 +39,90 @@ const resolvers = {
         });
       }
 
-      throw new AuthenticationError("Not logged in");
-    },
-    addComment: async (parent, { bikeId, commentBody }, context) => {
-      if (context.user) {
-        const updatedBike = await Bike.findOneAndUpdate(
-          { _id: bikeId },
-          {
-            $push: {
-              comments: { commentBody, username: context.user.username },
-            },
-          },
-          { new: true, runValidators: true }
-        );
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { bikes: bike._id }},
+                    { new: true, runValidators: true }
+                );
 
-        return updatedBike;
-      }
+                return bike;
+            }
 
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        updateBike: async (parent, { bikeId, description, image }, context) => {
+            if (context.user) {
+                const updatedBike = await Bike.findByIdAndUpdate( 
+                    { _id: bikeId },
+                    { description: description, image: image },
+                    { new: true, runValidators: true }
+                )
+
+                return updatedBike;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        deleteBike: async (parent, { bikeId }, context) => {
+            if (context.user) {
+                Bike.findOneAndDelete({ _id: bikeId });
+
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { bikes: bikeId } },
+                    { new: true, runValidators: true } 
+                )
+                .populate('bikes');
+
+                return updatedUser;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        updateStatus: async (parent, { bikeId, isLost, location }, context) => {
+            if (context.user) {
+                const updatedBike = await Bike.findByIdAndUpdate(
+                    { _id: bikeId },
+                    { status: { isLost: isLost, location: location }},
+                    { new: true, runValidators: true }
+                );
+
+                return updatedBike;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        updateUser: async (parent, args, context) => {
+            if (context.user) {
+                return await User.findByIdAndUpdate(context.user._id, args, {
+                    new: true,
+                });
+            }
+
+            throw new AuthenticationError("Not logged in");
+        },
+        addComment: async (parent, { bikeId, commentBody }, context) => {
+            if (context.user) {
+              const updatedBike = await Bike.findOneAndUpdate(
+                { _id: bikeId },
+                {
+                  $push: {
+                    comments: {
+                      commentBody,
+                      username: context.user.username,
+                    },
+                  },
+                },
+                { new: true, runValidators: true }
+              );
+
+              return updatedBike;
+            }
+      
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        login: async (parent, { username, password }) => {
+            const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
