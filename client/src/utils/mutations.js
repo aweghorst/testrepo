@@ -103,6 +103,11 @@ export const DELETE_BIKE = gql`
                     location
                     date
                 }
+                comments {
+                    username
+                    commentBody
+                    createdAt
+                }
             }
         }
     }
