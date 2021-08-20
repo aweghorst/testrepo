@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Route,
     NavLink,
     HashRouter,
     Switch
 } from "react-router-dom";
-import { useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import Message from '../../pages/Message.js';
@@ -13,11 +13,13 @@ import { QUERY_ALL_BIKES } from '../../utils/queries.js';
 
 const SearchBike = () => {
 
+
     const { loading, data} = useQuery(QUERY_ALL_BIKES);
     console.log(data);
+
     const [searchedBikes, setSearchedBikes] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-
+    
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -37,9 +39,10 @@ const SearchBike = () => {
             items: 1,
         },
     };
-
+    
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
+        console.log(event);
     }
 
 
