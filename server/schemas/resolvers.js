@@ -105,9 +105,8 @@ const resolvers = {
                   },
                 },
                 { new: true, runValidators: true }
-              )
-                .populate('comments');
-      
+              );
+
               return updatedBike;
             }
       

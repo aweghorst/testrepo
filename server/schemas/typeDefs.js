@@ -10,6 +10,7 @@ const typeDefs = gql`
         description: String
         image: String
         status: [Status]
+        comments: [Comment]
     }
 
     type Status {
