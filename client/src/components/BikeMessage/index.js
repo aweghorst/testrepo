@@ -1,10 +1,16 @@
 import React from 'react';
 
-const BikeMessage = () => {
+const BikeMessage = ( {messages }) => {
 
     return (
-        <div>
+        <div className="container text-center">
             <div>
+                {messages &&
+                    messages.map(message => (
+                        <p className="" key={message._id}>
+                        {message.messageBody}
+                        </p>
+                    ))}
             <p>From: User</p>
             <p>Sent on: Monday</p>
             </div>
@@ -12,3 +18,5 @@ const BikeMessage = () => {
         </div>
     )
 }
+
+export default BikeMessage;

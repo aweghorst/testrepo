@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 const statusSchema = require('./Status');
-const commentSchema = require('./Comment');
+const messageSchema = require('./Message');
 
 const bikeSchema = new Schema(
     {
@@ -30,7 +30,7 @@ const bikeSchema = new Schema(
             required: true
         },
         status: [statusSchema],
-        comments: [commentSchema]
+        messages: [messageSchema]
     }
 );
 

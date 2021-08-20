@@ -56,9 +56,9 @@ db.once("open", async () => {
     );
   }
 
-  // create comments
+  // create messagess
   for (let i = 0; i < 100; i += 1) {
-    const commentBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const messageBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username } = createdUsers.ops[randomUserIndex];
@@ -68,7 +68,7 @@ db.once("open", async () => {
 
     await Bike.updateOne(
       { _id: bikeId },
-      { $push: { comments: { commentBody, username } } },
+      { $push: { messages: { messageBody, username } } },
       { runValidators: true }
     );
   }

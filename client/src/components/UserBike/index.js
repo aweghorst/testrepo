@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import bike from '../../assets/images/bike.jpg';
 import BikeMessage from '../BikeMessage';
 
 const UserBike = () => {
+
+    const [showMessages, clickedShowMessages] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -63,6 +65,10 @@ const UserBike = () => {
                                 </div>
                             </div>
             </Carousel>
+
+            <div>
+                <BikeMessage />
+            </div>
         </span>
             
     )
