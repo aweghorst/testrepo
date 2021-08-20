@@ -19,6 +19,13 @@ const typeDefs = gql`
         date: String
     }
 
+    type Comment {
+        _id: ID
+        commentBody: String
+        createdAt: String
+        username: String
+    }
+
     type User {
         _id: ID
         username: String
@@ -46,6 +53,7 @@ const typeDefs = gql`
         updateStatus(bikeId: ID!, isLost: Boolean, location: String): Bike
         deleteBike(bikeId: ID!): User
         login(username: String!, password: String!): Auth
+        addComment(bikeId: ID!, commentBody: String!): Bike
     }
 `;
 

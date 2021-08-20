@@ -18,6 +18,11 @@ export const QUERY_USER = gql`
                     location
                     date
                 }
+                comments {
+                    username
+                    commentBody
+                    createdAt
+                }
             }
         }
     }
@@ -37,6 +42,11 @@ export const QUERY_ALL_BIKES = gql`
                 isLost
                 location
                 date
+            }
+            comment {
+                username
+                commentBody
+                createdAt
             }
         }
     }

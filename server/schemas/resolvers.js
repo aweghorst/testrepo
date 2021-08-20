@@ -33,7 +33,7 @@ const resolvers = {
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { bikes: bike._id }},
-                    { new: true }
+                    { new: true, runValidators: true }
                 );
 
                 return bike;
@@ -46,7 +46,7 @@ const resolvers = {
                 const updatedBike = await Bike.findByIdAndUpdate( 
                     { _id: bikeId },
                     { description: description, image: image },
-                    { new: true }
+                    { new: true, runValidators: true }
                 )
 
                 return updatedBike;
@@ -61,7 +61,7 @@ const resolvers = {
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $pull: { bikes: bikeId } },
-                    { new: true } 
+                    { new: true, runValidators: true } 
                 )
                 .populate('bikes');
 
@@ -75,7 +75,7 @@ const resolvers = {
                 const updatedBike = await Bike.findByIdAndUpdate(
                     { _id: bikeId },
                     { status: { isLost: isLost, location: location }},
-                    { new: true }
+                    { new: true, runValidators: true }
                 );
 
                 return updatedBike;
@@ -91,6 +91,27 @@ const resolvers = {
             }
 
             throw new AuthenticationError("Not logged in");
+        },
+        addComment: async (parent, { bikeId, commentBody }, context) => {
+            if (context.user) {
+              const updatedBike = await Bike.findOneAndUpdate(
+                { _id: bikeId },
+                {
+                  $push: {
+                    comments: {
+                      commentBody,
+                      username: context.user.username,
+                    },
+                  },
+                },
+                { new: true, runValidators: true }
+              )
+                .populate('comments');
+      
+              return updatedBike;
+            }
+      
+            throw new AuthenticationError("You need to be logged in!");
         },
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });

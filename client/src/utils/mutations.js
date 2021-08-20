@@ -27,7 +27,7 @@ export const ADD_BIKE = gql`
         $brand: String
         $bike_model: String
         $year: String
-        $serial: Int
+        $serial: String
         $description: String
         $image: String
     ) {
@@ -104,11 +104,35 @@ export const UPDATE_STATUS = gql`
             _id
             brand
             bike_model
+            serial
+            description
+            image
+            status {
+                isLost
+                location
+                date
+            }
+        }
+    }
+`;
+
+export const ADD_COMMENT = gql`
+    mutation addComment($bikeId: ID!, $commentBody: String!) {
+       addComment(bikeId: $bikeId, commentBody: $commentBody) {
+            _id
+            brand
+            bike_model
             description
             status {
                 isLost
                 location
                 date
+            }
+            comments {
+                _id
+                commentBody
+                createdAt
+                username
             }
         }
     }
