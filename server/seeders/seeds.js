@@ -10,7 +10,7 @@ db.once("open", async () => {
   // create users
   const userData = [];
 
-  for (let i = 0; i < 20; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
@@ -22,7 +22,7 @@ db.once("open", async () => {
 
   // create bikes
   let createdBikes = [];
-  for (let i = 0; i < 50; i += 1) {
+  for (let i = 0; i < 20; i += 1) {
     const brand = faker.vehicle.model();
     const bike_model = faker.animal.cat();
     const year = faker.date.recent();
@@ -43,7 +43,7 @@ db.once("open", async () => {
   }
 
   // assign bike status
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 40; i++) {
     const lostStatus = faker.datatype.boolean();
     const location = faker.address.city();
 
@@ -57,7 +57,7 @@ db.once("open", async () => {
   }
 
   // create messagess
-  for (let i = 0; i < 100; i += 1) {
+  for (let i = 0; i < 25; i += 1) {
     const messageBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
