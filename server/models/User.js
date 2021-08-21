@@ -21,7 +21,12 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    bikes: [Bike.schema],
+    bikes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Bike",
+      },
+    ],
   },
   {
     toJSON: {
@@ -43,9 +48,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-
-userSchema.virtual("bikeCount").get(function() {
-    return this.bikes.length
+userSchema.virtual("bikeCount").get(function () {
+  return this.bikes.length;
 });
 
 const User = mongoose.model("User", userSchema);

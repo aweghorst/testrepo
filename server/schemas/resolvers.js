@@ -17,41 +17,41 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    users: async () => {
+      return User.find().select("-__v").populate("bikes");
+    },
+    userBikes: async (parent, args, context) => {
+      if (context.user) {
+        const bikeList = await Bike.find({ userId: context.user._id });
+
+        return bikeList;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
+      console.log(args);
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
-
     addBike: async (parent, args, context) => {
       if (context.user) {
         const bike = await Bike.create(args);
+
         await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { bikes: bike._id } },
           { new: true }
         );
-        return bike;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
 
-    addComment: async (parent, { bikeId, commentBody }, context) => {
-      if (context.user) {
-        const updatedBike = await Bike.findOneAndUpdate(
-          { _id: bikeId },
-          {
-            $push: {
-              comments: {
-                commentBody,
-                username: context.user.username,
-              },
-            },
-          },
-          { new: true, runValidators: true }
+        await Bike.findByIdAndUpdate(
+          { _id: bike._id },
+          { userId: context.user._id },
+          { new: true }
         );
 
         return bike;
@@ -107,9 +107,28 @@ const resolvers = {
         });
       }
 
-      return updatedBike;
+      throw new AuthenticationError("Not logged in");
     },
+    addMessage: async (parent, { bikeId, messageBody }, context) => {
+      if (context.user) {
+        const updatedBike = await Bike.findOneAndUpdate(
+          { _id: bikeId },
+          {
+            $push: {
+              messages: {
+                messageBody,
+                username: context.user.username,
+              },
+            },
+          },
+          { new: true, runValidators: true }
+        );
 
+        return updatedBike;
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
