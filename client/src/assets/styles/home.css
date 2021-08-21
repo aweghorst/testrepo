@@ -1,0 +1,14 @@
+/* src/assets/styles/home.css */
+
+.home-container {
+    text-align: center;
+    margin: 150px;
+}
+
+.welcome-title {
+
+}
+
+.welcome-text {
+    font-size: large;
+}
