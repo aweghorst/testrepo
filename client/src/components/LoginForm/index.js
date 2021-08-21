@@ -35,7 +35,7 @@ const LoginForm = props => {
 
         // clear form values
         setFormState({
-            email: '',
+            username: '',
             password: '',
         });
     };
@@ -68,7 +68,7 @@ const LoginForm = props => {
                         onChange={handleChange} />
                     </div>
                     <div className="flex items-center justify-between">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus: shadow-outline" type="button">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus: shadow-outline" type="submit">
                             Login
                         </button>
                     </div>
@@ -78,7 +78,8 @@ const LoginForm = props => {
                 <div className="flex justify-center">
                     <p className="pt-2 pr-6">Not a member?</p>
                     <NavLink exact to="/Signup" activeClassName="current-nav" className="nav-link" replace>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                        type="submit">
                             Sign Up
                         </button>
                     </NavLink>
