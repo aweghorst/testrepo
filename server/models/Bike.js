@@ -31,7 +31,7 @@ const bikeSchema = new Schema(
             required: true
         },
         status: [statusSchema],
-        messages: [messageSchema]
+        messages: [messageSchema],
     }
 );
 

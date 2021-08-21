@@ -13,7 +13,7 @@ const typeDefs = gql`
         image: String
         status: [Status]
         messages: [Message]
-    }
+    },
 
     type Status {
         _id: ID
@@ -48,6 +48,7 @@ const typeDefs = gql`
         user: User
         users: [User]
         userBikes(userId: String): [Bike]
+        lostBikes(location: String): [Bike]
     }
 
     type Mutation {
