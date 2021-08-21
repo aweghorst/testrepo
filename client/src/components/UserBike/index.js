@@ -3,9 +3,10 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import bike from '../../assets/images/bike.jpg';
 import BikeMessage from '../BikeMessage';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
-
     const [showMessages, clickedShowMessages] = useState(false);
 
     const responsive = {
@@ -54,6 +55,11 @@ const UserBike = () => {
                                     <div className="bg-gray-200 rounded-3xl p-2">
                                         <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
                                         <div>
+                                            hello here are my bikes
+                                            {bikes?.map(bike => (
+                                                bike.messages
+                                            ))}
+            
                                             <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                         </div>
                                         <div className="flex justify-around">

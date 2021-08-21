@@ -21,7 +21,12 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    bikes: [Bike.schema],
+    bikes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Bike'
+      }
+    ],
   },
   {
     toJSON: {
