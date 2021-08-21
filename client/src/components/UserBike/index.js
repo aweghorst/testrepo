@@ -7,7 +7,7 @@ import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     const { loading, data } = useQuery(QUERY_USERS);
-    const user = data?.users[6] || {};
+    const user = data?.users[2] || {};
     console.log(data);
     console.log(user);
 
