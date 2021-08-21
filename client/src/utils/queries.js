@@ -22,6 +22,7 @@ export const QUERY_USERS = gql`
                     date
                 }
                 messages {
+                    _id
                     username
                     messageBody
                     createdAt
@@ -53,6 +54,7 @@ export const QUERY_USER = gql`
                     date
                 }
                 messages {
+                    _id
                     username
                     messageBody
                     createdAt
@@ -78,6 +80,7 @@ export const QUERY_ALL_BIKES = gql`
                 date
             }
             messages {
+                _id
                 username
                 messageBody
                 createdAt
@@ -103,6 +106,7 @@ export const QUERY_USER_BIKE = gql `
             date
         }
         messages {
+            _id
             username
             messageBody
             createdAt
