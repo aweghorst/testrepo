@@ -3,11 +3,14 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import bike from '../../assets/images/bike.jpg';
 import BikeMessage from '../BikeMessage';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
-    const {loading, data } = useQuery(QUERY_USERS)
-const user = data?.users[0]
+    const { loading, data } = useQuery(QUERY_USERS);
+    const user = data?.users[4] || {};
 
+    const { username, email, bikeCount, bikes } = user;
 
     const [showMessages, clickedShowMessages] = useState(false);
 
@@ -48,15 +51,24 @@ const user = data?.users[0]
 
     return (
         <span className="">
-
-            <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
-
+            {/* <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}> */}
+            {bikes?.map(bike => ( 
                             <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
                                 <div className="">
                                         <img className="object-contain h-48 w-full p-1" src={bike} alt="your bike"></img>
                                     <div className="bg-gray-200 rounded-3xl p-2">
                                         <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
                                         <div>
+                                            hello here are my bikes
+                                            <ul>
+                                                <li>image: {bike.image}</li>
+                                                <li>Description: {bike.description}</li>
+                                                <li>Brand: {bike.brand}</li>
+                                                <li>Status: {bike.status.isLost}</li>
+                                                <li>Location: {bike.status.location}</li>
+                                            </ul>
+                                                <p>Messages: {bike.messages.map(message => (
+                                                    `${message.messageBody} posted by ${message.username} on ${message.createdAt}`))}</p>   
                                             <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                         </div>
                                         <div className="flex justify-around">
@@ -67,7 +79,8 @@ const user = data?.users[0]
                                     </div>
                                 </div>
                             </div>
-            </Carousel>
+                    ))}
+            {/* </Carousel> */}
 
             <div>
                 <BikeMessage />

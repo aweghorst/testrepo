@@ -6,6 +6,9 @@ const messageSchema = require('./Message');
 
 const bikeSchema = new Schema(
     {
+        userId: {
+            type: String,
+        },
         brand: {
             type: String,
         },

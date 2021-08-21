@@ -22,6 +22,7 @@ export const QUERY_USERS = gql`
                     date
                 }
                 messages {
+                    _id
                     username
                     messageBody
                     createdAt
@@ -40,6 +41,7 @@ export const QUERY_USER = gql`
             bikeCount
             bikes {
                 _id
+                userId
                 brand
                 bike_model
                 year
@@ -52,6 +54,7 @@ export const QUERY_USER = gql`
                     date
                 }
                 messages {
+                    _id
                     username
                     messageBody
                     createdAt
@@ -77,10 +80,37 @@ export const QUERY_ALL_BIKES = gql`
                 date
             }
             messages {
+                _id
                 username
                 messageBody
                 createdAt
             }
         }
     }
+`;
+
+
+export const QUERY_USER_BIKE = gql `
+{
+    userBikes {
+        _id
+        brand
+        bike_model
+        year
+        serial
+        description
+        image
+        status {
+            isLost
+            location
+            date
+        }
+        messages {
+            _id
+            username
+            messageBody
+            createdAt
+        }
+    }
+}
 `;
