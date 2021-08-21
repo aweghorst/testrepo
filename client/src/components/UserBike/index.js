@@ -66,8 +66,9 @@ const UserBike = () => {
                                                 <li>Brand: {bike.brand}</li>
                                                 <li>Status: {bike.status.isLost}</li>
                                                 <li>Location: {bike.status.location}</li>
-                                                <li>Messages: {bike.messages.map(message => message.messageBody)}</li>    
                                             </ul>
+                                                <p>Messages: {bike.messages.map(message => (
+                                                    `${message.messageBody} posted by ${message.username} on ${message.createdAt}`))}</p>   
                                             <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                         </div>
                                         <div className="flex justify-around">

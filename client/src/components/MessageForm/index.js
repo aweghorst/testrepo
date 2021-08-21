@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_MESSAGE } from '../../utils/mutations';
 
-const MessageForm = () => {
+const MessageForm = (bikeId) => {
 
-    const [ messageText, setText] = useState({ message: ' '});
+    const [ messageBody, setText] = useState('');
     const [ addMessage, { error }] = useMutation(ADD_MESSAGE);
 
     function handleChange(event) {
@@ -16,7 +16,7 @@ const MessageForm = () => {
 
         try {
             await addMessage({
-                variables: { messageText }
+                variables: { bikeId, messageBody }
             });
 
             setText('');
