@@ -101,6 +101,7 @@ const SearchBike = () => {
                                                         </NavLink>
 
                                                         <Switch>
+                                                            {/* need to push bikeId as prop to message */}
                                                             <Route exact path="/Message" component={Message} />
                                                         </Switch>
                                                     </div>
