@@ -17,6 +17,20 @@ const SearchBike = () => {
     const { loading, data} = useQuery(QUERY_ALL_BIKES);
     console.log(data);
 
+    const allBikes = data?.bikes;
+    console.log("bikes", allBikes);
+    // returns with status as undefined
+    // const lostBikes = allBikes?.filter(bike => bike.status[0].isLost === true);
+    // console.log("lost",lostBikes);
+
+    // works for single bike but not an array of bikes
+    const bike = data?.bikes[0];
+    console.log("bike", bike);
+    console.log("bike status", bike?.status[0].isLost);
+
+    const status = allBikes?.map(bike => bike.status[0]);
+    console.log("status", status);
+
     const [searchedBikes, setSearchedBikes] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     
