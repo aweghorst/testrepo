@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
-import bike from '../../assets/images/bike.jpg';
 import BikeMessage from '../BikeMessage';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     const { loading, data } = useQuery(QUERY_USERS);
-    const user = data?.users[4] || {};
+    const user = data?.users[2] || {};
+    console.log(user);
+    console.log(data);
 
     const { username, email, bikeCount, bikes } = user;
 
@@ -37,6 +38,8 @@ const UserBike = () => {
     function handleMessagesClick(e) {
         e.preventDefault();
         console.log("clicked message!");
+        const bikeMessage = bikes.message[0]
+        console.log(bikeMessage);
     }
 
     function handleEditClick(e) {
@@ -50,26 +53,24 @@ const UserBike = () => {
     }
 
     return (
+
         <span className="">
-            {/* <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}> */}
+            
+            <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
+
             {bikes?.map(bike => ( 
                             <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
                                 <div className="">
-                                        <img className="object-contain h-48 w-full p-1" src={bike} alt="your bike"></img>
+                                        <img className="object-contain h-48 w-full p-1" src={bike.image} alt="your bike"></img>
                                     <div className="bg-gray-200 rounded-3xl p-2">
-                                        <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
+                                    {bike.status[0].isLost ? <div className="pt-2 pb-2 bg-red-200 rounded-full" >Missing</div> : <div className="pt-2 pb-2 bg-green-200 rounded-full">Found</div>}
                                         <div>
-                                            hello here are my bikes
                                             <ul>
-                                                <li>image: {bike.image}</li>
-                                                <li>Description: {bike.description}</li>
                                                 <li>Brand: {bike.brand}</li>
-                                                <li>Status: {bike.status.isLost}</li>
-                                                <li>Location: {bike.status.location}</li>
+                                                <li>Model: {bike.bike_model}</li>
+                                                <li>Location: {bike.status[0].location}</li>   
                                             </ul>
-                                                <p>Messages: {bike.messages.map(message => (
-                                                    `${message.messageBody} posted by ${message.username} on ${message.createdAt}`))}</p>   
-                                            <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                            <p className="pt-3 pb-3">Description: {bike.description}</p>
                                         </div>
                                         <div className="flex justify-around">
                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleEditClick}>Edit</button>
@@ -79,14 +80,15 @@ const UserBike = () => {
                                     </div>
                                 </div>
                             </div>
-                    ))}
-            {/* </Carousel> */}
 
+                    ))}
+                    <div></div>
+            </Carousel>
             <div>
-                <BikeMessage />
+            <BikeMessage messages={bike.messages} />
             </div>
         </span>
-            
+
     )
 }
 

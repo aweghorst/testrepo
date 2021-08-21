@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BikeMessage = ( { messages } ) => {
+const BikeMessage = ({messages}) => {
 
     return (
         <div className="container text-center">
