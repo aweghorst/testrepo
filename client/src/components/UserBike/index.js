@@ -7,12 +7,13 @@ import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     const { loading, data } = useQuery(QUERY_USERS);
-    const user = data?.users[2] || {};
-    console.log(user);
+    const user = data?.users[6] || {};
     console.log(data);
+    console.log(user);
 
     const { username, email, bikeCount, bikes } = user;
 
+    const [bikeMessages, setBikeMessages] = useState();
     const [showMessages, clickedShowMessages] = useState(false);
 
     const responsive = {
@@ -37,19 +38,34 @@ const UserBike = () => {
 
     function handleMessagesClick(e) {
         e.preventDefault();
-        console.log("clicked message!");
-        const bikeMessage = bikes.message[0]
-        console.log(bikeMessage);
+
+        // get bike id
+        const bikeId = e.target.getAttribute('data-bike-id');
+        console.log("clicked message!", bikeId);
+
+        // get bike messages
+        const bikeMessages = bikes?.filter(bike => bike._id === bikeId)[0].messages;
+        console.log("one bike", bikeMessages);
+
+        setBikeMessages(bikeMessages);
+        console.log("mesages", bikeMessages);
     }
 
     function handleEditClick(e) {
         e.preventDefault();
         console.log('clicked edit!')
+
+
+        // get bike id
+        const bikeId = e.target.getAttribute('data-bike-id');
     }
 
     function handleDeleteClick(e) {
         e.preventDefault();
-        console.log('clicked delete!')
+        console.log('clicked delete!');
+
+        // get bike id
+        const bikeId = e.target.getAttribute('data-bike-id');
     }
 
     return (
@@ -73,9 +89,9 @@ const UserBike = () => {
                                             <p className="pt-3 pb-3">Description: {bike.description}</p>
                                         </div>
                                         <div className="flex justify-around">
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleEditClick}>Edit</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleMessagesClick}>Messages</button>
-                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleDeleteClick}>Delete</button>
+                                        <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleEditClick}>Edit</button>
+                                        <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleMessagesClick}>Messages</button>
+                                        <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleDeleteClick}>Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +101,7 @@ const UserBike = () => {
                     <div></div>
             </Carousel>
             <div>
-            <BikeMessage messages={bike.messages} />
+            <BikeMessage bikeMessages={bikeMessages}/>
             </div>
         </span>
 
