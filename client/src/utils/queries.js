@@ -87,7 +87,7 @@ export const QUERY_ALL_BIKES = gql`
 `;
 
 
-export const QUERY_USER_BIKE = gql `
+export const QUERY_USER_BIKE = gql`
 {
     userBikes {
         _id
@@ -109,4 +109,23 @@ export const QUERY_USER_BIKE = gql `
         }
     }
 }
+`;
+
+export const QUERY_LOST_BIKES = gql`
+    {
+        lostBikes{
+            _id
+            brand
+            bike_model
+            year
+            serial
+            description
+            image
+            status {
+                isLost
+                location
+                date
+            }
+        }
+    }
 `;

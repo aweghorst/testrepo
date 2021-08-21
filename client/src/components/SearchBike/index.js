@@ -5,31 +5,23 @@ import {
     HashRouter,
     Switch
 } from "react-router-dom";
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import Message from '../../pages/Message.js';
-import { QUERY_ALL_BIKES } from '../../utils/queries.js';
+import { QUERY_LOST_BIKES } from '../../utils/queries.js';
 
 const SearchBike = () => {
 
 
-    const { loading, data} = useQuery(QUERY_ALL_BIKES);
-    console.log(data);
+    const {loading, data} = useQuery(QUERY_LOST_BIKES)
+    console.log("This is your log of the useQuery of QUERY_ALL_BIKES: ", data);
 
-    const allBikes = data?.bikes;
-    console.log("bikes", allBikes);
-    // returns with status as undefined
-    // const lostBikes = allBikes?.filter(bike => bike.status[0].isLost === true);
-    // console.log("lost",lostBikes);
+    // use a ternary operator to check if bike data is present (loaded)
+    const lostBikes = loading ? [] : data.lostBikes;
+  
+    console.log("These are your lost bikes: ", lostBikes);
 
-    // works for single bike but not an array of bikes
-    const bike = data?.bikes[0];
-    console.log("bike", bike);
-    console.log("bike status", bike?.status[0].isLost);
-
-    const status = allBikes?.map(bike => bike.status[0]);
-    console.log("status", status);
 
     const [searchedBikes, setSearchedBikes] = useState([]);
     const [searchInput, setSearchInput] = useState('');
@@ -57,6 +49,23 @@ const SearchBike = () => {
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
         console.log(event);
+
+        if (!searchInput) {
+            return false;
+        }
+            // all lost bikes in lostBikes
+            // you can filter through them by the city the user inputted
+            const bikeByCity = lostBikes.filter(bikes => {
+                if (bikes.status[0].location === searchInput) {
+                    console.log("you have locations!")
+                }
+            })
+
+        // try {
+            // const {loading, data} = useQuery(QUERY_LOST_BIKES, {
+            //     variables: {location: 'Austin'}
+            // });
+        // }
     }
 
 

@@ -8,7 +8,8 @@ import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     const { loading, data } = useQuery(QUERY_USERS);
-    const user = data?.users[4] || {};
+    const user = data?.users[6] || {};
+    console.log(user);
 
     const { username, email, bikeCount, bikes } = user;
 
@@ -64,8 +65,8 @@ const UserBike = () => {
                                                 <li>image: {bike.image}</li>
                                                 <li>Description: {bike.description}</li>
                                                 <li>Brand: {bike.brand}</li>
-                                                <li>Status: {bike.status.isLost}</li>
-                                                <li>Location: {bike.status.location}</li>
+                                                <li>Status: {bike.status[0].isLost}</li>
+                                                <li>Location: {bike.status[0].location}</li>
                                                 <li>Messages: {bike.messages.map(message => message.messageBody)}</li>    
                                             </ul>
                                             <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
