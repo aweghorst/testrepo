@@ -1,73 +1,93 @@
 import React from "react";
-import Carousel from "react-multi-carousel";
+//import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import bike from "../../assets/images/bike.jpg";
+//import bike from "../../assets/images/bike.jpg";
+//import { Redirect, useParams } from "react-router-dom";
 
 const UserBike = () => {
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+  const userArray = [
+    {
+      user: {
+        username: "testuser1",
+        bikeCount: 2,
+        bikes: [
+          {
+            _id: 1,
+            brand: "testbrand1",
+            bike_model: "testmodel1",
+            year: 1998,
+            serial: 1111111,
+            description: "This is a test description for bike 1",
+            image:
+              "https://cdn.shopify.com/s/files/1/2081/1519/products/1600x1067_Sparrow_White_Blue_ANGLE.jpg?v=1590502984",
+            status: {
+              isLost: true,
+              location: "Austin",
+              date: "2020 / 03 / 23",
+            },
+          },
+          {
+            _id: 2,
+            brand: "testbrand2",
+            bike_model: "testmodel2",
+            year: 2021,
+            serial: 2222222222,
+            description: "This is a test description for bike 2",
+            image:
+              "https://cdn.shopify.com/s/files/1/2081/1519/products/1600x1067_Sparrow_White_Blue_ANGLE.jpg?v=1590502984",
+            status: {
+              isLost: false,
+              location: "Dallas",
+              date: "2021 / 02 / 25",
+            },
+          },
+        ],
+      },
     },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+  ];
 
-  return (
-    <span className="">
-      <Carousel
-        responsive={responsive}
-        infinite={false}
-        swipeable={true}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        className="flex justify-center p-20"
-        centerMode={true}
-      >
-        <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
-          <div className="">
-            <img
-              className="object-contain h-48 w-full p-1"
-              src={bike}
-              alt="your bike"
-            ></img>
-            <div className="bg-gray-200 rounded-3xl p-2">
-              <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
-              <div>
-                <p className="pt-3 pb-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-              </div>
-              <div className="flex justify-around">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Edit
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Comments
-                </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Carousel>
-    </span>
+  var bikeImages = [];
+  var status = [];
+  var description = [];
+
+  function statusFunc() {
+    console.log("here");
+    const bikestatus = userArray.map((users) =>
+      users.user.bikes.map((bike) => bike.status.isLost)
+    );
+    for (var i = 0; i < bikestatus[0].length; i++) {
+      status.push(bikestatus[0][i]);
+      console.log(bikestatus[0][i]);
+    }
+    console.log(status[0]);
+    var stat1 = "" + status[0];
+    return stat1;
+  }
+
+  const bikeinfo = userArray.map((users) =>
+    users.user.bikes.map((description) => description.description)
   );
+  console.log(bikeinfo[0][1]);
+
+  // const bikestatus = userArray.map((users) =>
+  //   users.user.bikes.map((bike) => bike.status.isLost)
+  // );
+
+  console.log(bikeinfo);
+  // for (var i = 0; i < bikestatus[0].length; i++) {
+  //   status.push(bikestatus[0][i]);
+  //   console.log(bikestatus[0][i]);
+  // }
+  console.log(status[0]);
+  // for (var j = 0; j < bikeinfo[0].length; i++) {
+  //   description.push(bikeinfo[0][j]);
+  //   console.log(bikeinfo[0][j]);
+  // }
+  var test = "hi";
+  return <p>{statusFunc()} </p>;
+  //console.log(statusFunc());
 };
+
+// };
 
 export default UserBike;
