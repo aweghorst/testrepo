@@ -4,6 +4,7 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
     type Bike {
         _id: ID
+        userId: String
         brand: String
         bike_model: String
         year: String
@@ -46,6 +47,7 @@ const typeDefs = gql`
         bikes: [Bike]
         user: User
         users: [User]
+        userBikes(userId: String): [Bike]
     }
 
     type Mutation {

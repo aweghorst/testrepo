@@ -21,6 +21,17 @@ const resolvers = {
             return User.find()
                 .select('-__v')
                 .populate('bikes');
+        },
+        userBikes: async (parent, args, context) => {
+            if (context.user) {
+                const bikeList = await Bike.find(
+                    { userId: context.user._id }
+                );
+
+                return bikeList;
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
         }
     },
     Mutation: {
@@ -41,6 +52,12 @@ const resolvers = {
                     { new: true }
                 );
 
+                await Bike.findByIdAndUpdate(
+                    {_id: bike._id },
+                    { userId: context.user._id},
+                    { new: true }
+                );
+
                 return bike;
             }
 
@@ -51,7 +68,7 @@ const resolvers = {
                 const updatedBike = await Bike.findByIdAndUpdate( 
                     { _id: bikeId },
                     { description: description, image: image },
-                    { new: true, runValidators: true }
+                    { new: true }
                 )
 
                 return updatedBike;
@@ -66,7 +83,7 @@ const resolvers = {
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $pull: { bikes: bikeId } },
-                    { new: true, runValidators: true } 
+                    { new: true } 
                 )
                 .populate('bikes');
 
@@ -80,7 +97,7 @@ const resolvers = {
                 const updatedBike = await Bike.findByIdAndUpdate(
                     { _id: bikeId },
                     { status: { isLost: isLost, location: location }},
-                    { new: true, runValidators: true }
+                    { new: true }
                 );
 
                 return updatedBike;
