@@ -49,12 +49,6 @@ const typeDefs = gql`
     users: [User]
     userBikes(userId: String): [Bike]
   }
-  type Comment {
-    _id: ID
-    commentBody: String
-    createdAt: String
-    username: String
-  }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth

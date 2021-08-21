@@ -11,11 +11,9 @@ const bikeSchema = new Schema(
         },
         brand: {
             type: String,
-            required: true
         },
         bike_model: {
             type: String,
-            required: true
         },
         year: {
             type: String

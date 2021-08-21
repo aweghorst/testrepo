@@ -134,38 +134,25 @@ export const UPDATE_STATUS = gql`
   }
 `;
 
-export const ADD_COMMENT = gql`
-  mutation addComment($bikeId: ID!, $commentBody: String!) {
-    addComment(bikeId: $thoughtId, commentBody: $commentBody) {
-      _id
-      comments {
-        _id
-        commentBody
-        createdAt
-        username
-      }
-    }
-  }
-`;
-
 export const ADD_MESSAGE = gql`
-  mutation addMessage($bikeId: ID!, $messageBody: String!) {
-    addComment(bikeId: $bikeId, messageBody: $messageBody) {
-      _id
-      brand
-      bike_model
-      description
-      status {
-        isLost
-        location
-        date
-      }
-      messages {
-        _id
-        messageBody
-        createdAt
-        username
-      }
+    mutation addMessage($bikeId: ID!, $messageBody: String!) {
+       addComment(bikeId: $bikeId, messageBody: $messageBody) {
+            _id
+            brand
+            bike_model
+            description
+            status {
+                isLost
+                location
+                date
+            }
+            messages {
+                _id
+                messageBody
+                createdAt
+                username
+            }
+        }
     }
   }
 `;
