@@ -43,6 +43,7 @@ const SignupForm = () => {
                             </label>
                             <input className="focus:outline-none focus:ring focus:border-blue-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="username" 
+                            name="username"
                             type="text" 
                             placeholder="Username" 
                             value={formState.username}
@@ -53,7 +54,8 @@ const SignupForm = () => {
                                 Email
                             </label>
                             <input className="focus:outline-none focus:ring focus:border-blue-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
-                            id="email" 
+                            id="email"
+                            name="email" 
                             type="text" 
                             placeholder="Email" 
                             value={formState.email}
@@ -65,9 +67,10 @@ const SignupForm = () => {
                             </label>
                             <input className="focus:outline-none focus:ring focus:border-blue-300 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
                             id="password" 
+                            name="password"
                             type="password" 
                             placeholder="***********" 
-                            value={formState.email}
+                            value={formState.password}
                             onChange={handleChange} />
                             <p className="text-red-500 text-xs italic">Please choose a password.</p>
                         </div>
