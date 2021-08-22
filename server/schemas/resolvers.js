@@ -14,7 +14,6 @@ const resolvers = {
                 const user = await User.findById(context.user._id)
                 .select('-__v -password')
                 .populate('bikes');
-
                 return user;
             }
             throw new AuthenticationError("Not logged in");

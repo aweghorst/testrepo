@@ -8,14 +8,15 @@ const Tips = () => {
       <div className="flex justify-around">
         <img
           width="50%"
+          className="imgborder"
           src={biketips}
           alt="simple graphic of a locked up bike"
         />
         <div className="ml-10">
-          <div className="p-3 text-center">
+          <div className="p-1 text-center">
             <h2>Tips and Tricks!</h2>
           </div>
-          <div className="pt-3">
+          <div className="pt-1">
             <dl className="list-disc text-left">
               <div className="tip">
                 Add your information early before your bike goes missing!
