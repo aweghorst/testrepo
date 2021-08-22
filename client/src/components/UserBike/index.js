@@ -1,18 +1,25 @@
-import React, { ReactDOM, useState } from "react";
+import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import BikeMessage from "../BikeMessage";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
-import "../../assets/styles/dashboard.css";
 
 const UserBike = () => {
-  const { loading, data } = useQuery(QUERY_USERS);
-  const user = data?.users[0] || {};
-  console.log(data);
-  console.log(user);
+  //display seeded user data
+  // const { loading, data } = useQuery(QUERY_USERS);
+  // const user = data?.users[6] || {};
+  // console.log(data);
+  // console.log(user);
+  // const { username, email, bikeCount, bikes } = user;
 
-  const { username, email, bikeCount, bikes } = user;
+  //display logged in user data
+  const { loading, data } = useQuery(QUERY_USER);
+  console.log(data?.user);
+  const username = data?.user.username;
+  const email = data?.user.email;
+  const bikeCount = data?.user.bikeCount;
+  const bikes = data?.user.bikes;
 
   const [bikeMessages, setBikeMessages] = useState();
   const [showMessages, clickedShowMessages] = useState(false);
@@ -41,17 +48,16 @@ const UserBike = () => {
     e.preventDefault();
     // get bike id
     const bikeId = e.target.getAttribute("data-bike-id");
-    console.log("clicked message!", bikeId);
     // get bike messages
     const bikeMessages = bikes?.filter(bike => bike._id === bikeId)[0].messages;
-    console.log("one bike", bikeMessages);
     setBikeMessages(bikeMessages);
-    console.log("messages", bikeMessages);
-    // display show/hide
+    // display show/hide model
     var bikeMessageEl = document.getElementById("bikemessage");
     var dashboardEl = document.getElementById("dashboardcontainer");
+    var addbikebtnEl = document.getElementById("addbikebtn");
     bikeMessageEl.classList.remove("hidden");
     dashboardEl.classList.add("hidden");
+    addbikebtnEl.classList.add("hidden");
   }
 
   function handleMessagesReturnClick(e) {
@@ -59,8 +65,10 @@ const UserBike = () => {
     // display show/hide
     var bikeMessageEl = document.getElementById("bikemessage");
     var dashboardEl = document.getElementById("dashboardcontainer");
+    var addbikebtnEl = document.getElementById("addbikebtn");
     bikeMessageEl.classList.add("hidden");
     dashboardEl.classList.remove("hidden");
+    addbikebtnEl.classList.remove("hidden");
   }
 
   function handleEditClick(e) {
@@ -81,9 +89,12 @@ const UserBike = () => {
 
   return (
     <span>
-      <div id="dashboardcontainer" className=" flex justify-center visible">
+      <div id="dashboardcontainer" className=" flex justify-center flex-wrap visible">
         {bikes?.map(bike => (
-          <div className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg" key={bike._id} >
+          <div
+            className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg"
+            key={bike._id}
+          >
             <div className="">
               <img
                 className="object-contain h-48 w-full p-1"
