@@ -5,7 +5,8 @@
 }
 
 .brand-title {
-  background-color:aliceblue;
-  color: red;
+  background-color: rgb(6,9,35);
+  color: white;
   font-size: 40px;
+  border-bottom: 5px solid rgb(65,133,13);
 }
