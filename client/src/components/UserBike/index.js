@@ -1,10 +1,9 @@
-import React, { ReactDOM, useState } from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import BikeMessage from "../BikeMessage";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
-import "../../assets/styles/dashboard.css";
+import React, { useState } from 'react';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css'
+import BikeMessage from '../BikeMessage';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     // const { loading, data } = useQuery(QUERY_USERS);
@@ -112,20 +111,9 @@ const UserBike = () => {
             <div>
             <BikeMessage bikeMessages={bikeMessages}/>
             </div>
-          </div>
-        ))}
-      </div>
-      <div id="bikemessage" className="hidden">
-        <button
-          className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white mt-4 hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
-          onClick={handleMessagesReturnClick}
-        >
-          Return To Bike List
-        </button>
-        <BikeMessage bikeMessages={bikeMessages} />
-      </div>
-    </span>
-  );
-};
+        </span>
+
+    )
+}
 
 export default UserBike;
