@@ -1,12 +1,10 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
-import { ADD_BIKE } from "../../utils/mutations";
-import { QUERY_USER, QUERY_USER_BIKE } from "../../utils/queries";
-
+import { ADD_BIKE, UPDATE_STATUS } from "../../utils/mutations";
 
 const AddBike = () => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const cancelButtonRef = useRef(null);
 
     // create a new bike
@@ -18,28 +16,15 @@ const AddBike = () => {
         description: "",
         image: "",
     });
-    const [addBike] = useMutation(ADD_BIKE, {
-        update(cache, { data: { addBike } }) {
-            try {
-                //could potentially not exist yet, so wrap in a try... catch
-                 // read what's currently in the cache
-                const { bikes } = cache.readQuery({ query: QUERY_USER_BIKE });
-                // prepend the newest thought to the front of the array
-                cache.writeQuery({
-                    query: QUERY_USER_BIKE,
-                    data: { bikes: [addBike, ...bikes]}
-                });
-            } catch (e) {
-                console.error(e);
-            }
-            // update me object's cache, appending new thought to the end of the array
-            const { user } = cache.readQuery({ query: QUERY_USER });
-            cache.writeQuery({
-                query: QUERY_USER,
-                data: { user: { ...user, bikes: [...user.bikes, addBike] } }
-            });
-        }
+    // set status of new bike
+    const [statusState, setStatusState] = useState({
+        location: "",
+        isLost: "",
     });
+
+    const [addBike] = useMutation(ADD_BIKE);
+    const [addStatus] = useMutation(UPDATE_STATUS);
+
     // update state based on form input changes
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -48,25 +33,71 @@ const AddBike = () => {
             [name]: value,
         });
     };
+    const handleChangeStatus = (event) => {
+        let isLost;
+        const status = document.querySelector('[name="status"]').value;
+        if (status === "Not missing") {
+            isLost = false;
+        } else {
+            isLost = true;
+        }
+        const location = document.querySelector("#location").value;
+        setStatusState({
+            isLost,
+            location,
+        });
+    };
     // submit form,  pass the data from the form state object as variables for our addUser mutation function
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        console.log(statusState);
         // use try/catch instead of promises to handle errors
         try {
             // execute addBike mutation and pass in variable data from form
-            const { data } = await addBike({
+            const data = await addBike({
                 variables: { ...formState },
             });
-            
+            const bikeId = data?._id;
+            setBikeStatus(bikeId, statusState.isLost, statusState.location);
+
+            setFormState({
+                brand: "",
+                bike_model: "",
+                year: "",
+                serial: "",
+                description: "",
+                image: "",
+            });
+            setStatusState({
+                location: "",
+                isLost: "",
+            });
             console.log("form from addBike:", data);
         } catch (e) {
             console.error(e);
         }
     };
 
+    async function setBikeStatus(bikeId, isLost, location) {
+        try {
+            const statusData = await addStatus({
+                variables: { bikeId, isLost, location },
+            });
+            console.log(statusData);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     return (
         <>
-            <button onClick={() => setOpen((open) => !open)}>Add a Bike</button>
+            <button
+                className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                onClick={() => setOpen((open) => !open)}
+            >
+                Add a Bike
+            </button>
             <Transition.Root show={open} as={Fragment}>
                 <Dialog
                     as="div"
@@ -151,6 +182,9 @@ const AddBike = () => {
                                                     <select
                                                         id="status"
                                                         name="status"
+                                                        onChange={
+                                                            handleChangeStatus
+                                                        }
                                                         className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                     >
                                                         <option>
@@ -171,8 +205,12 @@ const AddBike = () => {
                                                             type="text"
                                                             name="brand"
                                                             id="brand"
-                                                            value={formState.brand}
-                                                            onChange={handleChange}
+                                                            value={
+                                                                formState.brand
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -188,8 +226,12 @@ const AddBike = () => {
                                                             type="text"
                                                             name="bike_model"
                                                             id="bike_model"
-                                                            value={formState.bike_model}
-                                                            onChange={handleChange}
+                                                            value={
+                                                                formState.bike_model
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -205,8 +247,12 @@ const AddBike = () => {
                                                             type="text"
                                                             name="year"
                                                             id="year"
-                                                            value={formState.year}
-                                                            onChange={handleChange}
+                                                            value={
+                                                                formState.year
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -222,8 +268,12 @@ const AddBike = () => {
                                                             type="text"
                                                             name="serial"
                                                             id="serial"
-                                                            value={formState.serial}
-                                                            onChange={handleChange}
+                                                            value={
+                                                                formState.serial
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -236,8 +286,14 @@ const AddBike = () => {
                                                         </label>
                                                         <input
                                                             type="text"
-                                                            name="city"
-                                                            id="city"
+                                                            name="location"
+                                                            id="location"
+                                                            value={
+                                                                statusState.location
+                                                            }
+                                                            onChange={
+                                                                handleChangeStatus
+                                                            }
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -252,13 +308,115 @@ const AddBike = () => {
                                                             type="text"
                                                             name="description"
                                                             id="description"
-                                                            value={formState.description}
-                                                            onChange={handleChange}
+                                                            value={
+                                                                formState.description
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
                                                 </div>
-                                                <div>
+                                                {/* ------------------------------------------------------------------------------------------------------------------------------------------------- */}
+
+                                                {/* <article
+                                                    aria-label="File Upload Modal"
+                                                    class="relative h-full flex flex-col bg-white shadow-xl rounded-md"
+                                                    ondrop="dropHandler(event);"
+                                                    ondragover="dragOverHandler(event);"
+                                                    ondragleave="dragLeaveHandler(event);"
+                                                    ondragenter="dragEnterHandler(event);"
+                                                >
+                                                    <div
+                                                        id="overlay"
+                                                        class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md"
+                                                    >
+                                                        <i>
+                                                            <svg
+                                                                class="fill-current w-12 h-12 mb-3 text-blue-700"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="24"
+                                                                height="24"
+                                                                viewBox="0 0 24 24"
+                                                            >
+                                                                <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                                                            </svg>
+                                                        </i>
+                                                        <p class="text-lg text-blue-700">
+                                                            Drop files to upload
+                                                        </p>
+                                                    </div>
+
+                                                    <section class="h-full overflow-auto p-8 w-full h-full flex flex-col">
+                                                        <header class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+                                                            <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                                                                <span>
+                                                                    Drag and
+                                                                    drop your
+                                                                </span>
+                                                                &nbsp;
+                                                                <span>
+                                                                    files
+                                                                    anywhere or
+                                                                </span>
+                                                            </p>
+                                                            <input
+                                                                id="hidden-input"
+                                                                type="file"
+                                                                multiple
+                                                                class="hidden"
+                                                            />
+                                                            <button
+                                                                id="button"
+                                                                class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none"
+                                                            >
+                                                                Upload a file
+                                                            </button>
+                                                        </header>
+
+                                                        <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                                                            To Upload
+                                                        </h1>
+
+                                                        <ul
+                                                            id="gallery"
+                                                            class="flex flex-1 flex-wrap -m-1"
+                                                        >
+                                                            <li
+                                                                id="empty"
+                                                                class="h-full w-full text-center flex flex-col items-center justify-center items-center"
+                                                            >
+                                                                <img
+                                                                    class="mx-auto w-32"
+                                                                    src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
+                                                                    alt="no data"
+                                                                />
+                                                                <span class="text-small text-gray-500">
+                                                                    No files
+                                                                    selected
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </section>
+
+                                                    <footer class="flex justify-end px-8 pb-8 pt-4">
+                                                        <button
+                                                            id="submit"
+                                                            class="rounded-sm px-3 py-1 bg-blue-700 hover:bg-blue-500 text-white focus:shadow-outline focus:outline-none"
+                                                        >
+                                                            Upload now
+                                                        </button>
+                                                        <button
+                                                            id="cancel"
+                                                            class="ml-3 rounded-sm px-3 py-1 hover:bg-gray-300 focus:shadow-outline focus:outline-none"
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </footer>
+                                                </article> */}
+                                                {/* ------------------------------------------------------------------------------------------------------------------------------------------------- */}
+                                                {/* <div>
                                                     <label className="block text-sm font-medium text-gray-700">
                                                         Image
                                                     </label>
@@ -293,6 +451,12 @@ const AddBike = () => {
                                                                         id="file-upload"
                                                                         name="file-upload"
                                                                         type="file"
+                                                                        value={
+                                                                            formState.image
+                                                                        }
+                                                                        onChange={
+                                                                            handleChange
+                                                                        }
                                                                         className="sr-only"
                                                                     />
                                                                 </label>
@@ -307,14 +471,14 @@ const AddBike = () => {
                                                             </p>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6"></div>
                                         </div>
                                         <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                             <button
                                                 type="submit"
-                                                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                                                 onClick={() => setOpen(false)}
                                             >
                                                 Add bike

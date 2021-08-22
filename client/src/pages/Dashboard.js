@@ -5,8 +5,8 @@ import UserBike from "../components/UserBike";
 const Dashboard = () => {
     return (
         <div className="">
-            <UserBike />
             <AddBike />
+            <UserBike />
         </div>
     );
 };
