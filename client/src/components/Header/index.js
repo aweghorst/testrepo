@@ -7,8 +7,8 @@ import '../../assets/styles/header.css';
 const Header = () => {
     return (
         <div>
-            <header className="">
-                <div className="justify-center">
+            <header>
+                <div className="justify-center test">
                     <h1 className="brand-title">Find My Bike</h1>
                     <div className="nav-section">
                     <Nav />

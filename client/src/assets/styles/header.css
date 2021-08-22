@@ -1,12 +1,10 @@
 /* src/assets/styles/header.css */
 
-.nav-section {
-
-}
-
 .brand-title {
   background-color: rgb(6,9,35);
   color: white;
   font-size: 40px;
   border-bottom: 5px solid rgb(65,133,13);
+  padding-left: 2vw;
+
 }
