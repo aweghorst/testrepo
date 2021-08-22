@@ -5,7 +5,7 @@ import '../../assets/styles/footer.css';
 const Footer = () => {
     return (
         <div className="footer-section">
-            <footer className="footer-text">copyright 2021 by group 3</footer>
+            <footer className="footer-text">&copy; 2021 by UTA Coding Bootcamp Group 3</footer>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import "../../assets/styles/dashboard.css";
 
 const UserBike = () => {
   const { loading, data } = useQuery(QUERY_USERS);
-  const user = data?.users[3] || {};
+  const user = data?.users[0] || {};
   console.log(data);
   console.log(user);
 
