@@ -85,30 +85,27 @@ export const UPDATE_BIKE = gql`
 `;
 
 export const DELETE_BIKE = gql`
-    mutation deleteBike($bikeId: ID!) {
-        deleteBike(bikeId: $bikeId) {
-            _id
-            username
-            bikeCount
-            bikes {
-                _id
-                brand
-                bike_model
-                year
-                serial
-                description
-                image
-                status {
-                    isLost
-                    location
-                    date
-                }
-                messages {
-                    username
-                    messageBody
-                    createdAt
-                }
-            }
+  mutation deleteBike($bikeId: ID!) {
+    deleteBike(bikeId: $bikeId) {
+      _id
+      bikeCount
+      bikes {
+        _id
+        brand
+        bike_model
+        year
+        serial
+        description
+        image
+        status {
+          isLost
+          location
+          date
+        }
+        messages {
+          username
+          messageBody
+          createdAt
         }
       }
     }
@@ -116,43 +113,42 @@ export const DELETE_BIKE = gql`
 `;
 
 export const UPDATE_STATUS = gql`
-    mutation updateStatus($bikeId: ID!, $isLost: Boolean, $location: String) {
-        updateStatus(bikeId: $bikeId, isLost: $isLost, location: $location) {
-            _id
-            brand
-            bike_model
-            serial
-            description
-            image
-            status {
-                isLost
-                location
-                date
-            }
-        }
+  mutation updateStatus($bikeId: ID!, $isLost: Boolean, $location: String) {
+    updateStatus(bikeId: $bikeId, isLost: $isLost, location: $location) {
+      _id
+      brand
+      bike_model
+      serial
+      description
+      image
+      status {
+        isLost
+        location
+        date
+      }
     }
   }
 `;
 
 export const ADD_MESSAGE = gql`
-    mutation addMessage($bikeId: ID!, $messageBody: String!) {
-       addComment(bikeId: $bikeId, messageBody: $messageBody) {
-            _id
-            brand
-            bike_model
-            description
-            status {
-                isLost
-                location
-                date
-            }
-            messages {
-                _id
-                messageBody
-                createdAt
-                username
-            }
-        }
+  mutation addMessage($bikeId: ID!, $messageBody: String!) {
+    addComment(bikeId: $bikeId, messageBody: $messageBody) {
+      _id
+      brand
+      bike_model
+      description
+      status {
+        s
+        isLost
+        location
+        date
+      }
+      messages {
+        _id
+        messageBody
+        createdAt
+        username
+      }
     }
   }
 `;
