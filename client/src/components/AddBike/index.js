@@ -326,7 +326,7 @@ const AddBike = () => {
                                                 </div>
 
                                                 <FileBase64
-                                                    multiple={true}
+                                                    multiple={false}
                                                     onDone={({ base64 }) =>
                                                         setFormState({
                                                             ...formState,
