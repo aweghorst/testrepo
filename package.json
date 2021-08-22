@@ -17,6 +17,6 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "babel-jest": "^27.0.6"
+    "mern-client": "file:client"
   }
 }

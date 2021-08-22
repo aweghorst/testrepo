@@ -18,6 +18,8 @@ import NoMatch from '../../pages/NoMatch';
 
 import '../../assets/styles/nav.css';
 
+import Auth from '../../utils/auth';
+
 const Nav = () => {
 
     return (
@@ -37,9 +39,15 @@ const Nav = () => {
                     <li className="main-nav">
                         <NavLink exact to="/Tips" activeClassName="current-nav" className="nav-link" replace>Tips</NavLink>
                     </li>
-                    <li id="login-out">
-                            <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Login</NavLink>
-                    </li>
+                    {Auth.loggedIn() ? (
+                        <>
+                        <li className="login-out nav-link" onClick={Auth.logout}>Logout</li>
+                        </>
+                    ) : (
+                        <li id="login-out">
+                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Login</NavLink>
+                        </li>
+                    )}
                 </ul>
 
             </nav>

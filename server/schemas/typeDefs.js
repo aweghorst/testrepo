@@ -4,6 +4,7 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
     type Bike {
         _id: ID
+        userId: String
         brand: String
         bike_model: String
         year: String
@@ -11,13 +12,21 @@ const typeDefs = gql`
         description: String
         image: String
         status: [Status]
-    }
+        messages: [Message]
+    },
 
     type Status {
         _id: ID
         isLost: Boolean
         location: String
         date: String
+    }
+
+    type Message {
+        _id: ID
+        messageBody: String
+        createdAt: String
+        username: String
     }
 
     type User {
@@ -35,32 +44,22 @@ const typeDefs = gql`
     }
 
     type Query {
-        bikes(_id: ID!): Bike
+        bikes: [Bike]
         user: User
-    }
-    type Comment {
-        _id: ID
-        commentBody: String
-        createdAt: String
-        username: String
+        users: [User]
+        userBikes(userId: String): [Bike]
+        lostBikes(location: String): [Bike]
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
-        addBike(
-            brand: String
-            bike_model: String
-            year: String
-            serial: String
-            description: String
-            image: String
-        ): Bike
+        addBike(brand: String, bike_model: String, year: String, serial: String, description: String, image: String): Bike
         updateUser(email: String, password: String): User
         updateBike(bikeId: ID!, description: String, image: String): Bike
         updateStatus(bikeId: ID!, isLost: Boolean, location: String): Bike
         deleteBike(bikeId: ID!): User
         login(username: String!, password: String!): Auth
-        addComment(bikeId: ID!, commentBody: String!): Bike
+        addMessage(bikeId: ID!, messageBody: String!): Bike
     }
 `;
 

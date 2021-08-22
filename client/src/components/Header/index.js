@@ -8,11 +8,12 @@ const Header = () => {
     return (
         <div>
             <header>
-                <div>
+                <div className="justify-center test">
                     <h1 className="brand-title">Find My Bike</h1>
-                </div>
-                <div className="nav-section">
+                    <div className="nav-section">
                     <Nav />
+                </div>
+              
                 </div>
             </header>
         </div>
