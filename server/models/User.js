@@ -24,8 +24,8 @@ const userSchema = new Schema(
     bikes: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Bike'
-      }
+        ref: "Bike",
+      },
     ],
   },
   {

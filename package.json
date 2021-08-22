@@ -17,6 +17,8 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "mern-client": "file:client"
+    "@headlessui/react": "^1.4.0",
+    "babel-jest": "^27.0.6",
+    "react-native-snap-carousel": "^3.9.1"
   }
 }

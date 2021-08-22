@@ -1,27 +1,31 @@
-const { Schema } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const { Schema } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 const statusSchema = new Schema(
-    {
-        isLost: {
-            type: Boolean,
-            default: false
-        },
-        location: {
-            type: String,
-            required: true
-        },
-        date: {
+  {
+    isLost: {
+      type: Boolean,
+      default: false,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: String,
+
+      /*
             type: Date,
             default: Date.now,
             get: timestamp => dateFormat(timestamp)
-        }
+            */
     },
-    {
-        toJSON: {
-            getters: true
-        }
-    }
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
 );
 
 module.exports = statusSchema;
