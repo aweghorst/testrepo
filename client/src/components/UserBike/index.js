@@ -6,20 +6,20 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
-    const { loading, data } = useQuery(QUERY_USERS);
-    const user = data?.users[6] || {};
-    console.log(data);
-    console.log(user);
-    const { username, email, bikeCount, bikes } = user;
+    // const { loading, data } = useQuery(QUERY_USERS);
+    // const user = data?.users[6] || {};
+    // console.log(data);
+    // console.log(user);
+    // const { username, email, bikeCount, bikes } = user;
 
     //use when logged into app. if using seeded data, uncomment lines 9-13
-    // const { loading, data} = useQuery(QUERY_USER);
-    // console.log(data?.user);
+    const { loading, data} = useQuery(QUERY_USER);
+    console.log(data?.user);
     
-    // const username = data?.user.username;
-    // const email = data?.user.email;
-    // const bikeCount = data?.user.bikeCount;
-    // const bikes = data?.user.bikes;
+    const username = data?.user.username;
+    const email = data?.user.email;
+    const bikeCount = data?.user.bikeCount;
+    const bikes = data?.user.bikes;
 
     const [bikeMessages, setBikeMessages] = useState();
     const [showMessages, clickedShowMessages] = useState(false);
