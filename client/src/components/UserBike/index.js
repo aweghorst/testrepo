@@ -4,6 +4,7 @@ import BikeMessage from "../BikeMessage";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
 import { DELETE_BIKE } from "../../utils/mutations";
+import '../../assets/styles/dashboard.css';
 
 const UserBike = () => {
     // const { loading, data } = useQuery(QUERY_USERS);
@@ -133,10 +134,11 @@ const UserBike = () => {
                                         <li>
                                             Location: {bike.status[0].location}
                                         </li>
+                                        <li className="descriptionheader">
+                                        Description
+                                        </li>
                                     </ul>
-                                    <p className="pt-3 pb-3">
-                                        Description: {bike.description}
-                                    </p>
+                                    <p className="description">{bike.description}</p>
                                 </div>
                                 <div className="flex justify-around">
                                     <button
