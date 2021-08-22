@@ -55,10 +55,11 @@ const AddBike = () => {
         // use try/catch instead of promises to handle errors
         try {
             // execute addBike mutation and pass in variable data from form
-            const data = await addBike({
+            const { data } = await addBike({
                 variables: { ...formState },
             });
-            const bikeId = data?._id;
+
+            const bikeId = data?.addBike._id;
             setBikeStatus(bikeId, statusState.isLost, statusState.location);
 
             setFormState({
@@ -73,6 +74,7 @@ const AddBike = () => {
                 location: "",
                 isLost: "",
             });
+            
             console.log("form from addBike:", data);
         } catch (e) {
             console.error(e);
@@ -84,7 +86,7 @@ const AddBike = () => {
             const statusData = await addStatus({
                 variables: { bikeId, isLost, location },
             });
-            console.log(statusData);
+            console.log("status Data", statusData);
         } catch (e) {
             console.error(e);
         }

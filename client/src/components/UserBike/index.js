@@ -83,7 +83,7 @@ const UserBike = () => {
     <span>
       <div id="dashboardcontainer" className=" flex justify-center visible">
         {bikes?.map(bike => (
-          <div className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg">
+          <div className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg" key={bike._id} >
             <div className="">
               <img
                 className="object-contain h-48 w-full p-1"
