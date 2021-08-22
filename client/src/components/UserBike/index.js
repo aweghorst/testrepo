@@ -5,6 +5,7 @@ import BikeMessage from "../BikeMessage";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
 
+
 const UserBike = () => {
   //display seeded user data
   // const { loading, data } = useQuery(QUERY_USERS);

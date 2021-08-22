@@ -80,6 +80,8 @@ const AddBike = () => {
             window.location.reload();
         } catch (e) {
             console.error(e);
+            window.location.reload();
+            window.alert("There was an error with adding your bike. Please make sure bike image is not larger than 64 KB.")
         }
     };
 
@@ -93,8 +95,6 @@ const AddBike = () => {
             console.error(e);
         }
     }
-
-    
 
     return (
         <>
@@ -324,6 +324,22 @@ const AddBike = () => {
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
+                                                    <br></br>
+                                                </div>
+                                                <p>
+                                                    Image size cannot be larger than
+                                                    64 KB.
+                                                </p>
+                                                <div>
+                                                    <FileBase64
+                                                        multiple={false}
+                                                        onDone={({ base64 }) =>
+                                                            setFormState({
+                                                                ...formState,
+                                                                image: base64,
+                                                            })
+                                                        }
+                                                    />
                                                 </div>
 
                                                 <FileBase64
