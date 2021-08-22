@@ -1,22 +1,17 @@
-import React from 'react';
-import {
-    Route,
-    NavLink,
-    HashRouter,
-    Switch
-} from "react-router-dom";
+import React from "react";
+import { Route, NavLink, HashRouter, Switch } from "react-router-dom";
 
-import Home from '../../pages/Home';
-import Dashboard from '../../pages/Dashboard';
-import Search from '../../pages/Search';
-import Tips from '../../pages/Tips';
-import Login from '../../pages/Login';
-import Signup from '../../pages/Signup';
-import Message from '../../pages/Message';
+import Home from "../../pages/Home";
+import Dashboard from "../../pages/Dashboard";
+import Search from "../../pages/Search";
+import Tips from "../../pages/Tips";
+import Login from "../../pages/Login";
+import Signup from "../../pages/Signup";
+import Message from "../../pages/Message";
 
-import NoMatch from '../../pages/NoMatch';
+import NoMatch from "../../pages/NoMatch";
 
-import '../../assets/styles/nav.css';
+import "../../assets/styles/nav.css";
 
 import Auth from '../../utils/auth';
 

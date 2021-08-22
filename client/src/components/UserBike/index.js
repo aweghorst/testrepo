@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import BikeMessage from '../BikeMessage';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation  } from '@apollo/client';
 import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
+import { DELETE_BIKE } from "../../utils/mutations";
 
 
 const UserBike = () => {
@@ -24,6 +25,11 @@ const UserBike = () => {
 
     const [bikeMessages, setBikeMessages] = useState();
     const [showMessages, clickedShowMessages] = useState(false);
+    const [bikeState, setBikeState] = useState(bikes);
+  useEffect(() => {
+    setBikeState(bikes);
+  }, bikes);
+  const [deletePost, { error }] = useMutation(DELETE_BIKE);
 
     const responsive = {
         superLargeDesktop: {
@@ -69,13 +75,19 @@ const UserBike = () => {
         const bikeId = e.target.getAttribute('data-bike-id');
     }
 
-    function handleDeleteClick(e) {
-        e.preventDefault();
-        console.log('clicked delete!');
-
-        // get bike id
-        const bikeId = e.target.getAttribute('data-bike-id');
-    }
+    const handleDeleteClick = async (bikeId) => {
+        //  e.preventDefault();
+        console.log("clicked delete!");
+        console.log("This is the bikeID: " + bikeId);
+        try {
+          await deletePost({
+            variables: { bikeId },
+          });
+        } catch (error) {
+          console.log(error);
+        }
+        window.location.reload();
+      };
 
     return (
 
@@ -100,7 +112,7 @@ const UserBike = () => {
                                         <div className="flex justify-around">
                                         <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleEditClick}>Edit</button>
                                         <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleMessagesClick}>Messages</button>
-                                        <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleDeleteClick}>Delete</button>
+                                        <button data-bike-id={bike._id} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => handleDeleteClick(bike._id)}>Delete</button>
                                         </div>
                                     </div>
                                 </div>
