@@ -2,24 +2,32 @@ import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
 import { ADD_BIKE } from "../../utils/mutations";
-import { QUERY_USER_BIKE, QUERY_USER } from "../../utils/queries";
+import { QUERY_USER, QUERY_USER_BIKE } from "../../utils/queries";
 
-const AddBike = () =>{
+
+const AddBike = () => {
     const [open, setOpen] = useState(true);
     const cancelButtonRef = useRef(null);
 
     // create a new bike
-    const [brand, setBrand] = useState('');
+    const [formState, setFormState] = useState({
+        brand: "",
+        bike_model: "",
+        year: "",
+        serial: "",
+        description: "",
+        image: "",
+    });
     const [addBike] = useMutation(ADD_BIKE, {
         update(cache, { data: { addBike } }) {
             try {
-                const { userbikes } = cache.readQuery({
-                    query: QUERY_USER_BIKE,
-                });
+                //could potentially not exist yet, so wrap in a try... catch
+                 // read what's currently in the cache
+                const { bikes } = cache.readQuery({ query: QUERY_USER_BIKE });
                 // prepend the newest thought to the front of the array
                 cache.writeQuery({
                     query: QUERY_USER_BIKE,
-                    data: { userbikes: [addBike, ...userbikes] },
+                    data: { bikes: [addBike, ...bikes]}
                 });
             } catch (e) {
                 console.error(e);
@@ -28,26 +36,29 @@ const AddBike = () =>{
             const { user } = cache.readQuery({ query: QUERY_USER });
             cache.writeQuery({
                 query: QUERY_USER,
-                data: {
-                    user: { ...user, userbikes: [...user.userbikes, addBike] },
-                },
+                data: { user: { ...user, bikes: [...user.bikes, addBike] } }
             });
-        },
+        }
     });
-
-    const handleChange = (e) => {
-        setBrand(e.target.value);
+    // update state based on form input changes
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
     };
-
+    // submit form,  pass the data from the form state object as variables for our addUser mutation function
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        // use try/catch instead of promises to handle errors
         try {
-            // add bike to database
-            await addBike({
-                variables: { brand },
+            // execute addBike mutation and pass in variable data from form
+            const { data } = await addBike({
+                variables: { ...formState },
             });
-            // clear form value
-            setBrand("");
+            
+            console.log("form from addBike:", data);
         } catch (e) {
             console.error(e);
         }
@@ -160,7 +171,7 @@ const AddBike = () =>{
                                                             type="text"
                                                             name="brand"
                                                             id="brand"
-                                                            value={brand}
+                                                            value={formState.brand}
                                                             onChange={handleChange}
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
@@ -177,6 +188,8 @@ const AddBike = () =>{
                                                             type="text"
                                                             name="bike_model"
                                                             id="bike_model"
+                                                            value={formState.bike_model}
+                                                            onChange={handleChange}
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -192,6 +205,8 @@ const AddBike = () =>{
                                                             type="text"
                                                             name="year"
                                                             id="year"
+                                                            value={formState.year}
+                                                            onChange={handleChange}
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -207,6 +222,8 @@ const AddBike = () =>{
                                                             type="text"
                                                             name="serial"
                                                             id="serial"
+                                                            value={formState.serial}
+                                                            onChange={handleChange}
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -235,6 +252,8 @@ const AddBike = () =>{
                                                             type="text"
                                                             name="description"
                                                             id="description"
+                                                            value={formState.description}
+                                                            onChange={handleChange}
                                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                         />
                                                     </div>
@@ -318,6 +337,6 @@ const AddBike = () =>{
             </Transition.Root>
         </>
     );
-}
+};
 
 export default AddBike;

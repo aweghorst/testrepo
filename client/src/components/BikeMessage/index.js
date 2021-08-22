@@ -1,12 +1,12 @@
 import React from 'react';
 
-const BikeMessage = ({messages}) => {
+const BikeMessage = ({bikeMessages}) => {
 
     return (
         <div className="container text-center">
             <div>
-                {messages &&
-                    messages.map(message => (
+                {bikeMessages &&
+                    bikeMessages.map(message => (
                         <p className="" key={message._id}>
                         {message.messageBody}
                         posted by
