@@ -51,7 +51,8 @@ const UserBike = () => {
   function handleEditClick(e) {
     e.preventDefault();
     console.log("clicked edit!");
-    // <EditBike />;
+    // return (<div>Hello</div>);
+    // window.location.assign("/EditBike");
   }
 
   const handleDeleteClick = async (bikeId) => {
@@ -65,15 +66,16 @@ const UserBike = () => {
     } catch (error) {
       console.log(error);
     }
-    var bikeArr = [];
-    bikeState.forEach((element, index) => {
-      if (element._id === bikeId) {
-      } else {
-        bikeArr.push(element);
-      }
-    });
-    console.log(bikeArr);
-    setBikeState(bikeArr);
+    // var bikeArr = [];
+    // bikeState.forEach((element, index) => {
+    //   if (element._id === bikeId) {
+    //   } else {
+    //     bikeArr.push(element);
+    //   }
+    // });
+    // console.log(bikeArr);
+    // setBikeState(bikeArr);
+    window.location.reload();
   };
 
   console.log(data);
@@ -117,7 +119,7 @@ const UserBike = () => {
               <div className="flex justify-around">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                  onClick={<EditBike />}
+                  onClick={handleEditClick}
                 >
                   Edit
                 </button>
