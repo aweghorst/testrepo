@@ -330,8 +330,9 @@ const AddBike = () => {
                                                     Image size cannot be larger than
                                                     64 KB.
                                                 </p>
-                                                <div>
+                                                <div className="mt-3">
                                                     <FileBase64
+
                                                         multiple={false}
                                                         onDone={({ base64 }) =>
                                                             setFormState({
@@ -341,16 +342,6 @@ const AddBike = () => {
                                                         }
                                                     />
                                                 </div>
-
-                                                <FileBase64
-                                                    multiple={false}
-                                                    onDone={({ base64 }) =>
-                                                        setFormState({
-                                                            ...formState,
-                                                            image: base64,
-                                                        })
-                                                    }
-                                                />
                                             </div>
                                             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6"></div>
                                         </div>
