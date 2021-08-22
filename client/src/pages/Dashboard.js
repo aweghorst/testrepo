@@ -4,7 +4,7 @@ import UserBike from '../components/UserBike';
 const Dashboard = () => {
 
     return (
-        <div className="">
+        <div className="w-screen">
             <UserBike />
         </div>
     )

@@ -7,12 +7,13 @@ import '../../assets/styles/header.css';
 const Header = () => {
     return (
         <div>
-            <header>
+            <header className="w-screen">
                 <div>
                     <h1 className="brand-title">Find My Bike</h1>
-                </div>
-                <div className="nav-section">
+                    <div className="nav-section">
                     <Nav />
+                </div>
+              
                 </div>
             </header>
         </div>
