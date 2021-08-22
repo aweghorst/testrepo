@@ -7,7 +7,7 @@ import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     const { loading, data } = useQuery(QUERY_USERS);
-    const user = data?.users[2] || {};
+    const user = data?.users[6] || {};
     console.log(data);
     console.log(user);
     const { username, email, bikeCount, bikes } = user;
@@ -83,7 +83,7 @@ const UserBike = () => {
             <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
 
             {bikes?.map(bike => ( 
-                            <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
+                            <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg" key={bike._id}>
                                 <div className="">
                                         <img className="object-contain h-48 w-full p-1" src={bike.image} alt="your bike"></img>
                                     <div className="bg-gray-200 rounded-3xl p-2">
