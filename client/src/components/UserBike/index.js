@@ -91,7 +91,7 @@ const UserBike = () => {
         className="flex justify-center p-20"
         centerMode={true}
       > */}
-      {bikeState?.map((bike) => (
+      {bikes?.map((bike) => (
         <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
           <div className="">
             <img
