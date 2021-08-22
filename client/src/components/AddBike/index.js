@@ -81,7 +81,9 @@ const AddBike = () => {
         } catch (e) {
             console.error(e);
             window.location.reload();
-            window.alert("There was an error with adding your bike. Please make sure bike image is not larger than 64 KB.")
+            window.alert(
+                "There was an error with adding your bike. Please make sure bike image is not larger than 64 KB."
+            );
         }
     };
 
@@ -99,6 +101,7 @@ const AddBike = () => {
     return (
         <>
             <button
+                id="addbikebtn"
                 className="rounded-md border border-transparent addbikebtn shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                 onClick={() => setOpen((open) => !open)}
             >
@@ -326,8 +329,8 @@ const AddBike = () => {
                                                     <br></br>
                                                 </div>
                                                 <p>
-                                                    Image size cannot be larger than
-                                                    64 KB.
+                                                    Image size cannot be larger
+                                                    than 64 KB.
                                                 </p>
                                                 <div>
                                                     <FileBase64
