@@ -129,12 +129,12 @@ const UserBike = () => {
                                 )}
                                 <div>
                                     <ul>
-                                        <li>Brand: {bike.brand}</li>
-                                        <li>Model: {bike.bike_model}</li>
+                                        <li><span className="detailsheader">Brand:</span> {bike.brand}</li>
+                                        <li><span className="detailsheader">Model:</span> {bike.bike_model}</li>
                                         <li>
-                                            Location: {bike.status[0].location}
+                                        <span className="detailsheader">Location:</span> {bike.status[0].location}
                                         </li>
-                                        <li className="descriptionheader">
+                                        <li className="detailsheader descriptionheader">
                                         Description
                                         </li>
                                     </ul>
@@ -170,9 +170,9 @@ const UserBike = () => {
                     </div>
                 ))}
             </div>
-            <div id="bikemessage" className="hidden">
+            <div id="bikemessage" className="hidden flex flex-col items-center">
                 <button
-                    className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white mt-4 hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                    className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white mt-4 hover:bg-blue-700 focus:outline-none  sm:w-auto sm:text-sm"
                     onClick={handleMessagesReturnClick}
                 >
                     Return To Bike List

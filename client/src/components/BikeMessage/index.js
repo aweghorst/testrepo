@@ -8,9 +8,9 @@ const BikeMessage = ({ bikeMessages }) => {
   }
 
   return (
-    <div className="flex-col p-20 pt-0 mt-10">
-      <div className="justify-center">
-        <h1 className="flex m-full mt-10 w-full justify-center comments-header">
+    <div className="flex-col w-8/12 p-20 pt-0 mt-1">
+      <div className="justify-center ">
+        <h1 className="flex m-full mt-1 w-full justify-center comments-header">
           Comments
         </h1>
         <div className="bg-gray-200  content-between mx-auto p-6 m-2 mb-10 rounded-3xl itemcontainer comment shadow-md w-8/12">

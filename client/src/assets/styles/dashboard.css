@@ -7,7 +7,20 @@
   text-decoration: underline;
 }
 
+.detailsheader {
+  font-weight: 500;
+}
 .description {
   margin-bottom: 5px;
   padding: 10px;
+}
+
+.username {
+  margin-top: 15px;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.welcome {
+  margin-bottom: 20px;
 }
