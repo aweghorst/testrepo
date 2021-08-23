@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "react-multi-carousel/lib/styles.css";
+import Carousel from 'react-multi-carousel';
 import BikeMessage from "../BikeMessage";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
@@ -102,13 +102,15 @@ const UserBike = () => {
 
     return (
         <span>
+
             <div
                 id="dashboardcontainer"
-                className=" flex flex-wrap justify-center visible"
+                className="pb-20 flex flex-wrap justify-center visible"
             >
                 {bikes?.map((bike) => (
+            // <Carousel responsive={responsive} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="p-20" >
                     <div
-                        className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg"
+                        className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
                         key={bike._id}
                     >
                         <div className="">
@@ -127,7 +129,7 @@ const UserBike = () => {
                                         Found
                                     </div>
                                 )}
-                                <div>
+                                <div className="">
                                     <ul>
                                         <li><span className="detailsheader">Brand:</span> {bike.brand}</li>
                                         <li><span className="detailsheader">Model:</span> {bike.bike_model}</li>
@@ -138,7 +140,7 @@ const UserBike = () => {
                                         Description
                                         </li>
                                     </ul>
-                                    <p className="description">{bike.description}</p>
+                                    <p className="description text-center">{bike.description}</p>
                                 </div>
                                 <div className="flex justify-around">
                                     <button
@@ -168,6 +170,7 @@ const UserBike = () => {
                             </div>
                         </div>
                     </div>
+                // </Carousel>
                 ))}
             </div>
             <div id="bikemessage" className="hidden flex flex-col items-center">
