@@ -27,7 +27,8 @@ const SearchBike = () => {
 
     const [searchedBikes, setSearchedBikes] = useState([]);
 
-    
+    const [clickSearch, setClickSearch] = useState(false);
+
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -51,6 +52,7 @@ const SearchBike = () => {
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
         // console.log("clicked")
+        setClickSearch(true);
 
         function findLostBikes (arr, query) {
             console.log("this is your array: ", arr);
@@ -113,7 +115,7 @@ const SearchBike = () => {
                     </button>
                 </form>
 
-            {        console.log('searchedbikes', searchedBikes.length ? true : false)}
+            {console.log('searchedbikes', searchedBikes.length ? true : false)}
 
             <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
                     {searchedBikes.length ? (
@@ -156,8 +158,9 @@ const SearchBike = () => {
                             })}
                             </div>
                     ) : (
-                        <div>There are no missing bikes reported</div>
-                    )}
+                        clickSearch ? (<div>There are no missing bikes reported in this area</div>) : (<div></div>)
+                        )
+                }
             </Carousel> 
 
         </span>
