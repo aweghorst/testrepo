@@ -28,7 +28,7 @@ const UserBike = () => {
     useEffect(() => {
         setBikeState(bikes);
     }, bikes);
-    const [deletePost, { error }] = useMutation(DELETE_BIKE);
+    const [deleteBike, { error }] = useMutation(DELETE_BIKE);
 
     const responsive = {
         superLargeDesktop: {
@@ -87,11 +87,11 @@ const UserBike = () => {
     }
 
     const handleDeleteClick = async (bikeId) => {
-        //  e.preventDefault();
+
         console.log("clicked delete!");
         console.log("This is the bikeID: " + bikeId);
         try {
-            await deletePost({
+            await deleteBike({
                 variables: { bikeId },
             });
         } catch (error) {
