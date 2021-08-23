@@ -22,7 +22,7 @@ ul {
   height: 40px;
   font-weight: 500;
   display: inline;
-  text-decoration: underline;
+  text-decoration: none;
   text-decoration-thickness: 2px;
   text-decoration-color: rgb(59,130,246);
   cursor:pointer;

@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_MESSAGE } from '../../utils/mutations';
+import { Redirect } from 'react-router-dom';
 
-const MessageForm = (bikeId) => {
+const MessageForm = () => {
 
-    const [ messageBody, setText] = useState('');
+    const [ messageBody, setMessageBody] = useState('');
     const [ addMessage, { error }] = useMutation(ADD_MESSAGE);
+    const [ bikeId, setBikeId ] = useState('');
+    const [ submitted, setSubmitted] = useState(false); 
+
+    let currentIdUrl = window.location.hash.split('/').splice(2).toString();
 
     function handleChange(event) {
-        setText(event.target.value);
+        setMessageBody(event.target.value);
+        setBikeId(currentIdUrl);
     }
 
     async function handleFormSubmit(event) {
@@ -19,12 +25,22 @@ const MessageForm = (bikeId) => {
                 variables: { bikeId, messageBody }
             });
 
-            setText('');
+            setMessageBody('');
+            setBikeId('');
+            setSubmitted(true);
+
         }
         catch (e) {
             console.error(e);
         }
+
     };
+
+        if (submitted === true) {
+            alert("Your message has been sent!");
+            return <Redirect to="/Search" />
+        }
+
 
     return (
         <div className="flex justify-center p-20">
