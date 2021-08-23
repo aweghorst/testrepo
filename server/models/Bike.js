@@ -27,8 +27,7 @@ const bikeSchema = new Schema(
             minLength: 1
         },
         image: {
-            type: String,
-            required: true
+            type: String
         },
         status: [statusSchema],
         messages: [messageSchema],

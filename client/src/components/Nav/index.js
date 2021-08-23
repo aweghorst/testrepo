@@ -1,26 +1,70 @@
-import React from 'react';
-import {
-    Route,
-    NavLink,
-    HashRouter,
-    Switch
-} from "react-router-dom";
+import React from "react";
+import { Route, NavLink, HashRouter, Switch } from "react-router-dom";
 
-import Home from '../../pages/Home';
-import Dashboard from '../../pages/Dashboard';
-import Search from '../../pages/Search';
-import Tips from '../../pages/Tips';
-import Login from '../../pages/Login';
-import Signup from '../../pages/Signup';
-import Message from '../../pages/Message';
+import Home from "../../pages/Home";
+import Dashboard from "../../pages/Dashboard";
+import Search from "../../pages/Search";
+import Tips from "../../pages/Tips";
+import Login from "../../pages/Login";
+import Signup from "../../pages/Signup";
+import Message from "../../pages/Message";
 
-import NoMatch from '../../pages/NoMatch';
+import NoMatch from "../../pages/NoMatch";
 
-import '../../assets/styles/nav.css';
+import "../../assets/styles/nav.css";
 
-import Auth from '../../utils/auth';
+import Auth from "../../utils/auth";
 
 const Nav = () => {
+  return (
+    <HashRouter>
+      <div>
+        <nav className="nav-section">
+          <ul>
+            <li className="main-nav">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="current-nav"
+                className="nav-link"
+                replace
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="main-nav">
+              <NavLink
+                exact
+                to="/Dashboard"
+                activeClassName="current-nav"
+                className="nav-link"
+                replace
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li className="main-nav">
+              <NavLink
+                exact
+                to="/Search"
+                activeClassName="current-nav"
+                className="nav-link"
+                replace
+              >
+                Search
+              </NavLink>
+            </li>
+            <li className="main-nav">
+              <NavLink
+                exact
+                to="/Tips"
+                activeClassName="current-nav"
+                className="nav-link"
+                replace
+              >
+                Tips
+              </NavLink>
+            </li>
 
     return (
         <HashRouter>

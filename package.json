@@ -15,5 +15,9 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.4.0",
+    "react-native-snap-carousel": "^3.9.1"
   }
 }

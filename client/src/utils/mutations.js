@@ -67,7 +67,7 @@ export const ADD_BIKE = gql`
 
 export const UPDATE_BIKE = gql`
     mutation updateBike($bikeId: ID!, $description: String, $image: String) {
-        updateBike (bikeId: $bikeId, description: $description, image: $image) {
+        updateBike(bikeId: $bikeId, description: $description, image: $image) {
             _id
             brand
             bike_model
@@ -88,7 +88,6 @@ export const DELETE_BIKE = gql`
     mutation deleteBike($bikeId: ID!) {
         deleteBike(bikeId: $bikeId) {
             _id
-            username
             bikeCount
             bikes {
                 _id
@@ -133,7 +132,7 @@ export const UPDATE_STATUS = gql`
 
 export const ADD_MESSAGE = gql`
     mutation addMessage($bikeId: ID!, $messageBody: String!) {
-       addComment(bikeId: $bikeId, messageBody: $messageBody) {
+        addComment(bikeId: $bikeId, messageBody: $messageBody) {
             _id
             brand
             bike_model

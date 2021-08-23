@@ -14,7 +14,6 @@ const resolvers = {
                 const user = await User.findById(context.user._id)
                 .select('-__v -password')
                 .populate('bikes');
-
                 return user;
             }
             throw new AuthenticationError("Not logged in");
@@ -35,16 +34,16 @@ const resolvers = {
 
             throw new AuthenticationError("You need to be logged in!");
         }, 
-        lostBikes: async (parent, args, context) => {
-            // console.log("lostBike args:", args)
-            // fetch all bikes and set equal to a variable
-            const bikes = await Bike.find({})
-            // need to filter out the lost bikes and set to a variable
-            const lostBikes = bikes.filter(bike => bike.status.length !== 0 && bike.status[0].isLost)
-            // return the lost bikes
-            return lostBikes;
-            // }
-        }
+        // lostBikes: async (parent, args, context) => {
+        //     // console.log("lostBike args:", args)
+        //     // fetch all bikes and set equal to a variable
+        //     const bikes = await Bike.find({})
+        //     // need to filter out the lost bikes and set to a variable
+        //     const lostBikes = bikes.filter(bike => bike.status.length !== 0 && bike.status[0].isLost)
+        //     // return the lost bikes
+        //     return lostBikes;
+        //     // }
+        // }
     },
     Mutation: {
         addUser: async (parent, args) => {
@@ -149,20 +148,20 @@ const resolvers = {
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });
 
-            if (!user) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-            const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
-            if (!correctPw) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-            const token = signToken(user);
-            return { token, user };
-        }
-    }
+      const token = signToken(user);
+      return { token, user };
+    },
+  },
 };
 
 module.exports = resolvers;
