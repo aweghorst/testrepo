@@ -25,6 +25,7 @@ ul {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-decoration-color: rgb(59,130,246);
+  cursor:pointer;
  
 }
 

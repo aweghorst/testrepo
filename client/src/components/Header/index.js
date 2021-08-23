@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div>
             <header>
-                <div className="justify-center test">
+                <div className="justify-center">
                     <h1 className="brand-title">Find My Bike</h1>
                     <div className="nav-section">
                     <Nav />
