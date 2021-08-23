@@ -41,11 +41,11 @@ const Nav = () => {
                     </li>
                     {Auth.loggedIn() ? (
                         <>
-                        <li className="login-out nav-link" onClick={Auth.logout}>Logout</li>
+                        <li className="login-out nav-link" onClick={Auth.logout}>Sign Out</li>
                         </>
                     ) : (
                         <li id="login-out">
-                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Login</NavLink>
+                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Sign In</NavLink>
                         </li>
                     )}
                 </ul>
