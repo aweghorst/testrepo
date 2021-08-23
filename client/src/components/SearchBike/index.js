@@ -58,6 +58,7 @@ const SearchBike = () => {
             return arr.filter((bikes, index) => {
                 index =+ 0
                 if (bikes.status[index].location === query) {
+                    console.log(bikes);
                     return bikes;
                 }
             });
@@ -116,17 +117,25 @@ const SearchBike = () => {
             <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
 
                             <div>
-                                {searchedBikes.map((bike) => {
-                                    if (bike) {
+                                {searchedBikes.map((bike, i) => {
+                                    // if (bike) {
+                                        {console.log('carousel', bike[i]._id)}
                                         return(
-                                            <div key={bike._id}>
-                                                {bike.image ? (
-                                                    <img className="object-contain h-48 w-full p-1" src={bike.image} alt="the users bike" />
+                                            <div key={bike[i]._id}>
+                                                {bike[i].image ? (
+                                                    <img className="object-contain h-48 w-full p-1" src={bike[i].image} alt="the users bike" />
                                                 ) : null}
                                                 <div className="bg-gray-200 rounded-3xl p-2">
-                                                    <h4 className="pt-2 pb-2 bg-red-200 rounded-full">{bike.status}</h4>
-                                                    <div>
-                                                        <p className="pt-3 pb-3">{bike.description}</p>
+                                                    {bike[i].status[0].isLost ? (
+                                                        <h4 className="pt-2 pb-2 bg-red-200 text-center rounded-full">Missing</h4>
+                                                    ) : (
+                                                        <h4 className="pt-2 pb-2 bg-green-200 text-center rounded-full">Found</h4>
+                                                    )}
+                                                    <div>                                                        
+                                                        <p className="pt-3 pb-3">Brand: {bike[i].brand}</p>
+                                                        <p className="pt-3 pb-3">Model: {bike[i].bike_model}</p>
+                                                        <p className="pt-3 pb-3">Serial: {bike[i].serial}</p>
+                                                        <p className="pt-3 pb-3">Description: {bike[i].description}</p>
                                                     </div>
                                                     <HashRouter>
                                                         <div className="flex justify-around">
@@ -142,9 +151,9 @@ const SearchBike = () => {
                                                 </div>
                                             </div>
                                         )
-                                    } else {
-                                        return null;
-                                    }
+                                    // } else {
+                                    //     return null;
+                                    // }
                                 })}
                             </div>
 
