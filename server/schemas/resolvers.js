@@ -34,16 +34,16 @@ const resolvers = {
 
             throw new AuthenticationError("You need to be logged in!");
         }, 
-        // lostBikes: async (parent, args, context) => {
-        //     // console.log("lostBike args:", args)
-        //     // fetch all bikes and set equal to a variable
-        //     const bikes = await Bike.find({})
-        //     // need to filter out the lost bikes and set to a variable
-        //     const lostBikes = bikes.filter(bike => bike.status.length !== 0 && bike.status[0].isLost)
-        //     // return the lost bikes
-        //     return lostBikes;
-        //     // }
-        // }
+        lostBikes: async (parent, args, context) => {
+            // console.log("lostBike args:", args)
+            // fetch all bikes and set equal to a variable
+            const bikes = await Bike.find({})
+            // need to filter out the lost bikes and set to a variable
+            const lostBikes = bikes.filter(bike => bike.status.length !== 0 && bike.status[0].isLost)
+            // return the lost bikes
+            return lostBikes;
+            // }
+        }
     },
     Mutation: {
         addUser: async (parent, args) => {
