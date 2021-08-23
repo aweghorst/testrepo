@@ -3,7 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import BikeMessage from '../BikeMessage';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER, QUERY_USERS } from '../../utils/queries';
+import { QUERY_USERS } from '../../utils/queries';
 
 const UserBike = () => {
     const { loading, data } = useQuery(QUERY_USERS);
@@ -38,8 +38,6 @@ const UserBike = () => {
     function handleMessagesClick(e) {
         e.preventDefault();
         console.log("clicked message!");
-        const bikeMessage = bikes.message[0]
-        console.log(bikeMessage);
     }
 
     function handleEditClick(e) {
@@ -60,7 +58,6 @@ const UserBike = () => {
 
             {bikes?.map(bike => ( 
                             <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
-                                <div className="">
                                         <img className="object-contain h-48 w-full p-1" src={bike.image} alt="your bike"></img>
                                     <div className="bg-gray-200 rounded-3xl p-2">
                                     {bike.status[0].isLost ? <div className="pt-2 pb-2 bg-red-200 rounded-full" >Missing</div> : <div className="pt-2 pb-2 bg-green-200 rounded-full">Found</div>}
@@ -78,14 +75,13 @@ const UserBike = () => {
                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleDeleteClick}>Delete</button>
                                         </div>
                                     </div>
-                                </div>
                             </div>
 
                     ))}
                     <div></div>
             </Carousel>
-            <div>
-            <BikeMessage messages={bike.messages} />
+            <div className="text-center">
+            <BikeMessage />
             </div>
         </span>
 

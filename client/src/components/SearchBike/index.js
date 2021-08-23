@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Route,
     NavLink,
@@ -12,19 +12,21 @@ import Message from '../../pages/Message.js';
 import { QUERY_LOST_BIKES } from '../../utils/queries.js';
 
 const SearchBike = () => {
+    const [searchInput, setSearchInput] = useState('');
 
-
-    const {loading, data} = useQuery(QUERY_LOST_BIKES)
-    console.log("This is your log of the useQuery of QUERY_ALL_BIKES: ", data);
+    const {loading, data, error} = useQuery(QUERY_LOST_BIKES, {
+        variables: {searchInput},
+    })
+    // console.log("This is your log of the useQuery of QUERY_ALL_BIKES: ", data);
 
     // use a ternary operator to check if bike data is present (loaded)
     const lostBikes = loading ? [] : data.lostBikes;
   
-    console.log("These are your lost bikes: ", lostBikes);
+    // console.log("These are your lost bikes: ", lostBikes);
 
 
     const [searchedBikes, setSearchedBikes] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+
     
     const responsive = {
         superLargeDesktop: {
@@ -48,28 +50,50 @@ const SearchBike = () => {
     
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
-        console.log(event);
+        // console.log("clicked")
 
-        if (!searchInput) {
-            return false;
-        }
-            // all lost bikes in lostBikes
-            // you can filter through them by the city the user inputted
-            const bikeByCity = lostBikes.filter(bikes => {
-                if (bikes.status[0].location === searchInput) {
-                    console.log("you have locations!")
+        function findLostBikes (arr, query) {
+            console.log("this is your array: ", arr);
+            console.log("You searched for: ", query);
+            return arr.filter((bikes, index) => {
+                index =+ 0
+                if (bikes.status[index].location === query) {
+                    return bikes;
                 }
-            })
+            });
+        }
 
-        // try {
-            // const {loading, data} = useQuery(QUERY_LOST_BIKES, {
-            //     variables: {location: 'Austin'}
-            // });
-        // }
+        try {
+
+            const response = await findLostBikes(lostBikes, searchInput)
+            console.log("This is your response: ", response);
+
+            if (!response) {
+                throw new Error("Something went wrong!");
+            }
+
+            // const bikeData = response.map((bike) => ({
+            //     bikeId: bike._id,
+            //     brand: bike.brand,
+            //     description: bike.description,
+            //     image: bike.image,
+            //     serial: bike.serial,
+            //     status: bike.status,
+            // }));
+
+            setSearchedBikes([response]);
+            setSearchInput('');
+
+        } catch (err) {
+            console.log(err)
+        }
+
+
     }
 
 
     return (
+        <>
         <span className="justify-center">
 
             <form className="bg-white shadow p-4 flex" onSubmit={handleSearchSubmit}>
@@ -93,60 +117,41 @@ const SearchBike = () => {
 
                             <div>
                                 {searchedBikes.map((bike) => {
-                                    return(
-                                        <div key={bike._id}>
-                                            {bike.image ? (
-                                                <img className="object-contain h-48 w-full p-1" src={bike.image} alt="the users bike" />
-                                            ) : null}
-                                            <div className="bg-gray-200 rounded-3xl p-2">
-                                                <h4 className="pt-2 pb-2 bg-red-200 rounded-full">{bike.status}</h4>
-                                                <div>
-                                                    <p lassName="pt-3 pb-3">{bike.description}</p>
-                                                </div>
-                                                <HashRouter>
-                                                    <div className="flex justify-around">
-                                                        <NavLink exact to="/Message" activeClassName="current-nav" className="nav-link" replace>
-                                                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Message User</button>
-                                                        </NavLink>
-
-                                                        <Switch>
-                                                            <Route exact path="/Message" component={Message} />
-                                                        </Switch>
+                                    if (bike) {
+                                        return(
+                                            <div key={bike._id}>
+                                                {bike.image ? (
+                                                    <img className="object-contain h-48 w-full p-1" src={bike.image} alt="the users bike" />
+                                                ) : null}
+                                                <div className="bg-gray-200 rounded-3xl p-2">
+                                                    <h4 className="pt-2 pb-2 bg-red-200 rounded-full">{bike.status}</h4>
+                                                    <div>
+                                                        <p className="pt-3 pb-3">{bike.description}</p>
                                                     </div>
-                                                </HashRouter>
+                                                    <HashRouter>
+                                                        <div className="flex justify-around">
+                                                            <NavLink exact to="/Message" activeClassName="current-nav" className="nav-link" replace>
+                                                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Message User</button>
+                                                            </NavLink>
+    
+                                                            <Switch>
+                                                                <Route exact path="/Message" component={Message} />
+                                                            </Switch>
+                                                        </div>
+                                                    </HashRouter>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
+                                        )
+                                    } else {
+                                        return null;
+                                    }
                                 })}
                             </div>
 
-                            {/* <div>
-                                    <div className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
-                                        <div className="">
-                                                <img className="object-contain h-48 w-full p-1" src={bike} alt="the users bike"></img>
-                                            <div className="bg-gray-200 rounded-3xl p-2">
-                                                <div className="pt-2 pb-2 bg-red-200 rounded-full">Missing</div>
-                                                <div>
-                                                    <p className="pt-3 pb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                </div>
-                                                <HashRouter>
-                                                    <div className="flex justify-around">
-                                                        <NavLink exact to="/Message" activeClassName="current-nav" className="nav-link" replace>
-                                                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Message User</button>
-                                                        </NavLink>
-
-                                                        <Switch>
-                                                            <Route exact path="/Message" component={Message} />
-                                                        </Switch>
-                                                    </div>
-                                                </HashRouter>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div> */}
             </Carousel>
 
         </span>
+        </>
             
     )
 }
