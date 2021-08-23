@@ -11,7 +11,7 @@ const Header = () => {
         <div>
             <header>
                 <div className="justify-center">
-                    <img src={bikeSleuth} className=""/>
+                    <img src={bikeSleuth} className="min-w-full"/>
                     <h1 className="brand-title text-center">BikeSleuth</h1>
                     <div className="nav-section">
                     <Nav />
