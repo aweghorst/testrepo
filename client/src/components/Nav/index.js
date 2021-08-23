@@ -41,7 +41,7 @@ const Nav = () => {
                     </li>
                     {Auth.loggedIn() ? (
                         <>
-                        <li className="login-out nav-link" onClick={Auth.logout}>Sign Out</li>
+                        <li id="login-out" className="nav-link" onClick={Auth.logout}>Sign Out</li>
                         </>
                     ) : (
                         <li id="login-out">
