@@ -8,6 +8,7 @@ const MessageForm = () => {
     const [ messageBody, setMessageBody] = useState('');
     const [ addMessage, { error }] = useMutation(ADD_MESSAGE);
     const [ bikeId, setBikeId ] = useState('');
+    const [ submitted, setSubmitted] = useState(false); 
 
     let currentIdUrl = window.location.hash.split('/').splice(2).toString();
 
@@ -26,6 +27,7 @@ const MessageForm = () => {
 
             setMessageBody('');
             setBikeId('');
+            setSubmitted(true);
 
         }
         catch (e) {
@@ -33,6 +35,11 @@ const MessageForm = () => {
         }
 
     };
+
+    if (submitted === true) {
+        alert("Your message has been sent!");
+        return <Redirect to="/Search" />
+    }
 
     return (
         <div className="flex justify-center p-20">
