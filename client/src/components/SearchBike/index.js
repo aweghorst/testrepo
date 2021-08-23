@@ -140,12 +140,12 @@ const SearchBike = () => {
                                                     </div>
                                                     <HashRouter>
                                                         <div className="flex justify-around">
-                                                            <NavLink exact to="/Message" activeClassName="current-nav" className="nav-link" replace>
+                                                            <NavLink exact to={`/Message/${bike._id}`} activeClassName="current-nav" className="nav-link" replace>
                                                                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Message User</button>
                                                             </NavLink>
     
                                                             <Switch>
-                                                                <Route exact path="/Message" component={Message} />
+                                                                <Route exact path={`/Message/${bike._id}`} component={() => <Message bikeId={bike._id} />} />
                                                             </Switch>
                                                         </div>
                                                     </HashRouter>
