@@ -27,7 +27,8 @@ const SearchBike = () => {
 
     const [searchedBikes, setSearchedBikes] = useState([]);
 
-    
+    const [clickSearch, setClickSearch] = useState(false);
+
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -51,6 +52,7 @@ const SearchBike = () => {
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
         // console.log("clicked")
+        setClickSearch(true);
 
         function findLostBikes (arr, query) {
             console.log("this is your array: ", arr);
@@ -58,6 +60,7 @@ const SearchBike = () => {
             return arr.filter((bikes, index) => {
                 index =+ 0
                 if (bikes.status[index].location === query) {
+                    console.log(bikes);
                     return bikes;
                 }
             });
@@ -81,13 +84,12 @@ const SearchBike = () => {
             //     status: bike.status,
             // }));
 
-            setSearchedBikes([response]);
+            setSearchedBikes(response);
             setSearchInput('');
 
         } catch (err) {
             console.log(err)
         }
-
 
     }
 
@@ -113,20 +115,30 @@ const SearchBike = () => {
                     </button>
                 </form>
 
-            <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
+            {console.log('searchedbikes', searchedBikes.length ? true : false)}
 
+            <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
+                    {searchedBikes.length ? (
                             <div>
                                 {searchedBikes.map((bike) => {
-                                    if (bike) {
+                                        // {console.log('carousel', bike[i]._id)}
+                                    // if (bike) {
                                         return(
                                             <div key={bike._id}>
                                                 {bike.image ? (
                                                     <img className="object-contain h-48 w-full p-1" src={bike.image} alt="the users bike" />
                                                 ) : null}
                                                 <div className="bg-gray-200 rounded-3xl p-2">
-                                                    <h4 className="pt-2 pb-2 bg-red-200 rounded-full">{bike.status}</h4>
-                                                    <div>
-                                                        <p className="pt-3 pb-3">{bike.description}</p>
+                                                    {bike.status[0].isLost ? (
+                                                        <h4 className="pt-2 pb-2 bg-red-200 text-center rounded-full">Missing</h4>
+                                                    ) : (
+                                                        <h4 className="pt-2 pb-2 bg-green-200 text-center rounded-full">Found</h4>
+                                                    )}
+                                                    <div>                                                        
+                                                        <p className="pt-3 pb-3">Brand: {bike.brand}</p>
+                                                        <p className="pt-3 pb-3">Model: {bike.bike_model}</p>
+                                                        <p className="pt-3 pb-3">Serial: {bike.serial}</p>
+                                                        <p className="pt-3 pb-3">Description: {bike.description}</p>
                                                     </div>
                                                     <HashRouter>
                                                         <div className="flex justify-around">
@@ -140,15 +152,16 @@ const SearchBike = () => {
                                                         </div>
                                                     </HashRouter>
                                                 </div>
-                                            </div>
+                                            </div>         
                                         )
-                                    } else {
-                                        return null;
-                                    }
-                                })}
+                                // }
+                            })}
                             </div>
-
-            </Carousel>
+                    ) : (
+                        clickSearch ? (<div>There are no missing bikes reported in this area</div>) : (<div></div>)
+                        )
+                }
+            </Carousel> 
 
         </span>
         </>
