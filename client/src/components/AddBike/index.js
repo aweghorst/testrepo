@@ -100,7 +100,7 @@ const AddBike = () => {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="pt-20 pb-20 flex justify-center">
       <button
         id="addbikebtn"
         className="rounded-md border border-transparent addbikebtn shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"

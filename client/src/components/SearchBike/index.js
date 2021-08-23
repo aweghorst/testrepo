@@ -14,7 +14,7 @@ import { QUERY_LOST_BIKES } from '../../utils/queries.js';
 const SearchBike = () => {
     const [searchInput, setSearchInput] = useState('');
 
-    const {loading, data, error} = useQuery(QUERY_LOST_BIKES, {
+    const {loading, data} = useQuery(QUERY_LOST_BIKES, {
         variables: {searchInput},
     })
     // console.log("This is your log of the useQuery of QUERY_ALL_BIKES: ", data);
@@ -22,7 +22,7 @@ const SearchBike = () => {
     // use a ternary operator to check if bike data is present (loaded)
     const lostBikes = loading ? [] : data.lostBikes;
   
-    // console.log("These are your lost bikes: ", lostBikes);
+    console.log("These are your lost bikes: ", lostBikes);
 
 
     const [searchedBikes, setSearchedBikes] = useState([]);
@@ -115,16 +115,14 @@ const SearchBike = () => {
                     </button>
                 </form>
 
-            {console.log('searchedbikes', searchedBikes.length ? true : false)}
+            {console.log('searchedBikes', searchedBikes.length ? true : false)}
 
             <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
                     {searchedBikes.length ? (
                             <div>
                                 {searchedBikes.map((bike) => {
-                                        // {console.log('carousel', bike[i]._id)}
-                                    // if (bike) {
                                         return(
-                                            <div key={bike._id}>
+                                            <div key={bike._id} className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
                                                 {bike.image ? (
                                                     <img className="object-contain h-48 w-full p-1" src={bike.image} alt="the users bike" />
                                                 ) : null}
