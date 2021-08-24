@@ -1,3 +1,4 @@
+require('dotenv').config();
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_MESSAGE } from '../../utils/mutations';
