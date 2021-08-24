@@ -27,8 +27,11 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client} className="flex flex-col min-h-screen">
       <Header />
+      <main className="flex-grow">
+
+      </main>
       <Footer />
     </ApolloProvider>
     

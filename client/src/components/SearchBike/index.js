@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
     Route,
     NavLink,
-    HashRouter,
+    HashRouter, //can use browserRouter to get rid of #
     Switch
 } from "react-router-dom";
 import { useQuery } from '@apollo/client';
@@ -108,7 +108,7 @@ const SearchBike = () => {
                     placeholder="Try 'Los Angeles'"  
                     name="searchInput" 
                     value={searchInput}
-                    onChange={(event) => setSearchInput(event.target.value)}
+                    onChange={(event) => setSearchInput(event.target.value.toUpperCase())}
                     />
                     <button className="bg-red-400 hover:bg-red-300 rounded text-white p-2 pl-4 pr-4" >
                             <p className="font-semibold text-xs">Search</p>
@@ -117,12 +117,12 @@ const SearchBike = () => {
 
             {console.log('searchedBikes', searchedBikes.length ? true : false)}
 
-            <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}>
+            {/* <Carousel responsive={responsive} infinite={false} swipeable={true} removeArrowOnDeviceType={["tablet", "mobile"]} className="flex justify-center p-20" centerMode={true}> */}
                     {searchedBikes.length ? (
-                            <div>
+                            <div className="pb-20 flex flex-wrap justify-center visible">
                                 {searchedBikes.map((bike) => {
                                         return(
-                                            <div key={bike._id} className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg">
+                                            <div key={bike._id} className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container">
                                                 {bike.image ? (
                                                     <img className="object-contain h-48 w-full p-1" src={bike.image} alt="the users bike" />
                                                 ) : null}
@@ -159,7 +159,7 @@ const SearchBike = () => {
                         clickSearch ? (<div>There are no missing bikes reported in this area</div>) : (<div></div>)
                         )
                 }
-            </Carousel> 
+            {/* </Carousel>  */}
 
         </span>
         </>

@@ -62,7 +62,7 @@ const AddBike = () => {
       });
 
       const bikeId = data?.addBike._id;
-      setBikeStatus(bikeId, statusState.isLost, statusState.location);
+      setBikeStatus(bikeId, statusState.isLost, statusState.location.toUpperCase());
 
       setFormState({
         brand: "",

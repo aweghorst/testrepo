@@ -24,7 +24,7 @@ ul {
   display: inline;
   text-decoration: none;
   text-decoration-thickness: 2px;
-  text-decoration-color: rgb(59,130,246);
+  text-decoration-color: rgb(255, 187, 40);
   cursor:pointer;
  
 }
@@ -41,7 +41,7 @@ ul {
   font-size: 1.3em;
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-decoration-color: rgb(59,130,246);
+  text-decoration-color: rgb(255, 187, 40);
 }
 
 .current-nav {
