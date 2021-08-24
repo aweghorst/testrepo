@@ -186,8 +186,8 @@ const EditBike = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block addbikecontainer align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div className=" addheadercontainer px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="inline-block addbikecontainer align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-600">
+                <div className=" addheadercontainer px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-gray-600">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
                       <span role="img" aria-label="bike Emoji">
@@ -212,8 +212,8 @@ const EditBike = ({
                 <div className="mt-5 md:mt-0 md:col-span-2">
                   <form action="#" method="PUT" onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
-                      <div className="px-4 py-5 addbackground sm:p-6">
-                        <div className="col-span-6 sm:col-span-3">
+                      <div className="dark:bg-gray-600 rounded-xl px-4 py-5 sm:p-6">
+                        <div className="col-span-6 sm:col-span-3 dark:bg-gray-600">
                           <label
                             htmlFor="status"
                             className="block text-sm font-medium text-gray-700"
@@ -225,7 +225,7 @@ const EditBike = ({
                             id="status"
                             name="status"
                             onChange={handleChangeStatus}
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            className="dark:bg-gray-400 mb-3 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
                             <option hidden disabled selected value> Select a status</option>
                             <option>Not Missing</option>
@@ -233,10 +233,10 @@ const EditBike = ({
                           </select>
                         </div>
                         <div className="grid grid-cols-6 gap-6">
-                          <div className="col-span-6 sm:col-span-3">
+                          <div className="col-span-6 sm:col-span-3 dark:bg-gray-600">
                             <label
                               htmlFor="brand"
-                              className="block text-sm font-medium text-gray-700"
+                              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                             >
                               Brand
                             </label>
@@ -246,14 +246,14 @@ const EditBike = ({
                               name="brand"
                               id="brand"
                               onChange={handleChange}
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="dark:bg-gray-400 mt-1 line-height focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
 
                           <div className="col-span-6 sm:col-span-3">
                             <label
                               htmlFor="model"
-                              className="block text-sm font-medium text-gray-700"
+                              className="block text-sm font-medium text-gray-700 dark:bg-gray-600 dark:text-gray-300"
                             >
                               Model
                             </label>
@@ -263,14 +263,14 @@ const EditBike = ({
                               name="bike_model"
                               id="bike_model"
                               onChange={handleChange}
-                              className="mt-1 line-height focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="dark:bg-gray-400 mt-1 line-height focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
 
                           <div className="col-span-6 sm:col-span-3">
                             <label
                               htmlFor="year"
-                              className="block text-sm font-medium text-gray-700"
+                              className="block text-sm font-medium text-gray-700 dark:bg-gray-600 dark:text-gray-300"
                             >
                               Year
                             </label>
@@ -280,14 +280,14 @@ const EditBike = ({
                               name="year"
                               id="year"
                               onChange={handleChange}
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="dark:bg-gray-400 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
 
                           <div className="col-span-6 sm:col-span-3">
                             <label
                               htmlFor="serial"
-                              className="block text-sm font-medium text-gray-700"
+                              className="block text-sm font-medium text-gray-700 dark:bg-gray-600 dark:text-gray-300"
                             >
                               Serial Number
                             </label>
@@ -297,13 +297,13 @@ const EditBike = ({
                               id="serial"
                               value={formState.serial}
                               onChange={handleChange}
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="dark:bg-gray-400 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
                           <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                             <label
                               htmlFor="city"
-                              className="block text-sm font-medium text-gray-700"
+                              className="block text-sm font-medium text-gray-700 dark:bg-gray-600 dark:text-gray-300"
                             >
                               City
                             </label>
@@ -313,13 +313,13 @@ const EditBike = ({
                               id="location"
                               value={statusState.location.toUpperCase()}
                               onChange={handleChangeStatus}
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="dark:bg-gray-400 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
                           <div className="col-span-6">
                             <label
                               htmlFor="description"
-                              className="block text-sm font-medium text-gray-700"
+                              className="block text-sm font-medium text-gray-700 dark:bg-gray-600 dark:text-gray-300"
                             >
                               Description
                             </label>
@@ -329,14 +329,15 @@ const EditBike = ({
                               id="description"
                               value={formState.description}
                               onChange={handleChange}
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="dark:bg-gray-400 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
                           <br></br>
                         </div>
                         <p>Image size cannot be larger than 64 KB.</p>
-                        <div className="mt-3 bg-white">
+                        <div className="mt-3 bg-white dark:bg-gray-600">
                           <FileBase64
+                          containerClass="dark:bg-gray-600"
                             multiple={false}
                             onDone={({ base64 }) =>
                               setFormState({
@@ -347,9 +348,9 @@ const EditBike = ({
                           />
                         </div>
                       </div>
-                      <div className="px-4 py-3 bg-gray-50 text-right sm:px-6"></div>
+                      <div className="px-4 py-3 bg-gray-50 dark:bg-gray-600 text-right sm:px-6"></div>
                     </div>
-                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                       <button
                         type="submit"
                         className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
@@ -359,7 +360,7 @@ const EditBike = ({
                       </button>
                       <button
                         type="button"
-                        className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        className="dark:bg-gray-400 mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         onClick={() => setOpen(false)}
                         ref={cancelButtonRef}
                       >

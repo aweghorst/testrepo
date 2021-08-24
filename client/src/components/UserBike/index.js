@@ -120,7 +120,7 @@ const UserBike = () => {
                   alt="the users bike"
                 />
               ) : null}
-              <div className="bg-gray-200 dark:bg-gray-800 rounded-3xl p-2">
+              <div className="bg-gray-200 dark:bg-gray-400 rounded-3xl p-2">
                 {bike.status[0].isLost ? (
                   <div className="pt-2 pb-2 bg-red-200 text-center rounded-full">
                     Missing
