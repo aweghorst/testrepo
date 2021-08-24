@@ -92,7 +92,7 @@ const UserBike = () => {
     console.log("clicked delete!");
     console.log("This is the bikeID: " + bikeId);
     try {
-      await deletePost({
+      await deleteBike({
         variables: { bikeId },
       });
     } catch (error) {
