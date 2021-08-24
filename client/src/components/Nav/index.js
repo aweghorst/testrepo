@@ -1,17 +1,22 @@
-import React from "react";
-import { Route, NavLink, HashRouter, Switch } from "react-router-dom";
+import React from 'react';
+import {
+    Route,
+    NavLink,
+    HashRouter,
+    Switch
+} from "react-router-dom";
 
-import Home from "../../pages/Home";
-import Dashboard from "../../pages/Dashboard";
-import Search from "../../pages/Search";
-import Tips from "../../pages/Tips";
-import Login from "../../pages/Login";
-import Signup from "../../pages/Signup";
-import Message from "../../pages/Message";
+import Home from '../../pages/Home';
+import Dashboard from '../../pages/Dashboard';
+import Search from '../../pages/Search';
+import Tips from '../../pages/Tips';
+import Login from '../../pages/Login';
+import Signup from '../../pages/Signup';
+import Message from '../../pages/Message';
 
-import NoMatch from "../../pages/NoMatch";
+import NoMatch from '../../pages/NoMatch';
 
-import "../../assets/styles/nav.css";
+import '../../assets/styles/nav.css';
 
 import Auth from '../../utils/auth';
 
@@ -36,11 +41,11 @@ const Nav = () => {
                     </li>
                     {Auth.loggedIn() ? (
                         <>
-                        <li className="login-out nav-link" onClick={Auth.logout}>Logout</li>
+                        <li id="login-out" className="nav-link" onClick={Auth.logout}>Sign Out</li>
                         </>
                     ) : (
                         <li id="login-out">
-                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Login</NavLink>
+                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Sign In</NavLink>
                         </li>
                     )}
                 </ul>

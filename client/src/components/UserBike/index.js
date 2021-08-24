@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import BikeMessage from "../BikeMessage";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
 import { DELETE_BIKE } from "../../utils/mutations";
 import EditBike from "../EditBike";
+import "../../assets/styles/dashboard.css";
+
 const UserBike = () => {
   // const { loading, data } = useQuery(QUERY_USERS);
   // const user = data?.users[6] || {};
@@ -53,18 +53,29 @@ const UserBike = () => {
 
   function handleMessagesClick(e) {
     e.preventDefault();
-
     // get bike id
     const bikeId = e.target.getAttribute("data-bike-id");
-    console.log("clicked message!", bikeId);
-
     // get bike messages
-    const bikeMessages = bikes?.filter((bike) => bike._id === bikeId)[0]
-      .messages;
-    console.log("one bike", bikeMessages);
-
+    const bikeMessages = bikes?.filter(bike => bike._id === bikeId)[0].messages;
     setBikeMessages(bikeMessages);
-    console.log("mesages", bikeMessages);
+    // display show/hide model
+    var bikeMessageEl = document.getElementById("bikemessage");
+    var dashboardEl = document.getElementById("dashboardcontainer");
+    var addbikebtnEl = document.getElementById("addbikebtn");
+    bikeMessageEl.classList.remove("hidden");
+    dashboardEl.classList.add("hidden", "pb-10");
+    addbikebtnEl.classList.add("hidden");
+  }
+
+  function handleMessagesReturnClick(e) {
+    e.preventDefault();
+    // display show/hide
+    var bikeMessageEl = document.getElementById("bikemessage");
+    var dashboardEl = document.getElementById("dashboardcontainer");
+    var addbikebtnEl = document.getElementById("addbikebtn");
+    bikeMessageEl.classList.add("hidden");
+    dashboardEl.classList.remove("hidden", "pb-10");
+    addbikebtnEl.classList.remove("hidden");
   }
 
   function handleEditClick(e) {
@@ -75,7 +86,7 @@ const UserBike = () => {
     const bikeId = e.target.getAttribute("data-bike-id");
   }
 
-  const handleDeleteClick = async (bikeId) => {
+  const handleDeleteClick = async bikeId => {
     //  e.preventDefault();
     console.log("clicked delete!");
     console.log("This is the bikeID: " + bikeId);
@@ -90,52 +101,46 @@ const UserBike = () => {
   };
 
   return (
-    <span className="">
-      <Carousel
-        responsive={responsive}
-        infinite={false}
-        swipeable={true}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        className="flex justify-center p-20"
-        centerMode={true}
+    <span>
+      <div
+        id="dashboardcontainer"
+        className="pb-20 flex flex-wrap justify-center visible"
       >
-        {bikes?.map((bike) => (
+        {bikes?.map(bike => (
           <div
-            className="bg-gray-300 p-6 m-2 rounded-3xl shadow-2xl max-w-lg"
+            className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
             key={bike._id}
           >
             <div className="">
-              <img
-                className="object-contain h-48 w-full p-1"
-                src={bike.image}
-                alt="your bike"
-              ></img>
+              {bike.image ? (
+                <img
+                  className="object-contain h-48 w-full p-1"
+                  src={bike.image}
+                  alt="the users bike"
+                />
+              ) : null}
               <div className="bg-gray-200 rounded-3xl p-2">
                 {bike.status[0].isLost ? (
-                  <div className="pt-2 pb-2 bg-red-200 rounded-full">
+                  <div className="pt-2 pb-2 bg-red-200 text-center rounded-full">
                     Missing
                   </div>
                 ) : (
-                  <div className="pt-2 pb-2 bg-green-200 rounded-full">
+                  <div className="pt-2 pb-2 bg-green-200 text-center rounded-full">
                     Found
                   </div>
                 )}
-                <div>
-                  <ul>
-                    <li>Brand: {bike.brand}</li>
-                    <li>Model: {bike.bike_model}</li>
-                    <li>Location: {bike.status[0].location}</li>
-                  </ul>
-                  <p className="pt-3 pb-3">Description: {bike.description}</p>
+                <div className="text-center">
+                  <p className="pt-3 pb-3">Brand: {bike.brand}</p>
+                  <p className="pt-3 pb-3">Model: {bike.bike_model}</p>
+                  <p className="pt-3 pb-3">Year: {bike.year}</p>
+                  <p className="pt-3 pb-3">
+                    Location: {bike.status[0].location}
+                  </p>
+                  <p className="pt-3 pb-3 mb-3">
+                    Description: {bike.description}
+                  </p>
                 </div>
                 <div className="flex justify-around">
-                  {/* <button
-                    data-bike-id={bike._id}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                    onClick={handleEditClick}
-                  >
-                    Edit
-                  </button> */}
                   <EditBike
                     bikeId={bike._id}
                     status={bike.status[0].isLost}
@@ -149,14 +154,14 @@ const UserBike = () => {
                   />
                   <button
                     data-bike-id={bike._id}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                    className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={handleMessagesClick}
                   >
                     Messages
                   </button>
                   <button
                     data-bike-id={bike._id}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                    className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => handleDeleteClick(bike._id)}
                   >
                     Delete
@@ -166,10 +171,15 @@ const UserBike = () => {
             </div>
           </div>
         ))}
-        <div></div>
-      </Carousel>
-      <div>
+      </div>
+      <div id="bikemessage" className="hidden flex flex-col items-center">
         <BikeMessage bikeMessages={bikeMessages} />
+        <button
+          className="rounded-md mb-10 border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white mt-4 hover:bg-blue-700 focus:outline-none  sm:w-auto sm:text-sm"
+          onClick={handleMessagesReturnClick}
+        >
+          Return To Bike List
+        </button>
       </div>
     </span>
   );

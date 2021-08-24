@@ -147,23 +147,23 @@ export const UPDATE_STATUS = gql`
 `;
 
 export const ADD_MESSAGE = gql`
-  mutation addMessage($bikeId: ID!, $messageBody: String!) {
-    addMessage(bikeId: $bikeId, messageBody: $messageBody) {
-      _id
-      brand
-      bike_model
-      description
-      status {
-        isLost
-        location
-        date
+    mutation addMessage($bikeId: ID!, $messageBody: String!) {
+        addMessage(bikeId: $bikeId, messageBody: $messageBody) {
+            _id
+            brand
+            bike_model
+            description
+            status {
+                isLost
+                location
+                date
+            }
+            messages {
+                _id
+                messageBody
+                createdAt
+                username
+            }
       }
-      messages {
-        _id
-        messageBody
-        createdAt
-        username
-      }
-    }
   }
 `;

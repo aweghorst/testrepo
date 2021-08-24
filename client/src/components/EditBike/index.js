@@ -5,6 +5,7 @@ import { QUERY_USER } from "../../utils/queries";
 import { UPDATE_BIKE, UPDATE_STATUS } from "../../utils/mutations";
 import FileBase64 from "react-file-base64";
 import gql from "graphql-tag";
+import "../../assets/styles/editbike.css";
 
 const EditBike = ({
   bikeId,
@@ -144,8 +145,8 @@ const EditBike = ({
   return (
     <>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        onClick={() => setOpen((open) => !open)}
+        className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+        onClick={() => setOpen(open => !open)}
       >
         Edit
       </button>
@@ -185,8 +186,8 @@ const EditBike = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="inline-block addbikecontainer align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className=" addheadercontainer px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
                       <span role="img" aria-label="bike Emoji">
@@ -196,7 +197,7 @@ const EditBike = ({
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg leading-6 font-medium text-gray-900"
+                        className="text-lg addheadertext leading-6 font-medium text-gray-900"
                       >
                         Edit Your Bike Details
                       </Dialog.Title>
@@ -211,7 +212,7 @@ const EditBike = ({
                 <div className="mt-5 md:mt-0 md:col-span-2">
                   <form action="#" method="PUT" onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
-                      <div className="px-4 py-5 bg-white sm:p-6">
+                      <div className="px-4 py-5 addbackground sm:p-6">
                         <div className="col-span-6 sm:col-span-3">
                           <label
                             htmlFor="status"
@@ -262,7 +263,7 @@ const EditBike = ({
                               name="bike_model"
                               id="bike_model"
                               onChange={handleChange}
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              className="mt-1 line-height focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           </div>
 
@@ -334,7 +335,7 @@ const EditBike = ({
                           <br></br>
                         </div>
                         <p>Image size cannot be larger than 64 KB.</p>
-                        <div>
+                        <div className="mt-3 bg-white">
                           <FileBase64
                             multiple={false}
                             onDone={({ base64 }) =>
