@@ -2,6 +2,14 @@
 
 ## Description
 
+## Table of Contents
+* [User Story](#User-Story)
+* [Made With](#Made With)
+* [Packages](#Packages)
+* [Usage](#Usage)
+* [Snapshots](#Snapshots)
+* [Contributors](#Contributors)
+
 ## User Story
 > As an avid cyclist I WANT to be able to log by bike's information SO THAT I can report it if it gets lost or stolen.
 
