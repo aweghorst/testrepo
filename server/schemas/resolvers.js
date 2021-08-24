@@ -89,7 +89,14 @@ const resolvers = {
         },
         deleteBike: async (parent, { bikeId }, context) => {
             if (context.user) {
-                Bike.findOneAndDelete({ _id: bikeId });
+                Bike.findOneAndDelete({ _id: bikeId }, function (err, docs) {
+                    if (err) {
+                        console.log("delete err", err)
+                    }
+                    else {
+                        console.log("deleted bike", bikeId)
+                    }
+                });
 
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
