@@ -6,10 +6,10 @@ const Home = () => {
     return (
         <div className="home-container">
             <div>
-                <h2 className="welcome-title">Welcome to Find My Bike!</h2>
+                <h2 className="welcome-title"><span>Welcome to BikeSleuth!</span></h2>
             </div>
-            <div>
-                <p className="welcome-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div className="pt-4">
+                <p className="welcome-text">BikeSleuth is designed to quickly reunite a rider and their missing bicycle. With this app, you are able to upload your bicycle information at any time and in the event the bike becomes lost or stolen, you can update your bike's status as missing and your bike will be automatically added to our search page allowing other users in your area to keep an eye out for your missing bicycle. </p>
             </div>
         </div>
     )

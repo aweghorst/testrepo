@@ -6,9 +6,12 @@
 }
 
 .welcome-title {
-
+font-size: 3em;
 }
 
 .welcome-text {
     font-size: large;
+    width:65%;
+   margin: auto;
+   padding: 10px;
 }

@@ -12,10 +12,13 @@ import Search from '../../pages/Search';
 import Tips from '../../pages/Tips';
 import Login from '../../pages/Login';
 import Signup from '../../pages/Signup';
+import Message from '../../pages/Message';
 
 import NoMatch from '../../pages/NoMatch';
 
 import '../../assets/styles/nav.css';
+
+import Auth from '../../utils/auth';
 
 const Nav = () => {
 
@@ -36,12 +39,20 @@ const Nav = () => {
                     <li className="main-nav">
                         <NavLink exact to="/Tips" activeClassName="current-nav" className="nav-link" replace>Tips</NavLink>
                     </li>
-                    <li id="login-out">
-                            <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Login</NavLink>
-                    </li>
+                    {Auth.loggedIn() ? (
+                        <>
+                        <li id="login-out" className="nav-link" onClick={Auth.logout}>Sign Out</li>
+                        </>
+                    ) : (
+                        <li id="login-out">
+                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Sign In</NavLink>
+                        </li>
+                    )}
                 </ul>
 
-                    <div className="content">
+            </nav>
+        </div>
+                    <div className="object-center">
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/Dashboard" component={Dashboard} />
@@ -49,11 +60,10 @@ const Nav = () => {
                             <Route path="/Tips" component={Tips} />
                             <Route path="/Login" component={Login} />
                             <Route path="/Signup" component={Signup} />
+                            <Route path="/Message" component={Message} />
                             <Route component={NoMatch} />
                         </Switch>
                     </div>
-            </nav>
-        </div>
         </HashRouter>
     );
 };

@@ -4,15 +4,19 @@ import Nav from '../Nav';
 
 import '../../assets/styles/header.css';
 
+import bikeSleuth from '../../assets/images/bikesleuthbanner.jpg'
+
 const Header = () => {
     return (
         <div>
             <header>
-                <div>
-                    <h1 className="brand-title">Find My Bike</h1>
-                </div>
-                <div className="nav-section">
+                <div className="justify-center">
+                    <img src={bikeSleuth} className="min-w-full"/>
+                    <h1 className="brand-title text-center">BikeSleuth</h1>
+                    <div className="nav-section">
                     <Nav />
+                </div>
+              
                 </div>
             </header>
         </div>

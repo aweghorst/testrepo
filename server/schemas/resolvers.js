@@ -2,6 +2,8 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Bike } = require("../models");
 const { signToken } = require("../utils/auth");
 
+
+
 const resolvers = {
     Query: {
         bikes: async () => {
@@ -12,11 +14,36 @@ const resolvers = {
                 const user = await User.findById(context.user._id)
                 .select('-__v -password')
                 .populate('bikes');
-
                 return user;
             }
             throw new AuthenticationError("Not logged in");
         },
+        users: async () => {
+            return User.find()
+                .select('-__v')
+                .populate('bikes');
+        },
+        userBikes: async (parent, args, context) => {
+            if (context.user) {
+                const bikeList = await Bike.find(
+                    { userId: context.user._id }
+                );
+
+                return bikeList;
+            }
+
+            throw new AuthenticationError("You need to be logged in!");
+        }, 
+        lostBikes: async (parent, args, context) => {
+            // console.log("lostBike args:", args)
+            // fetch all bikes and set equal to a variable
+            const bikes = await Bike.find({})
+            // need to filter out the lost bikes and set to a variable
+            const lostBikes = bikes.filter(bike => bike.status.length !== 0 && bike.status[0].isLost)
+            // return the lost bikes
+            return lostBikes;
+            // }
+        }
     },
     Mutation: {
         addUser: async (parent, args) => {
@@ -33,6 +60,12 @@ const resolvers = {
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { bikes: bike._id }},
+                    { new: true }
+                );
+
+                await Bike.findByIdAndUpdate(
+                    {_id: bike._id },
+                    { userId: context.user._id},
                     { new: true }
                 );
 
@@ -92,23 +125,43 @@ const resolvers = {
 
             throw new AuthenticationError("Not logged in");
         },
+        addMessage: async (parent, { bikeId, messageBody }, context) => {
+            if (context.user) {
+              const updatedBike = await Bike.findOneAndUpdate(
+                { _id: bikeId },
+                {
+                  $push: {
+                    messages: {
+                      messageBody,
+                      username: context.user.username,
+                    },
+                  },
+                },
+                { new: true, runValidators: true }
+              );
+
+              return updatedBike;
+            }
+      
+            throw new AuthenticationError("You need to be logged in!");
+        },
         login: async (parent, { username, password }) => {
             const user = await User.findOne({ username });
 
-            if (!user) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-            const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
-            if (!correctPw) {
-                throw new AuthenticationError("Incorrect credentials");
-            }
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-            const token = signToken(user);
-            return { token, user };
-        }
-    }
+      const token = signToken(user);
+      return { token, user };
+    },
+  },
 };
 
 module.exports = resolvers;

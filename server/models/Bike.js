@@ -1,17 +1,19 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 const statusSchema = require('./Status');
+const messageSchema = require('./Message');
 
 const bikeSchema = new Schema(
     {
+        userId: {
+            type: String,
+        },
         brand: {
             type: String,
-            required: true
         },
         bike_model: {
             type: String,
-            required: true
         },
         year: {
             type: String
@@ -25,13 +27,13 @@ const bikeSchema = new Schema(
             minLength: 1
         },
         image: {
-            type: String,
-            required: true
+            type: String
         },
-        status: [statusSchema]
+        status: [statusSchema],
+        messages: [messageSchema],
     }
 );
 
-const Bike = mongoose.model('Bike', bikeSchema);
+const Bike = mongoose.model("Bike", bikeSchema);
 
 module.exports = Bike;

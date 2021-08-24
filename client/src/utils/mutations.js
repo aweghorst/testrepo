@@ -22,12 +22,22 @@ export const ADD_USER = gql`
     }
 `;
 
+export const UPDATE_USER = gql`
+    mutation updateUser($email: String!, $password: String!) {
+        updateUser(email: $email, password: $password) {
+            _id
+            username
+            email
+        }
+    }
+`;
+
 export const ADD_BIKE = gql`
     mutation addBike(
         $brand: String
         $bike_model: String
         $year: String
-        $serial: Int
+        $serial: String
         $description: String
         $image: String
     ) {
@@ -57,7 +67,7 @@ export const ADD_BIKE = gql`
 
 export const UPDATE_BIKE = gql`
     mutation updateBike($bikeId: ID!, $description: String, $image: String) {
-        updateBike (bikeId: $bikeId, description: $description, image: $image) {
+        updateBike(bikeId: $bikeId, description: $description, image: $image) {
             _id
             brand
             bike_model
@@ -78,7 +88,6 @@ export const DELETE_BIKE = gql`
     mutation deleteBike($bikeId: ID!) {
         deleteBike(bikeId: $bikeId) {
             _id
-            username
             bikeCount
             bikes {
                 _id
@@ -93,6 +102,11 @@ export const DELETE_BIKE = gql`
                     location
                     date
                 }
+                messages {
+                    username
+                    messageBody
+                    createdAt
+                }
             }
         }
     }
@@ -104,11 +118,35 @@ export const UPDATE_STATUS = gql`
             _id
             brand
             bike_model
+            serial
+            description
+            image
+            status {
+                isLost
+                location
+                date
+            }
+        }
+    }
+`;
+
+export const ADD_MESSAGE = gql`
+    mutation addMessage($bikeId: ID!, $messageBody: String!) {
+        addMessage(bikeId: $bikeId, messageBody: $messageBody) {
+            _id
+            brand
+            bike_model
             description
             status {
                 isLost
                 location
                 date
+            }
+            messages {
+                _id
+                messageBody
+                createdAt
+                username
             }
         }
     }
