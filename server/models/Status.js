@@ -12,13 +12,10 @@ const statusSchema = new Schema(
       required: true,
     },
     date: {
-      type: String,
-
-      /*
-            type: Date,
-            default: Date.now,
-            get: timestamp => dateFormat(timestamp)
-            */
+      type: Date,
+      default: Date.now,
+      get: timestamp => dateFormat(timestamp)
+          
     },
   },
   {
