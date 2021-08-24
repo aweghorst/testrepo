@@ -30,7 +30,7 @@ const EditBike = ({
     serial: serialNum,
     // location: city,
     description: description,
-    image: "",
+    image: image,
   });
   // console.log(bikeId);
   // console.log(status);
@@ -226,7 +226,7 @@ const EditBike = ({
                             onChange={handleChangeStatus}
                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
-                            <option disabled selected value> Select a status</option>
+                            <option hidden disabled selected value> Select a status</option>
                             <option>Not Missing</option>
                             <option>Missing</option>
                           </select>
