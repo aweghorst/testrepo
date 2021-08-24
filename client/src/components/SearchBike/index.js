@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
     Route,
     NavLink,
-    HashRouter,
+    HashRouter, //can use browserRouter to get rid of #
     Switch
 } from "react-router-dom";
 import { useQuery } from '@apollo/client';

@@ -2,33 +2,37 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_MESSAGE } from '../../utils/mutations';
 import { Redirect } from 'react-router-dom';
+// useEffect
 
 const MessageForm = () => {
 
     const [ messageBody, setMessageBody] = useState('');
     const [ addMessage, { error }] = useMutation(ADD_MESSAGE);
-    const [ bikeId, setBikeId ] = useState('');
-    const [ submitted, setSubmitted] = useState(false); 
+    // const [ bikeId, setBikeId ] = useState('');
+    // const [ submitted, setSubmitted] = useState(false); 
 
     let currentIdUrl = window.location.hash.split('/').splice(2).toString();
 
     function handleChange(event) {
         setMessageBody(event.target.value);
-        setBikeId(currentIdUrl);
+        // setBikeId(currentIdUrl);
     }
 
     async function handleFormSubmit(event) {
         event.preventDefault();
 
+        console.log("handleform");
+
         try {
             await addMessage({
-                variables: { bikeId, messageBody }
+                variables: { bikeId: currentIdUrl, messageBody }
             });
 
-            setMessageBody('');
-            setBikeId('');
-            setSubmitted(true);
-
+            // setMessageBody('');
+            // setBikeId('');
+            // setSubmitted(true);
+        window.location.href = 'http://localhost:3000/#/Search'
+        //find method which does not reload page
         }
         catch (e) {
             console.error(e);
@@ -36,10 +40,11 @@ const MessageForm = () => {
 
     };
 
-        if (submitted === true) {
-            alert("Your message has been sent!");
-            return <Redirect to="/Search" />
-        }
+        // if (submitted === true) {
+        //     // alert("Your message has been sent!");
+        //     console.log("hello!!!!")
+        //     return <Redirect to="/Search" />
+        // }
 
 
     return (

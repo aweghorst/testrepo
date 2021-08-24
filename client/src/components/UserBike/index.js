@@ -4,6 +4,7 @@ import BikeMessage from "../BikeMessage";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
 import { DELETE_BIKE } from "../../utils/mutations";
+import EditBike from "../EditBike";
 import '../../assets/styles/dashboard.css';
 
 const UserBike = () => {
@@ -143,13 +144,24 @@ const UserBike = () => {
                                     <p className="description text-center">{bike.description}</p>
                                 </div>
                                 <div className="flex justify-around">
-                                    <button
+                                    {/* <button
                                         data-bike-id={bike._id}
                                         className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                                         onClick={handleEditClick}
                                     >
                                         Edit
-                                    </button>
+                                    </button> */}
+                                        <EditBike
+                                            bikeId={bike._id}
+                                            status={bike.status[0].isLost ? "Missing" : "Found"}
+                                            brand={bike.brand}
+                                            bikeModel={bike.bike_model}
+                                            year={bike.year}
+                                            serialNum={bike.serial}
+                                            city={bike.status[0].location}
+                                            description={bike.description}
+                                            image={bike.image}
+                                        />
                                     <button
                                         data-bike-id={bike._id}
                                         className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
