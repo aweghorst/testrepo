@@ -1,18 +1,20 @@
-.addheadercontainer {
+.editheadercontainer {
   border-bottom: 4px solid rgb(65, 133, 13);
 }
 
-.addbikecontainer {
+.editbikecontainer {
   border: 5px solid rgb(6, 9, 35);
 }
 
-.addheadertext {
+.editheadertext {
   font-size: 30px;
 }
 
-.addbackground {
+.editbackground {
   background-color: rgb(245, 245, 245);
 }
+
+
 
 .line-height {
   line-height: 30px;

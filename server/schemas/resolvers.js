@@ -2,8 +2,6 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Bike } = require("../models");
 const { signToken } = require("../utils/auth");
 
-
-
 const resolvers = {
     Query: {
         bikes: async () => {
@@ -74,14 +72,25 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in!');
         },
-        updateBike: async (parent, { bikeId, description, image }, context) => {
+        updateBike: async (
+            parent,
+            { bikeId, description, image, brand, bike_model, year, serial },
+            context
+          ) => {
             if (context.user) {
-                const updatedBike = await Bike.findByIdAndUpdate( 
-                    { _id: bikeId },
-                    { description: description, image: image },
-                    { new: true }
-                )
-
+              const updatedBike = await Bike.findByIdAndUpdate(
+                { _id: bikeId },
+                {
+                  description: description,
+                  image: image,
+                  brand: brand,
+                  bike_model: bike_model,
+                  year: year,
+                  serial: serial,
+                },
+                { new: true }
+              );
+      
                 return updatedBike;
             }
 
@@ -89,7 +98,14 @@ const resolvers = {
         },
         deleteBike: async (parent, { bikeId }, context) => {
             if (context.user) {
-                Bike.findOneAndDelete({ _id: bikeId });
+                Bike.findOneAndDelete({ _id: bikeId }, function (err, docs) {
+                    if (err) {
+                        console.log("delete err", err)
+                    }
+                    else {
+                        console.log("deleted bike", bikeId)
+                    }
+                });
 
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },

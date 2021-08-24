@@ -1,31 +1,39 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e92fb35cf5550d1e005a6234be2229f1",
+    "revision": "e9f87f8087e4002811b2d8228036b48c",
     "url": "/index.html"
   },
   {
-    "revision": "c3d54a69b1b6c268cdec",
+    "revision": "961a9f80e32c07027a89",
     "url": "/static/css/2.46add351.chunk.css"
   },
   {
-    "revision": "aa2aed6032b16edd3aa6",
-    "url": "/static/css/main.ef0c8a9d.chunk.css"
+    "revision": "a9bacc7939b979b37eec",
+    "url": "/static/css/main.957e0e8e.chunk.css"
   },
   {
-    "revision": "c3d54a69b1b6c268cdec",
-    "url": "/static/js/2.162e5a85.chunk.js"
+    "revision": "961a9f80e32c07027a89",
+    "url": "/static/js/2.7407db0a.chunk.js"
   },
   {
     "revision": "8b240fa57d2685bf09edc781f871b66b",
-    "url": "/static/js/2.162e5a85.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.7407db0a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "aa2aed6032b16edd3aa6",
-    "url": "/static/js/main.deaf085e.chunk.js"
+    "revision": "a9bacc7939b979b37eec",
+    "url": "/static/js/main.2c927312.chunk.js"
   },
   {
     "revision": "02751e160f988a50d44f",
     "url": "/static/js/runtime-main.8a258a78.js"
+  },
+  {
+    "revision": "77ad1876f36be4a9138813bde0d72d4d",
+    "url": "/static/media/bikesleuthbanner.77ad1876.jpg"
+  },
+  {
+    "revision": "0625057fe6fb50fdc5bb2236fcfbd0e2",
+    "url": "/static/media/bikesleuthbannerdark.0625057f.jpg"
   },
   {
     "revision": "e41a51557701ca72ee4c97bc0ff54207",

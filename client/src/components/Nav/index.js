@@ -27,25 +27,25 @@ const Nav = () => {
         <div>
             <nav className="nav-section">
                 <ul>
-                    <li className="main-nav">
+                    <li className="main-nav dark:text-gray-200">
                         <NavLink exact to="/" activeClassName="current-nav" className="nav-link" replace>Home</NavLink>
                     </li>
-                    <li className="main-nav"> 
+                    <li className="main-nav dark:text-gray-200"> 
                         <NavLink exact to="/Dashboard" activeClassName="current-nav" className="nav-link" replace>Dashboard</NavLink>
                     </li>
-                    <li className="main-nav">
+                    <li className="main-nav dark:text-gray-200">
                         <NavLink exact to="/Search" activeClassName="current-nav" className="nav-link" replace>Search</NavLink>
                     </li>
-                    <li className="main-nav">
+                    <li className="main-nav dark:text-gray-200">
                         <NavLink exact to="/Tips" activeClassName="current-nav" className="nav-link" replace>Tips</NavLink>
                     </li>
                     {Auth.loggedIn() ? (
                         <>
-                        <li id="login-out" className="nav-link" onClick={Auth.logout}>Sign Out</li>
+                        <li id="login-out" className="nav-link dark:text-gray-200" onClick={Auth.logout}>Sign Out</li>
                         </>
                     ) : (
                         <li id="login-out">
-                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link" replace>Sign In</NavLink>
+                        <NavLink exact to="/Login" activeClassName="current-nav" className="nav-link dark:text-gray-200" replace>Sign In</NavLink>
                         </li>
                     )}
                 </ul>
