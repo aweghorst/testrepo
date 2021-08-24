@@ -1,8 +1,10 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
+import { QUERY_USER } from "../../utils/queries";
 import { UPDATE_BIKE, UPDATE_STATUS } from "../../utils/mutations";
 import FileBase64 from "react-file-base64";
+import gql from "graphql-tag";
 
 const EditBike = ({
   bikeId,
@@ -20,11 +22,14 @@ const EditBike = ({
 
   // create a new bike
   const [formState, setFormState] = useState({
-    brand: "",
-    bike_model: "",
-    year: "",
-    serial: "",
-    description: "",
+    bikeId: bikeId,
+    status: status,
+    brand: brand,
+    bike_model: bikeModel,
+    year: year,
+    serial: serialNum,
+    // location: city,
+    description: description,
     image: "",
   });
   console.log(bikeId);
@@ -39,9 +44,24 @@ const EditBike = ({
 
   // set status of new bike
   const [statusState, setStatusState] = useState({
-    location: "",
-    isLost: "",
+    location: city,
+    isLost: status,
   });
+
+  // const [updateBike] = useMutation(UPDATE_BIKE, {
+  //   refetchQueries: [
+  //     {
+  //       query: QUERY_USER, // Query name
+  //     },
+  //   ],
+  // });
+  // const [updateStatus] = useMutation(UPDATE_STATUS, {
+  //   refetchQueries: [
+  //     {
+  //       query: "QUERY_USER", // Query name
+  //     },
+  //   ],
+  // });
 
   const [updateBike] = useMutation(UPDATE_BIKE);
   const [updateStatus] = useMutation(UPDATE_STATUS);
@@ -57,6 +77,7 @@ const EditBike = ({
   const handleChangeStatus = (event) => {
     let isLost;
     const status = document.querySelector('[name="status"]').value;
+    console.log("This is status Handle Change: " + status);
     if (status === "Not missing") {
       isLost = false;
     } else {
@@ -84,6 +105,7 @@ const EditBike = ({
       setBikeStatus(bikeId, statusState.isLost, statusState.location);
 
       setFormState({
+        bikeId: "",
         brand: "",
         bike_model: "",
         year: "",
@@ -97,7 +119,7 @@ const EditBike = ({
       });
 
       console.log("form from addBike:", data);
-      window.location.reload();
+      //window.location.reload();
     } catch (e) {
       console.error(e);
       window.location.reload();
@@ -197,7 +219,7 @@ const EditBike = ({
                             Bike's current status
                           </label>
                           <select
-                            value={status}
+                            // value={formState.status}
                             id="status"
                             name="status"
                             onChange={handleChangeStatus}
@@ -216,7 +238,7 @@ const EditBike = ({
                               Brand
                             </label>
                             <input
-                              // value={brand}
+                              value={formState.brand}
                               type="text"
                               name="brand"
                               id="brand"
@@ -233,7 +255,7 @@ const EditBike = ({
                               Model
                             </label>
                             <input
-                              value={bikeModel}
+                              value={formState.bike_model}
                               type="text"
                               name="bike_model"
                               id="bike_model"
@@ -250,10 +272,10 @@ const EditBike = ({
                               Year
                             </label>
                             <input
+                              value={formState.year}
                               type="text"
                               name="year"
                               id="year"
-                              value={year}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -270,7 +292,7 @@ const EditBike = ({
                               type="text"
                               name="serial"
                               id="serial"
-                              value={serialNum}
+                              value={formState.serial}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -286,7 +308,7 @@ const EditBike = ({
                               type="text"
                               name="location"
                               id="location"
-                              value={city}
+                              value={statusState.location}
                               onChange={handleChangeStatus}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -302,7 +324,7 @@ const EditBike = ({
                               type="text"
                               name="description"
                               id="description"
-                              value={description}
+                              value={formState.description}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />

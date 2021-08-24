@@ -138,7 +138,7 @@ const UserBike = () => {
                   </button> */}
                   <EditBike
                     bikeId={bike._id}
-                    status={bike.status[0].isLost ? "Missing" : "Found"}
+                    status={bike.status[0].isLost}
                     brand={bike.brand}
                     bikeModel={bike.bike_model}
                     year={bike.year}

@@ -148,7 +148,7 @@ export const UPDATE_STATUS = gql`
 
 export const ADD_MESSAGE = gql`
   mutation addMessage($bikeId: ID!, $messageBody: String!) {
-    addComment(bikeId: $bikeId, messageBody: $messageBody) {
+    addMessage(bikeId: $bikeId, messageBody: $messageBody) {
       _id
       brand
       bike_model
