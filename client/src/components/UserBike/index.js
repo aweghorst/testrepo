@@ -109,10 +109,10 @@ const UserBike = () => {
       >
         {bikes?.map(bike => (
           <div
-            className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
+            className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
             key={bike._id}
           >
-            <div className="bg-gray-600 rounded-3xl">
+            <div className="bg-gray-600 dark:bg-gray-800 rounded-3xl">
               {bike.image ? (
                 <img
                   className="object-cover rounded-3xl h-full w-full p-1"
@@ -120,7 +120,7 @@ const UserBike = () => {
                   alt="the users bike"
                 />
               ) : null}
-              <div className="bg-gray-200 rounded-3xl p-2">
+              <div className="bg-gray-200 dark:bg-gray-800 rounded-3xl p-2">
                 {bike.status[0].isLost ? (
                   <div className="pt-2 pb-2 bg-red-200 text-center rounded-full">
                     Missing
@@ -130,16 +130,16 @@ const UserBike = () => {
                     Not Missing
                   </div>
                 )}
-                <div className="text-center bg-blue-200 rounded-xl">
-                  <div className="bg-blue-100"><p className="pt-1 pb-1">Brand: {bike.brand}</p></div>
+                <div className="text-center bg-blue-200 rounded-xl dark:bg-blue-400">
+                  <div className="bg-blue-100 dark:bg-blue-200"><p className="pt-1 pb-1">Brand: {bike.brand}</p></div>
                   <div><p className="pt-1 pb-1">Model: {bike.bike_model}</p></div>
-                  <div className="bg-blue-100"><p className="pt-1 pb-1">Year: {bike.year}</p></div>
+                  <div className="bg-blue-100 dark:bg-blue-200"><p className="pt-1 pb-1">Year: {bike.year}</p></div>
                   <div><p className="pt-1 pb-1">Serial Number: {bike.serial}</p></div>
-                  <div className="bg-blue-100"><p className="pt-1 pb-1">
+                  <div className="bg-blue-100 dark:bg-blue-200"><p className="pt-1 pb-1">
                     Location: {bike.status[0].location}
                   </p></div>
-                  <div className="bg-gray-100">
-                  <p className="pt-3 pb-3 mb-3">
+                  <div className="bg-gray-100 dark:bg-gray-600">
+                  <p className="pt-3 pb-3 mb-3 dark:text-gray-300">
                     Description: {bike.description}
                   </p>
                   </div>

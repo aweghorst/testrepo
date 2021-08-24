@@ -93,14 +93,14 @@ const SearchBike = () => {
     <>
       <span className="justify-center">
         <form
-          className="bg-white shadow p-4 flex"
+          className="bg-white dark:bg-gray-700 shadow p-4 flex"
           onSubmit={handleSearchSubmit}
         >
-          <span className="w-auto flex justify-end items-center text-gray-500 p-2">
+          <span className="w-auto flex justify-end items-center text-gray-500 dark:text-gray-300 dark:bg-gray-800 p-2">
             <p className="material-icons text-3xl">search</p>
           </span>
           <input
-            className="w-full rounded p-2"
+            className="w-full rounded p-2 dark:text-gray-300 dark:bg-gray-600"
             type="text"
             placeholder="Try 'Los Angeles'"
             name="searchInput"
@@ -114,41 +114,47 @@ const SearchBike = () => {
 
         {console.log("searchedBikes", searchedBikes.length ? true : false)}
 
-        <div className="pt-20">
+        {!clickSearch ? (
+          <div className="text-center pt-20">
+            <h2 className="dark:text-gray-300">Hey There!</h2>
+            <p className="dark:text-gray-300">Type in the name of a city in the search bar above to get started!</p>
+          </div>
+        ) : (
+          <div className="pt-20">
           {searchedBikes.length ? (
             <div className="pb-20 flex flex-wrap  justify-center visible">
               {searchedBikes.map(bike => {
                 return (
                   <div
-                    key={bike._id}
-                    className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
+                  key={bike._id}
+                  className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
                   >
-                    <div className="bg-gray-600 rounded-3xl">
+                    <div className="bg-gray-600 dark:bg-gray-800 rounded-3xl">
 
                     {bike.image ? (
-                        <img
-                        className="object-cover rounded-3xl h-full w-full p-1"
-                        src={bike.image}
-                        alt="the users bike"
-                        />
-                        ) : null}
-                    <div className="bg-gray-200 rounded-3xl p-2">
+                      <img
+                      className="object-cover rounded-3xl h-full w-full p-1"
+                      src={bike.image}
+                      alt="the users bike"
+                      />
+                      ) : null}
+                    <div className="bg-gray-200 dark:bg-gray-400 rounded-3xl p-2">
                       {bike.status[0].isLost ? (
-                          <h4 className="pt-2 pb-2 bg-red-200 text-center rounded-full">
+                        <h4 className="pt-2 pb-2 bg-red-200 text-center rounded-full">
                           Missing
                         </h4>
                       ) : (
-                          <h4 className="pt-2 pb-2 bg-green-200 text-center rounded-full">
+                        <h4 className="pt-2 pb-2 bg-green-200 text-center rounded-full">
                           Found
                         </h4>
                       )}
-                        <div className="text-center">
-                        <div className="bg-blue-100"><p className="pt-1 pb-1">Brand: {bike.brand}</p></div>
+                        <div className="text-center bg-blue-200 rounded-xl dark:bg-blue-400">
+                        <div className="bg-blue-100 dark:bg-blue-200"><p className="pt-1 pb-1">Brand: {bike.brand}</p></div>
                         <div><p className="pt-1 pb-1">Model: {bike.bike_model}</p></div>
-                        <div className="bg-blue-100"><p className="pt-1 pb-1">Year: {bike.year}</p></div>
+                        <div className="bg-blue-100 dark:bg-blue-200"><p className="pt-1 pb-1">Year: {bike.year}</p></div>
                         <div><p className="pt-1 pb-1">Serial Number: {bike.serial}</p></div>
-                        <div className="bg-gray-100">
-                        <p className="pt-3 pb-3 mb-3">
+                        <div className="bg-gray-100 dark:bg-gray-600">
+                        <p className="pt-3 pb-3 mb-3 dark:text-gray-300">
                             Description: {bike.description}
                         </p>
                         </div>
@@ -185,10 +191,11 @@ const SearchBike = () => {
             </div>
           ) : clickSearch ? (
             <div>There are no missing bikes reported in this area</div>
-          ) : (
-            <div></div>
+            ) : (
+              <div></div>
           )}
         </div>
+            )}
       </span>
     </>
   );

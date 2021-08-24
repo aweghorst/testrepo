@@ -121,7 +121,7 @@ const EditBike = ({
       // });
 
       console.log("form from addBike:", data);
-      //window.location.reload();
+      window.location.reload();
     } catch (e) {
       console.error(e);
       // window.location.reload();
@@ -311,7 +311,7 @@ const EditBike = ({
                               type="text"
                               name="location"
                               id="location"
-                              value={statusState.location}
+                              value={statusState.location.toUpperCase()}
                               onChange={handleChangeStatus}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />

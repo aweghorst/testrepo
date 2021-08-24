@@ -25,7 +25,7 @@ module.exports = {
   //public-index.html
   '../public/index.html'
 ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class', or false
   theme: {
     extend: {},
   },
