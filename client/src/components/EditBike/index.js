@@ -1,10 +1,20 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
-import { ADD_BIKE, UPDATE_STATUS } from "../../utils/mutations";
+import { UPDATE_BIKE, UPDATE_STATUS } from "../../utils/mutations";
 import FileBase64 from "react-file-base64";
 
-const EditBike = ({ bikeId }) => {
+const EditBike = ({
+  bikeId,
+  status,
+  brand,
+  bikeModel,
+  year,
+  serialNum,
+  city,
+  description,
+  image,
+}) => {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
 
@@ -18,14 +28,23 @@ const EditBike = ({ bikeId }) => {
     image: "",
   });
   console.log(bikeId);
+  console.log(status);
+  console.log(brand);
+  console.log(bikeModel);
+  console.log(year);
+  console.log(serialNum);
+  console.log(city);
+  console.log(description);
+  console.log(image);
+
   // set status of new bike
   const [statusState, setStatusState] = useState({
     location: "",
     isLost: "",
   });
 
-  const [addBike] = useMutation(ADD_BIKE);
-  const [addStatus] = useMutation(UPDATE_STATUS);
+  const [updateBike] = useMutation(UPDATE_BIKE);
+  const [updateStatus] = useMutation(UPDATE_STATUS);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -57,11 +76,11 @@ const EditBike = ({ bikeId }) => {
     // use try/catch instead of promises to handle errors
     try {
       // execute addBike mutation and pass in variable data from form
-      const { data } = await addBike({
+      const { data } = await updateBike({
         variables: { ...formState },
       });
 
-      const bikeId = data?.addBike._id;
+      const bikeId = data?.updateBike._id;
       setBikeStatus(bikeId, statusState.isLost, statusState.location);
 
       setFormState({
@@ -90,7 +109,7 @@ const EditBike = ({ bikeId }) => {
 
   async function setBikeStatus(bikeId, isLost, location) {
     try {
-      const statusData = await addStatus({
+      const statusData = await updateStatus({
         variables: { bikeId, isLost, location },
       });
       console.log("status Data", statusData);
@@ -156,21 +175,18 @@ const EditBike = ({ bikeId }) => {
                         as="h3"
                         className="text-lg leading-6 font-medium text-gray-900"
                       >
-                        Add a Bike
+                        Edit Your Bike Details
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          The more information you can provide about your bike,
-                          the easier it will be for law enforcement and other
-                          users to try to identify it if it is ever lost or
-                          stolen!
+                          Please add or edit details to your bike, if need be!
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 md:mt-0 md:col-span-2">
-                  <form action="#" method="POST" onSubmit={handleFormSubmit}>
+                  <form action="#" method="PUT" onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
                       <div className="px-4 py-5 bg-white sm:p-6">
                         <div className="col-span-6 sm:col-span-3">
@@ -181,6 +197,7 @@ const EditBike = ({ bikeId }) => {
                             Bike's current status
                           </label>
                           <select
+                            value={status}
                             id="status"
                             name="status"
                             onChange={handleChangeStatus}
@@ -199,10 +216,10 @@ const EditBike = ({ bikeId }) => {
                               Brand
                             </label>
                             <input
+                              // value={brand}
                               type="text"
                               name="brand"
                               id="brand"
-                              value={formState.brand}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -216,10 +233,10 @@ const EditBike = ({ bikeId }) => {
                               Model
                             </label>
                             <input
+                              value={bikeModel}
                               type="text"
                               name="bike_model"
                               id="bike_model"
-                              value={formState.bike_model}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -236,7 +253,7 @@ const EditBike = ({ bikeId }) => {
                               type="text"
                               name="year"
                               id="year"
-                              value={formState.year}
+                              value={year}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -253,7 +270,7 @@ const EditBike = ({ bikeId }) => {
                               type="text"
                               name="serial"
                               id="serial"
-                              value={formState.serial}
+                              value={serialNum}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -269,7 +286,7 @@ const EditBike = ({ bikeId }) => {
                               type="text"
                               name="location"
                               id="location"
-                              value={statusState.location}
+                              value={city}
                               onChange={handleChangeStatus}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -285,7 +302,7 @@ const EditBike = ({ bikeId }) => {
                               type="text"
                               name="description"
                               id="description"
-                              value={formState.description}
+                              value={description}
                               onChange={handleChange}
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -313,7 +330,7 @@ const EditBike = ({ bikeId }) => {
                         className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                         onClick={() => setOpen(false)}
                       >
-                        Add bike
+                        Submit
                       </button>
                       <button
                         type="button"

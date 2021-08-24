@@ -136,7 +136,17 @@ const UserBike = () => {
                   >
                     Edit
                   </button> */}
-                  <EditBike bikeId={bike._id} />
+                  <EditBike
+                    bikeId={bike._id}
+                    status={bike.status[0].isLost ? "Missing" : "Found"}
+                    brand={bike.brand}
+                    bikeModel={bike.bike_model}
+                    year={bike.year}
+                    serialNum={bike.serial}
+                    city={bike.status[0].location}
+                    description={bike.description}
+                    image={bike.image}
+                  />
                   <button
                     data-bike-id={bike._id}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
