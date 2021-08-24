@@ -4,7 +4,7 @@
 
 ## Table of Contents
 * [User Story](#User-Story)
-* [Made With](#Made With)
+* [Made-With](#Made-With)
 * [Packages](#Packages)
 * [Usage](#Usage)
 * [Snapshots](#Snapshots)
