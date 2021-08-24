@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Carousel from 'react-multi-carousel';
 import BikeMessage from "../BikeMessage";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_USERS } from "../../utils/queries";

@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 const MessageForm = () => {
 
     const [ messageBody, setMessageBody] = useState('');
-    const [ addMessage, { error }] = useMutation(ADD_MESSAGE);
+    const [ addMessage] = useMutation(ADD_MESSAGE);
     const [ bikeId, setBikeId ] = useState('');
     const [ submitted, setSubmitted] = useState(false); 
 
