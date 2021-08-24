@@ -1,5 +1,7 @@
 import React from "react";
 import biketips from "../assets/images/biketips.jpg";
+import doubleLock from "../assets/images/double-lock.PNG";
+import serialNumber from "../assets/images/serial-number.PNG"
 import "../assets/styles/tips.css";
 
 const Tips = () => {
@@ -7,12 +9,23 @@ const Tips = () => {
     <div>
       <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-5xl">
         <div class="md:flex">
-          <div class="md:flex-shrink-0">
-            <img class="h-48 w-full object-cover md:w-48" src="/img/store.jpg" alt="Man looking at item at a store" />
-          </div>
           <div class="p-8">
-            <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Finding customers for your new business</p>
-            <p class="mt-2 text-gray-500">Getting a new business off the ground is a lot of hard work. Here are five ideas you can use to find your first customers.</p>
+            <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Double up your security by using two high-quality locks</p>
+            <p class="mt-2 text-gray-500">U-locks tend to be more durable than thin cable locks, which can be cut through more easily. But because of their shape, U-locks limit the amount of bike you can secure at one time, so consider pairing yours with a sturdy steel chain.</p>
+          </div>
+          <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:w-58" src={doubleLock} alt="Double locked bike" />
+          </div>
+        </div>
+      </div>
+      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-5xl">
+        <div class="md:flex">
+          <div class="p-8">
+            <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Take pictures of your bike</p>
+            <p class="mt-2 text-gray-500">Pictures of both sides of your bike and the picture of the bottom bracket, showing the serial number.</p>
+          </div>
+          <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:w-58" src={serialNumber} alt="Double locked bike" />
           </div>
         </div>
       </div>
