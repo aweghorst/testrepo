@@ -114,7 +114,7 @@ const SearchBike = () => {
 
         {console.log("searchedBikes", searchedBikes.length ? true : false)}
 
-        <div>
+        <div className="pt-20">
           {searchedBikes.length ? (
             <div className="pb-20 flex flex-wrap  justify-center visible">
               {searchedBikes.map(bike => {
@@ -123,30 +123,35 @@ const SearchBike = () => {
                     key={bike._id}
                     className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
                   >
+                    <div className="bg-gray-600 rounded-3xl">
+
                     {bike.image ? (
-                      <img
-                        className="object-contain h-48 w-full p-1"
+                        <img
+                        className="object-cover rounded-3xl h-full w-full p-1"
                         src={bike.image}
                         alt="the users bike"
-                      />
-                    ) : null}
+                        />
+                        ) : null}
                     <div className="bg-gray-200 rounded-3xl p-2">
                       {bike.status[0].isLost ? (
-                        <h4 className="pt-2 pb-2 bg-red-200 text-center rounded-full">
+                          <h4 className="pt-2 pb-2 bg-red-200 text-center rounded-full">
                           Missing
                         </h4>
                       ) : (
-                        <h4 className="pt-2 pb-2 bg-green-200 text-center rounded-full">
+                          <h4 className="pt-2 pb-2 bg-green-200 text-center rounded-full">
                           Found
                         </h4>
                       )}
-                      <div className="text-center">
-                        <p className="pt-3 pb-3">Brand: {bike.brand}</p>
-                        <p className="pt-3 pb-3">Model: {bike.bike_model}</p>
-                        <p className="pt-3 pb-3">Serial: {bike.serial}</p>
-                        <p className="pt-3 pb-3">
-                          Description: {bike.description}
+                        <div className="text-center">
+                        <div className="bg-blue-100"><p className="pt-1 pb-1">Brand: {bike.brand}</p></div>
+                        <div><p className="pt-1 pb-1">Model: {bike.bike_model}</p></div>
+                        <div className="bg-blue-100"><p className="pt-1 pb-1">Year: {bike.year}</p></div>
+                        <div><p className="pt-1 pb-1">Serial Number: {bike.serial}</p></div>
+                        <div className="bg-gray-100">
+                        <p className="pt-3 pb-3 mb-3">
+                            Description: {bike.description}
                         </p>
+                        </div>
                       </div>
                       <HashRouter>
                         <div className="flex justify-around">
@@ -156,7 +161,7 @@ const SearchBike = () => {
                             activeClassName="current-nav"
                             className="nav-link"
                             replace
-                          >
+                            >
                             <button className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
                               Message User
                             </button>
@@ -167,11 +172,12 @@ const SearchBike = () => {
                               exact
                               path={`/Message/${bike._id}`}
                               component={() => <Message bikeId={bike._id} />}
-                            />
+                              />
                           </Switch>
                         </div>
                       </HashRouter>
                     </div>
+                </div>
                   </div>
                 );
                 // }

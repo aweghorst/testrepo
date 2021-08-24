@@ -112,10 +112,10 @@ const UserBike = () => {
             className="bg-gray-300 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
             key={bike._id}
           >
-            <div className="">
+            <div className="bg-gray-600 rounded-3xl">
               {bike.image ? (
                 <img
-                  className="object-contain h-48 w-full p-1"
+                  className="object-cover rounded-3xl h-full w-full p-1"
                   src={bike.image}
                   alt="the users bike"
                 />
@@ -127,19 +127,22 @@ const UserBike = () => {
                   </div>
                 ) : (
                   <div className="pt-2 pb-2 bg-green-200 text-center rounded-full">
-                    Found
+                    Not Missing
                   </div>
                 )}
-                <div className="text-center">
-                  <p className="pt-3 pb-3">Brand: {bike.brand}</p>
-                  <p className="pt-3 pb-3">Model: {bike.bike_model}</p>
-                  <p className="pt-3 pb-3">Year: {bike.year}</p>
-                  <p className="pt-3 pb-3">
+                <div className="text-center bg-blue-200 rounded-xl">
+                  <div className="bg-blue-100"><p className="pt-1 pb-1">Brand: {bike.brand}</p></div>
+                  <div><p className="pt-1 pb-1">Model: {bike.bike_model}</p></div>
+                  <div className="bg-blue-100"><p className="pt-1 pb-1">Year: {bike.year}</p></div>
+                  <div><p className="pt-1 pb-1">Serial Number: {bike.serial}</p></div>
+                  <div className="bg-blue-100"><p className="pt-1 pb-1">
                     Location: {bike.status[0].location}
-                  </p>
+                  </p></div>
+                  <div className="bg-gray-100">
                   <p className="pt-3 pb-3 mb-3">
                     Description: {bike.description}
                   </p>
+                  </div>
                 </div>
                 <div className="flex justify-around">
                   <EditBike
@@ -162,7 +165,7 @@ const UserBike = () => {
                   </button>
                   <button
                     data-bike-id={bike._id}
-                    className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                    className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => handleDeleteClick(bike._id)}
                   >
                     Delete
