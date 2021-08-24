@@ -32,15 +32,15 @@ const EditBike = ({
     description: description,
     image: "",
   });
-  console.log(bikeId);
-  console.log(status);
-  console.log(brand);
-  console.log(bikeModel);
-  console.log(year);
-  console.log(serialNum);
-  console.log(city);
-  console.log(description);
-  console.log(image);
+  // console.log(bikeId);
+  // console.log(status);
+  // console.log(brand);
+  // console.log(bikeModel);
+  // console.log(year);
+  // console.log(serialNum);
+  // console.log(city);
+  // console.log(description);
+  // console.log(image);
 
   // set status of new bike
   const [statusState, setStatusState] = useState({
@@ -78,13 +78,14 @@ const EditBike = ({
     let isLost;
     const status = document.querySelector('[name="status"]').value;
     console.log("This is status Handle Change: " + status);
-    if (status === "Not missing") {
-      isLost = false;
-    } else {
+    if (status === "Missing") {
       isLost = true;
+    } else {
+      isLost = false;
     }
     const location = document.querySelector("#location").value;
     setStatusState({
+      ...statusState,
       isLost,
       location,
     });
@@ -104,25 +105,25 @@ const EditBike = ({
       const bikeId = data?.updateBike._id;
       setBikeStatus(bikeId, statusState.isLost, statusState.location);
 
-      setFormState({
-        bikeId: "",
-        brand: "",
-        bike_model: "",
-        year: "",
-        serial: "",
-        description: "",
-        image: "",
-      });
-      setStatusState({
-        location: "",
-        isLost: "",
-      });
+      // setFormState({
+      //   bikeId: "",
+      //   brand: "",
+      //   bike_model: "",
+      //   year: "",
+      //   serial: "",
+      //   description: "",
+      //   image: "",
+      // });
+      // setStatusState({
+      //   location: "",
+      //   isLost: "",
+      // });
 
       console.log("form from addBike:", data);
       //window.location.reload();
     } catch (e) {
       console.error(e);
-      window.location.reload();
+      // window.location.reload();
       window.alert(
         "There was an error with adding your bike. Please make sure bike image is not larger than 64 KB."
       );
@@ -225,7 +226,8 @@ const EditBike = ({
                             onChange={handleChangeStatus}
                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
-                            <option>Not missing</option>
+                            <option disabled selected value> Select a status</option>
+                            <option>Not Missing</option>
                             <option>Missing</option>
                           </select>
                         </div>
