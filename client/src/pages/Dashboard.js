@@ -7,7 +7,7 @@ import { QUERY_USER } from "../utils/queries";
 import Auth from '../utils/auth';
 
 const Dashboard = () => {
-  const { loading, data } = useQuery(QUERY_USER);
+  const { data } = useQuery(QUERY_USER);
   console.log(data?.user);
 
   const username = data?.user.username;

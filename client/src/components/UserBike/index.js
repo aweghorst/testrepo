@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Carousel from 'react-multi-carousel';
+// import Carousel from 'react-multi-carousel';
 import BikeMessage from "../BikeMessage";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER, QUERY_USERS } from "../../utils/queries";
+import { QUERY_USER } from "../../utils/queries";
 import { DELETE_BIKE } from "../../utils/mutations";
 import EditBike from "../EditBike";
 import '../../assets/styles/dashboard.css';
@@ -15,20 +15,22 @@ const UserBike = () => {
     // const { username, email, bikeCount, bikes } = user;
 
     //use when logged into app. if using seeded data, uncomment lines 9-13
-    const { loading, data } = useQuery(QUERY_USER);
+    const { data } = useQuery(QUERY_USER);
     console.log(data?.user);
 
-    const username = data?.user.username;
-    const email = data?.user.email;
-    const bikeCount = data?.user.bikeCount;
+    // const username = data?.user.username;
+    // const email = data?.user.email;
+    // const bikeCount = data?.user.bikeCount;
     const bikes = data?.user.bikes;
 
     const [bikeMessages, setBikeMessages] = useState();
-    const [showMessages, clickedShowMessages] = useState(false);
-    const [bikeState, setBikeState] = useState(bikes);
+    // const [showMessages, clickedShowMessages] = useState(false);
+    const [bikeState, setBikeState] = useState([bikes]);
+
     useEffect(() => {
         setBikeState(bikes);
-    }, bikes);
+    });
+
     const [deleteBike, { error }] = useMutation(DELETE_BIKE);
 
     const responsive = {

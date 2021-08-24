@@ -11,7 +11,7 @@ const Header = () => {
         <div>
             <header>
                 <div className="justify-center">
-                    <img src={bikeSleuth} className="min-w-full"/>
+                    <img src={bikeSleuth} className="min-w-full" alt="banner with sloth riding bike down forest road"/>
                     <h1 className="brand-title text-center">BikeSleuth</h1>
                     <div className="nav-section">
                     <Nav />
