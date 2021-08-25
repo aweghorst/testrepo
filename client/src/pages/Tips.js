@@ -9,6 +9,9 @@ import "../assets/styles/tips.css";
 const Tips = () => {
   return (
     <div>
+      <div>
+        <h2 className="tips-title"><span className="dark:text-gray-200">How to Keep Your Bike Safe!</span></h2>
+      </div>
       <div id="tips" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl space-x-3">
         <div class="md:flex">
           <div class="p-8">
@@ -60,12 +63,12 @@ const Tips = () => {
             <p class="mt-2 text-gray-500">Most bike thieves prefer to operate when the sun goes down and no one is around to watch. Whenever possible, bring your bike indoors at night — and if you can’t bring it indoors, lock it up in a well-lit area.</p>
           </div>
           {/* <div class="md:flex-shrink-0"> */}
-            {/* <img class="h-48 w-full object-cover md:w-58" src={doubleLock} alt="Double locked bike" />
+          {/* <img class="h-48 w-full object-cover md:w-58" src={doubleLock} alt="Double locked bike" />
           </div> */}
         </div>
       </div>
 
-      
+
 
     </div>
 
