@@ -41,6 +41,9 @@ const resolvers = {
             // return the lost bikes
             return lostBikes;
             // }
+        },
+        bike: async ( parent, { _id }) => {
+            return Bike.findOne({ _id });
         }
     },
     Mutation: {

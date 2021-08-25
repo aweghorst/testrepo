@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
-import { Redirect } from "react-router-dom";
+import { QUERY_USER, QUERY_BIKE_MESSAGES } from "../../utils/queries";
 import "../../assets/styles/bikemessage.css";
 
 const BikeMessage = ({ bikeMessages, bike }) => {
@@ -12,9 +12,30 @@ const BikeMessage = ({ bikeMessages, bike }) => {
 
   const [clickReply, setClickReply] = useState(false);
   const [messageBody, setMessageBody] = useState("");
-  const [addMessage, { error }] = useMutation(ADD_MESSAGE);
   const [bikeId, setBikeId] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [addMessage, {error}] = useMutation(ADD_MESSAGE //, {
+  //   update(cache, { data: { addMessage } }) {
+  //     try {
+  //       const { bike } = cache.readQuery({ query: QUERY_BIKE_MESSAGES });
+  
+  //       cache.writeQuery({
+  //         query: QUERY_BIKE_MESSAGES,
+  //         data: { bike: { messages: [...bike.messages, addMessage] } }
+  //       });
+
+  //       const { user } = cache.readQuery({ query: QUERY_USER });
+  //       cache.writeQuery({
+  //         query: QUERY_USER,
+  //         data: { user: { ...user, bikes: { mesages: [...user.bikes.messages, addMessage]}}}
+  //       })
+  //     }
+  //     catch(e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // }
+  );
 
   function handleReply() {
     setClickReply(true);
@@ -45,7 +66,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
     alert("Your message has been sent!");
     setSubmitted(false);
     setClickReply(false);
-    return <Redirect to="/Dashboard" />;
+    window.location.reload(); // ideally find another way to refresh the messages without reloading
   }
 
   return (

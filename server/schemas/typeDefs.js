@@ -47,6 +47,7 @@ const typeDefs = gql`
     bikes: [Bike]
     user: User
     users: [User]
+    bike(_id: ID!): Bike
     userBikes(userId: String): [Bike]
     lostBikes(location: String): [Bike]
   }

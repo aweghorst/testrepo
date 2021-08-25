@@ -129,3 +129,16 @@ export const QUERY_LOST_BIKES = gql`
         }
     }
 `;
+
+export const QUERY_BIKE_MESSAGES = gql`
+    query bike($id: ID!) {
+        bike(_id: $bikeId) {
+            _id
+            messages {
+                username
+                messageBody
+                createdAt
+            }
+        }
+    }
+`;
