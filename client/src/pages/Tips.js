@@ -9,7 +9,7 @@ import "../assets/styles/tips.css";
 const Tips = () => {
   return (
     <div>
-      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl space-x-3">
+      <div id="tips" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl space-x-3">
         <div class="md:flex">
           <div class="p-8">
             <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Double up your security by using two high-quality locks</p>
@@ -20,7 +20,7 @@ const Tips = () => {
           </div>
         </div>
       </div>
-      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
+      <div id="tips" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
         <div class="md:flex">
           <div class="p-8">
             <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Use your locks to keep your wheels from being stolen, too.</p>
@@ -31,7 +31,7 @@ const Tips = () => {
           </div>
         </div>
       </div>
-      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
+      <div id="tips" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
         <div class="md:flex">
           <div class="p-8">
             <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Swap quick-release seat and wheel skewers for ones that require keys.</p>
@@ -42,7 +42,7 @@ const Tips = () => {
           </div>
         </div>
       </div>
-      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
+      <div id="tips" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
         <div class="md:flex">
           <div class="p-8">
             <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Take pictures of your bike</p>
@@ -53,7 +53,7 @@ const Tips = () => {
           </div>
         </div>
       </div>
-      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
+      <div id="tips" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl">
         <div class="md:flex">
           <div class="p-8">
             <p class="block mt-1 text-lg leading-tight font-medium text-black underline">Always bring your bike inside at night.</p>
