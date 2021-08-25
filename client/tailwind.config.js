@@ -23,7 +23,7 @@ module.exports = {
   './src/pages/Message.js',
   '.src/pages/ViewMessage.js',
   //public-index.html
-  '../public/index.html'
+  './public/index.html'
 ],
   darkMode: 'media', // or 'media' or 'class', or false
   theme: {
