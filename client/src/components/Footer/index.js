@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-
-
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_CHECKOUT } from "../../utils/queries"
 import "../../assets/styles/footer.css";
 
 
 
 const Footer = () => {
-  
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
   const [message, setMessage] = useState("");
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -20,6 +20,13 @@ const Footer = () => {
       );
     }
   }, []);
+  function submitCheckout() {
+    const productIds = [];
+
+    getCheckout({
+      variables: { products: productIds }
+    });
+  }
 
 
 
@@ -34,7 +41,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <form action="/create-checkout-session" method="POST">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Donate</button>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={submitCheckout}>Donate</button>
                     </form>
                 </div>
             </footer>
