@@ -72,6 +72,9 @@ const resolvers = {
             });
             return { session: session.id };
         },
+        bike: async ( parent, { _id }) => {
+            return Bike.findOne({ _id });
+        }
     },
     Mutation: {
         addUser: async (parent, args) => {
