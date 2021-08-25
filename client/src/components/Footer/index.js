@@ -7,19 +7,6 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 const Footer = () => {
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-    const [message, setMessage] = useState("");
-    // useEffect(() => {
-    //     // Check to see if this is a redirect back from Checkout
-    //     const query = new URLSearchParams(window.location.search);
-    //     if (query.get("success")) {
-    //         setMessage(
-    //             "Thank you for your donation! Because of people like you, the BikeSleuths can continue to help bike owners nationwide recover their missing bikes."
-    //         );
-    //     }
-    //     if (query.get("canceled")) {
-    //         setMessage("Donation canceled.");
-    //     }
-    // }, []);
 
     useEffect(() => {
         if (data) {
@@ -30,12 +17,7 @@ const Footer = () => {
     }, [data]);
 
     function submitCheckout() {
-        // const productIds = [];
-
-        getCheckout(  //{
-            // variables: { products: productIds },
-        //}
-        );
+        getCheckout();
     }
 
     return (
