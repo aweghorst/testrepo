@@ -31,7 +31,6 @@ export const QUERY_USERS = gql`
     }
 `;
 
-
 export const QUERY_USER = gql`
     {
         user {
@@ -86,34 +85,9 @@ export const QUERY_ALL_BIKES = gql`
     }
 `;
 
-
 export const QUERY_USER_BIKE = gql`
-{
-    userBikes {
-        _id
-        brand
-        bike_model
-        year
-        serial
-        description
-        image
-        status {
-            isLost
-            location
-            date
-        }
-        messages {
-            username
-            messageBody
-            createdAt
-        }
-    }
-}
-`;
-
-export const QUERY_LOST_BIKES = gql`
     {
-        lostBikes{
+        userBikes {
             _id
             brand
             bike_model
@@ -126,6 +100,38 @@ export const QUERY_LOST_BIKES = gql`
                 location
                 date
             }
+            messages {
+                username
+                messageBody
+                createdAt
+            }
+        }
+    }
+`;
+
+export const QUERY_LOST_BIKES = gql`
+    {
+        lostBikes {
+            _id
+            brand
+            bike_model
+            year
+            serial
+            description
+            image
+            status {
+                isLost
+                location
+                date
+            }
+        }
+    }
+`;
+
+export const QUERY_CHECKOUT = gql`
+    query getCheckout($products: [ID]!) {
+        checkout(products: $products) {
+            session
         }
     }
 `;

@@ -22,6 +22,11 @@ const typeDefs = gql`
     date: String
   }
 
+  
+  type Checkout {
+    session: ID
+  }
+  
   type Message {
     _id: ID
     messageBody: String
@@ -49,6 +54,7 @@ const typeDefs = gql`
     users: [User]
     userBikes(userId: String): [Bike]
     lostBikes(location: String): [Bike]
+    checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
@@ -76,6 +82,7 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
     addMessage(bikeId: ID!, messageBody: String!): Bike
   }
+
 `;
 
 module.exports = typeDefs;
