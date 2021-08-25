@@ -63,7 +63,7 @@ const Nav = () => {
                             <Route path="/Login" component={Login} />
                             <Route path="/Signup" component={Signup} />
                             <Route path="/Message" component={Message} />
-                            <Route exact path="/Success" component={Success} />
+                            <Route path="/Success" component={Success} />
                             <Route component={NoMatch} />
                         </Switch>
                     </div>
