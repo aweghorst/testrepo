@@ -135,3 +135,16 @@ export const QUERY_CHECKOUT = gql`
         }
     }
 `;
+
+export const QUERY_BIKE_MESSAGES = gql`
+    query bike($id: ID!) {
+        bike(_id: $bikeId) {
+            _id
+            messages {
+                username
+                messageBody
+                createdAt
+            }
+        }
+    }
+`;

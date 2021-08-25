@@ -4,11 +4,11 @@ import Jumbotron from "../components/Jumbotron";
 
 function Success() {
 
-    useEffect(() => {
-            setTimeout(() => {
-                window.location.assign("/");
-            }, 4000);
-        });
+    // useEffect(() => {
+    //         setTimeout(() => {
+    //             window.location.assign("/");
+    //         }, 10000);
+    //     });
 
     return (
         <div>
