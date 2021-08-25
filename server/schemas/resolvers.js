@@ -43,10 +43,25 @@ const resolvers = {
         },
         checkout: async (parent, args, context) => {
             const url = new URL(context.headers.referer).origin;
+
+
+            //generate product id
+            const product = await stripe.products.create({
+                name: "Donation",
+                description: "Donation to BikeSleuth team for their continued efforts to help reunite owners with their lost and stolen bikes"
+            });
+
+            //generate price id using product id
+            const price = await stripe.prices.create({
+                product: product.id,
+                unit_amount: 500,
+                currency: 'usd'
+            });
+
             const session = await stripe.checkout.sessions.create({
                 line_items: [
                     {
-                        price: '500',
+                        price: price.id,
                         quantity: 1,
                     },
                 ],
