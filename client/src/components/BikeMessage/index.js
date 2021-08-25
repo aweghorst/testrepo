@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_MESSAGE } from "../../utils/mutations";
+import { Redirect } from "react-router-dom";
 import "../../assets/styles/bikemessage.css";
 
-const BikeMessage = ({ bikeMessages }) => {
+const BikeMessage = ({ bikeMessages, bike }) => {
   let nomessages = false;
   if (bikeMessages?.length === 0) {
     nomessages = true;
+  }
+
+  const [clickReply, setClickReply] = useState(false);
+  const [messageBody, setMessageBody] = useState("");
+  const [addMessage, { error }] = useMutation(ADD_MESSAGE);
+  const [bikeId, setBikeId] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleReply() {
+    setClickReply(true);
+  }
+
+  function handleChange(event) {
+    setMessageBody(event.target.value);
+    setBikeId(bike);
+  }
+
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    try {
+      await addMessage({
+        variables: { bikeId, messageBody },
+      });
+
+      setMessageBody("");
+      setBikeId("");
+      setSubmitted(true);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  if (submitted === true) {
+    alert("Your message has been sent!");
+    setSubmitted(false);
+    setClickReply(false);
+    return <Redirect to="/Dashboard" />;
   }
 
   return (
@@ -53,6 +94,36 @@ const BikeMessage = ({ bikeMessages }) => {
                 </div>
               </div>
             )}
+            {clickReply ? (
+                    <form onSubmit={handleFormSubmit}>
+                    <div className="shadow overflow-hidden sm:rounded-md">
+                      <div className="px-4 py-5 addbackground sm:p-6">
+                        <div className="col-span-6 sm:col-span-3">
+                          <textarea
+                            className="border pl-3 pt-1 mt-2 rounded-md outline"
+                            rows="5"
+                            cols="59"
+                            placeholder="Type your message here!"
+                            onChange={handleChange}
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                  ) : (
+                    <button className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                      onClick={handleReply}>
+                    Reply
+                  </button>
+                  ) }
           </div>
         </div>
       </div>

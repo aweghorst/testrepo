@@ -21,7 +21,6 @@ const UserBike = () => {
   const email = data?.user.email;
   const bikeCount = data?.user.bikeCount;
   const bikes = data?.user.bikes;
-  let bikeId;
 
   const [bikeMessages, setBikeMessages] = useState();
   const [showMessages, clickedShowMessages] = useState(false);
@@ -30,6 +29,7 @@ const UserBike = () => {
     setBikeState(bikes);
   }, bikes);
   const [deletePost, { error }] = useMutation(DELETE_BIKE);
+  const [bikeId, setBikeId] = useState('');
 
   const responsive = {
     superLargeDesktop: {
@@ -55,6 +55,7 @@ const UserBike = () => {
     e.preventDefault();
     // get bike id
     const bikeId = e.target.getAttribute("data-bike-id");
+    setBikeId(bikeId);
     // get bike messages
     const bikeMessages = bikes?.filter(bike => bike._id === bikeId)[0].messages;
     setBikeMessages(bikeMessages);
@@ -173,7 +174,7 @@ const UserBike = () => {
         ))}
       </div>
       <div id="bikemessage" className="hidden flex flex-col items-center">
-        <BikeMessage bikeMessages={bikeMessages} />
+        <BikeMessage bikeMessages={bikeMessages} bike={bikeId} />
         <button
           className="rounded-md mb-10 border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white mt-4 hover:bg-blue-700 focus:outline-none  sm:w-auto sm:text-sm"
           onClick={handleMessagesReturnClick}
