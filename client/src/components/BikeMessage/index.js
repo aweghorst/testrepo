@@ -6,8 +6,11 @@ import "../../assets/styles/bikemessage.css";
 
 const BikeMessage = ({ bikeMessages, bike }) => {
   let nomessages = false;
+  let noReply = true;
+  
   if (bikeMessages?.length === 0) {
     nomessages = true;
+    noReply = false;
   }
 
   const [clickReply, setClickReply] = useState(false);
@@ -148,10 +151,10 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                     </div>
                   </form>
                   ) : (
-                    <button className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                    noReply && (<button className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                       onClick={handleReply}>
                     Reply
-                  </button>
+                  </button>)
                   ) }
           </div>
         </div>
