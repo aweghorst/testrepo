@@ -134,7 +134,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                           <textarea
                             className="border pl-3 pt-1 mt-2 rounded-md outline"
                             rows="5"
-                            cols="59"
+                            cols="52"
                             placeholder="Type your message here!"
                             onChange={handleChange}
                           ></textarea>
