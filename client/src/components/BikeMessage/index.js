@@ -66,7 +66,15 @@ const BikeMessage = ({ bikeMessages, bike }) => {
     alert("Your message has been sent!");
     setSubmitted(false);
     setClickReply(false);
-    window.location.reload(); // ideally find another way to refresh the messages without reloading
+    // window.location.reload(); // ideally find another way to refresh the messages without reloading
+
+    // hide model
+    var bikeMessageEl = document.getElementById("bikemessage");
+    var dashboardEl = document.getElementById("dashboardcontainer");
+    var addbikebtnEl = document.getElementById("addbikebtn");
+    bikeMessageEl.classList.add("hidden");
+    dashboardEl.classList.remove("hidden", "pb-10");
+    addbikebtnEl.classList.remove("hidden");
   }
 
   return (
