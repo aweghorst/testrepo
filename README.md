@@ -37,6 +37,10 @@
 4. Navigate to https://localhost:3001/graphql to test queries and mutations  
 
 ## Snapshots 
+![Landing Page](https://user-images.githubusercontent.com/79660405/130887795-c921bb9f-8ba3-4ca1-8ecc-c07ca6cc1a92.png)
+![Sign In](https://user-images.githubusercontent.com/79660405/130887881-e2275658-c093-448d-82bf-db9d17b38fe1.png)
+![Search Bike](https://user-images.githubusercontent.com/79660405/130888021-443222a8-2c09-4f29-a211-678a4bee6ec8.png)
+
 
 ## Contributors 
 - Alex Weghorst
