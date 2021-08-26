@@ -62,9 +62,6 @@ const Tips = () => {
             <p class="block mt-1 text-lg leading-tight font-medium text-black dark:text-gray-300 underline">Always bring your bike inside at night.</p>
             <p class="mt-2 text-gray-500 dark:text-gray-400">Most bike thieves prefer to operate when the sun goes down and no one is around to watch. Whenever possible, bring your bike indoors at night — and if you can’t bring it indoors, lock it up in a well-lit area.</p>
           </div>
-          {/* <div className="md:flex-shrink-0"> */}
-          {/* <img className="h-48 w-full object-cover md:w-58" src={doubleLock} alt="Double locked bike" />
-          </div> */}
         </div>
       </div>
 
@@ -72,47 +69,6 @@ const Tips = () => {
 
     </div>
 
-
-
-    // <div className="p-20">
-    //   <div className="flex justify-around">
-    //     <img
-    //       width="50%"
-    //       className="imgborder"
-    //       src={biketips}
-    //       alt="simple graphic of a locked up bike"
-    //     />
-    //     <div className="ml-10">
-    //       <div className="p-1 text-center">
-    //         <h2><span>Tips and Tricks!</span></h2>
-    //       </div>
-    //       <div className="pt-1">
-    //         <dl className="list-disc text-left">
-    //           <div className="tip">
-    //             Add your information early before your bike goes missing!
-    //           </div>
-    //           <li>
-    //             Serial Numbers are hard to remember and it's one of the most
-    //             important factors in determining bike ownership.
-    //           </li>
-    //           <div className="tip">Be thorough with your descriptions!</div>
-    //           <li>
-    //             Listing things like the custom hardware as well as any unique
-    //             identifying features such as scratches or scuffs will help prove
-    //             the bike is yours!
-    //           </li>
-    //           <div className="tip">
-    //             Be on the look-out for other missing bikes!
-    //           </div>
-    //           <li>
-    //             An active community will help lower the number of missing bikes
-    //             in your area!
-    //           </li>
-    //         </dl>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
