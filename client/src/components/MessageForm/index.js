@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
 import { Redirect } from "react-router-dom";
+import { useAlert } from 'react-alert';
 
 
 const MessageForm = () => {
@@ -9,6 +10,7 @@ const MessageForm = () => {
   const [addMessage, { error }] = useMutation(ADD_MESSAGE);
   const [bikeId, setBikeId] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const alert = useAlert()
 
   let currentIdUrl = window.location.hash.split("/").splice(2).toString();
 
@@ -34,7 +36,9 @@ const MessageForm = () => {
   }
 
   if (submitted === true) {
-    alert("Your message has been sent!");
+    alert.success(
+      "Messege Sent"
+    );
     return <Redirect to="/Search" />;
   }
 
