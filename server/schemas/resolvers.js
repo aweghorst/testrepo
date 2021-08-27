@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Bike } = require("../models");
+const { User, Bike, Message } = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -73,9 +73,9 @@ const resolvers = {
             return { session: session.id };
         },
         bike: async ( parent, { _id }) => {
-            return Bike.findOne({ _id });
+            return Bike.findOne({ _id }).populate('message');
         },
-        messagesFromUser: async (parent, args, context) => {
+        userMessages: async (parent, args, context) => {
             if (context.user) {
                 const messages = await Message.find({username: context.username});
                 return messages;
@@ -186,18 +186,13 @@ const resolvers = {
         },
         addMessage: async (parent, { bikeId, messageBody }, context) => {
             if (context.user) {
+                const message = Message.create({messageBody, username: context.user.username});
+                console.log("message", message, "id", message._id);
                 const updatedBike = await Bike.findOneAndUpdate(
                     { _id: bikeId },
-                    {
-                        $push: {
-                            messages: {
-                                messageBody,
-                                username: context.user.username,
-                            },
-                        },
-                    },
+                    { $push: { messages: message._id } },
                     { new: true, runValidators: true }
-                );
+                ).populate('messages');
 
                 return updatedBike;
             }

@@ -31,7 +31,7 @@ const messageSchema = new Schema(
 
 messageSchema.virtual('replyCount').get(function() {
     return this.replies.length;
-})
+});
 
 const Message = model('Message', messageSchema);
 

@@ -148,3 +148,37 @@ export const QUERY_BIKE_MESSAGES = gql`
         }
     }
 `;
+
+export const QUERY_MESSAGES_FROM_USER = gql`
+    query userMessages($username: String!) {
+        userMessages(username: $username) {
+            _id
+            messageBody
+            createdAt
+            replyCount
+            replies {
+                _id
+                replyBody
+                username
+                createdAt
+            }
+        }
+    }
+`;
+
+export const QUERY_MESSAGE = gql`
+    query message ($messageId: ID!) {
+        message (messageId: $messageId) {
+            _id
+            messageBody
+            createdAt
+            replyCount
+            replies {
+                _id
+                replyBody
+                username
+                createdAt
+            }
+        }
+    }
+`;

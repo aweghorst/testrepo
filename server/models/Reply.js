@@ -3,10 +3,10 @@ const dateFormat = require('../utils/dateFormat');
 
 const replySchema = new Schema(
     {
-        replyId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
-        },
+        // replyId: {
+        //     type: Schema.Types.ObjectId,
+        //     default: () => new Types.ObjectId()
+        // },
         username: {
             type: String,
             required: true
@@ -25,8 +25,8 @@ const replySchema = new Schema(
         toJSON: {
             getters: true
         },
-        id: false
+        // id: false
     }
 );
 
-module.exports = statusSchema;
+module.exports = replySchema;

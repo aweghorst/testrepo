@@ -36,7 +36,7 @@ const typeDefs = gql`
   }
 
   type Reply {
-    replyId: ID
+    _id: ID
     replyBody: String
     username: String
     createdAt: String
@@ -64,7 +64,7 @@ const typeDefs = gql`
     userBikes(userId: String): [Bike]
     lostBikes(location: String): [Bike]
     checkout: Checkout
-    messagesFromUser(username: String!): [Messages]
+    userMessages(username: String!): [Message]
     message(messageId: ID!): [Message]
   }
 
