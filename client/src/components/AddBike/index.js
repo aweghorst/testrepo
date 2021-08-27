@@ -2,6 +2,8 @@ import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
 import { ADD_BIKE, UPDATE_STATUS } from "../../utils/mutations";
+import { useAlert } from 'react-alert'
+
 import FileBase64 from "react-file-base64";
 import "../../assets/styles/addbike.css";
 
@@ -18,6 +20,7 @@ const AddBike = () => {
     description: "",
     image: "",
   });
+  const alert = useAlert()
   // set status of new bike
   const [statusState, setStatusState] = useState({
     location: "",
@@ -81,9 +84,8 @@ const AddBike = () => {
       window.location.reload();
     } catch (e) {
       console.error(e);
-      window.location.reload();
-      window.alert(
-        "There was an error with adding your bike. Please make sure bike image is not larger than 64 KB."
+      alert.error(
+        "Error adding bike Image too large"
       );
     }
   };
@@ -98,6 +100,7 @@ const AddBike = () => {
       console.error(e);
     }
   }
+
 
   return (
     <div className="pt-10 pb-10 flex justify-center">
