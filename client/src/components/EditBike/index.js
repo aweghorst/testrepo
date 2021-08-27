@@ -337,7 +337,6 @@ const EditBike = ({
                         <p>Image size cannot be larger than 64 KB.</p>
                         <div className="mt-3 bg-white dark:bg-gray-600">
                           <FileBase64
-                          containerClass="dark:bg-gray-600"
                             multiple={false}
                             onDone={({ base64 }) =>
                               setFormState({
