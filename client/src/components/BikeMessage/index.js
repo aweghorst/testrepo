@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_MESSAGE } from "../../utils/mutations";
-import { QUERY_USER, QUERY_BIKE_MESSAGES } from "../../utils/queries";
+import { ADD_MESSAGE, ADD_REPLY } from "../../utils/mutations";
+import { QUERY_USER, QUERY_MESSAGE } from "../../utils/queries";
 import "../../assets/styles/bikemessage.css";
 
 const BikeMessage = ({ bikeMessages, bike }) => {
-  let nomessages = false;
+  let noMessages = false;
   let noReply = true;
   
   if (bikeMessages?.length === 0) {
-    nomessages = true;
+    noMessages = true;
     noReply = false;
   }
 
+  const [messageId, setMessageId] = useState('');
   const [clickReply, setClickReply] = useState(false);
-  const [messageBody, setMessageBody] = useState("");
+  const [replyBody, setReplyBody] = useState("");
   const [bikeId, setBikeId] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [addMessage, {error}] = useMutation(ADD_MESSAGE //, {
-  //   update(cache, { data: { addMessage } }) {
+  const [addReply, {error}] = useMutation(ADD_REPLY //, {
+  //   update(cache, { data: { addReply } }) {
   //     try {
-  //       const { bike } = cache.readQuery({ query: QUERY_BIKE_MESSAGES });
+  //       const { message } = cache.readQuery({ query: QUERY_MESSAGE });
   
   //       cache.writeQuery({
-  //         query: QUERY_BIKE_MESSAGES,
-  //         data: { bike: { messages: [...bike.messages, addMessage] } }
+  //         query: QUERY_MESSAGE,
+  //         data: { message: { replies: [...message.replies, addReply] } }
   //       });
 
   //       const { user } = cache.readQuery({ query: QUERY_USER });
@@ -40,12 +41,15 @@ const BikeMessage = ({ bikeMessages, bike }) => {
   // }
   );
 
-  function handleReply() {
+  function handleReply(event) {
     setClickReply(true);
+    // get messageId
+    const id = event.target.getAttribute('data-id');
+    setMessageId(id);
   }
 
   function handleChange(event) {
-    setMessageBody(event.target.value);
+    setReplyBody(event.target.value);
     setBikeId(bike);
   }
 
@@ -53,11 +57,11 @@ const BikeMessage = ({ bikeMessages, bike }) => {
     event.preventDefault();
 
     try {
-      await addMessage({
-        variables: { bikeId, messageBody },
+      await addReply({
+        variables: { messageId, replyBody },
       });
 
-      setMessageBody("");
+      setReplyBody("");
       setBikeId("");
       setSubmitted(true);
     } catch (e) {
@@ -104,6 +108,13 @@ const BikeMessage = ({ bikeMessages, bike }) => {
         </div>
         <div className="bg-gray-200 content-between  p-6 itemcontainercomment shadow-md">
           <div className="flex-col justify-center mx-auto justify-items-center text-center">
+            {noMessages && (
+              <div className="bg-gray-200 p-6 pt-6 m-2 rounded-3xl pt-0  itemboxcomment my-3 shadow-md m-auto w-auto">
+                <div className="bg-gray-50 p-6 m-2 rounded-3xl mx-auto shadow-md w-full">
+                  There Are No Messages Yet! Don't Give Up Hope!
+                </div>
+              </div>
+            )}
             {bikeMessages &&
               bikeMessages.map(message => (
                 <div className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
@@ -117,15 +128,38 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                   >
                     <div>{message.messageBody}</div>
                   </div>
+                  {/* {clickReply ? (
+                    <form onSubmit={handleFormSubmit}>
+                    <div className="shadow overflow-hidden sm:rounded-md">
+                      <div className="px-4 py-5 addbackground sm:p-6">
+                        <div className="col-span-6 sm:col-span-3">
+                          <textarea
+                            className="border pl-3 pt-1 mt-2 rounded-md outline"
+                            rows="5"
+                            cols="52"
+                            placeholder="Type your message here!"
+                            onChange={handleChange}
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                  ) : (
+                    noReply && (<button data-id={message._id} className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                      onClick={handleReply}> {console.log("id", message._id)}
+                    Reply
+                  </button>)
+                  ) } */}
                 </div>
               ))}
-            {nomessages && (
-              <div className="bg-gray-200 p-6 pt-6 m-2 rounded-3xl pt-0  itemboxcomment my-3 shadow-md m-auto w-auto">
-                <div className="bg-gray-50 p-6 m-2 rounded-3xl mx-auto shadow-md w-full">
-                  There Are No Messages Yet! Don't Give Up Hope!
-                </div>
-              </div>
-            )}
             {clickReply ? (
                     <form onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">

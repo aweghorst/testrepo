@@ -22,6 +22,7 @@ export const QUERY_USERS = gql`
                     date
                 }
                 messages {
+                    _id
                     username
                     messageBody
                     createdAt
@@ -52,9 +53,17 @@ export const QUERY_USER = gql`
                     date
                 }
                 messages {
+                    _id
                     username
                     messageBody
                     createdAt
+                    replyCount
+                    replies {
+                        _id
+                        username
+                        replyBody
+                        createdAt
+                    }
                 }
             }
         }
@@ -77,9 +86,11 @@ export const QUERY_ALL_BIKES = gql`
                 date
             }
             messages {
+                _id
                 username
                 messageBody
                 createdAt
+                replyCount
             }
         }
     }
@@ -101,9 +112,11 @@ export const QUERY_USER_BIKE = gql`
                 date
             }
             messages {
+                _id
                 username
                 messageBody
                 createdAt
+                replyCount
             }
         }
     }
@@ -141,9 +154,17 @@ export const QUERY_BIKE_MESSAGES = gql`
         bike(_id: $bikeId) {
             _id
             messages {
+                _id
                 username
                 messageBody
                 createdAt
+                replyCount
+                replies {
+                    _id
+                    username
+                    replyBody
+                    createdAt
+                }
             }
         }
     }

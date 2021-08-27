@@ -77,11 +77,11 @@ const resolvers = {
         },
         userMessages: async (parent, args, context) => {
             if (context.user) {
-                const messages = await Message.find({username: context.username});
+                const messages = await Message.find({username: context.user.username});
                 return messages;
             }
         },
-        message: async (parent, args, context) => {
+        message: async (parent, { _id }, context) => {
             if (context.user) {
                 const message = await Message.findOne({ _id });
                 return message;
@@ -186,8 +186,7 @@ const resolvers = {
         },
         addMessage: async (parent, { bikeId, messageBody }, context) => {
             if (context.user) {
-                const message = Message.create({messageBody, username: context.user.username});
-                console.log("message", message, "id", message._id);
+                const message = await Message.create({ messageBody, username: context.user.username });
                 const updatedBike = await Bike.findOneAndUpdate(
                     { _id: bikeId },
                     { $push: { messages: message._id } },
@@ -234,14 +233,16 @@ const resolvers = {
         },
         addReply: async (parent, { messageId, replyBody }, context) => {
             if (context.user) {
+                console.log("mess Id, reply body: ", messageId, replyBody);
                 const updatedMessage = await Message.findOneAndUpdate(
                     { _id: messageId },
-                    { $push: { replies: { replyBody, username: context.username } } },
+                    { $push: { replies: { replyBody, username: context.user.username } } },
                     { new: true}
-                )
+                ).populate('replies');
+
+                return updatedMessage;
             }
-        }
-        
+        }        
     },
 };
 
