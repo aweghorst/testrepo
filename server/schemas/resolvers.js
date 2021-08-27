@@ -74,6 +74,18 @@ const resolvers = {
         },
         bike: async ( parent, { _id }) => {
             return Bike.findOne({ _id });
+        },
+        messagesFromUser: async (parent, args, context) => {
+            if (context.user) {
+                const messages = await Message.find({username: context.username});
+                return messages;
+            }
+        },
+        message: async (parent, args, context) => {
+            if (context.user) {
+                const message = await Message.findOne({ _id });
+                return message;
+            }
         }
     },
     Mutation: {
@@ -208,6 +220,32 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+        deleteMessage: async (parent, { bikeId, messageId }, context) => {
+            if (context.user) {
+                Message.findOneAndDelete({ _id: messageId }, function(err, docs) {
+                    if (err) {
+                        console.log("delete err", err);
+                    } else {
+                        console.log("deleted message", messageId);
+                    }
+                });
+
+                const updatedBike = await Bike.findOneAndUpdate(
+                    { _id: bikeId },
+                    { $pull: { messages: messageId } },
+                    { new: true }
+                )
+            }
+        },
+        addReply: async (parent, { messageId, replyBody }, context) => {
+            if (context.user) {
+                const updatedMessage = await Message.findOneAndUpdate(
+                    { _id: messageId },
+                    { $push: { replies: { replyBody, username: context.username } } },
+                    { new: true}
+                )
+            }
+        }
         
     },
 };
