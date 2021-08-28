@@ -8,12 +8,10 @@ import "../../assets/styles/bikemessage.css";
 
 const BikeMessage = ({ bikeMessages, bike }) => {
   let noMessages = false;
-  // let noReply = true;
   const alert = useAlert()
   
   if (bikeMessages?.length === 0) {
     noMessages = true;
-    // noReply = false;
   }
 
   const [messageId, setMessageId] = useState('');
@@ -72,7 +70,6 @@ const BikeMessage = ({ bikeMessages, bike }) => {
     }
   }
   
-
   if (submitted === true) {
     alert.success(
       "Messege Sent"
@@ -176,36 +173,6 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                       </button>
                     </div>
                   </form>)}
-            {/* {clickReply ? (
-                    <form onSubmit={handleFormSubmit}>
-                    <div className="shadow overflow-hidden sm:rounded-md">
-                      <div className="px-4 py-5 addbackground sm:p-6">
-                        <div className="col-span-6 sm:col-span-3">
-                          <textarea
-                            className="border pl-3 pt-1 mt-2 rounded-md outline"
-                            rows="5"
-                            cols="52"
-                            placeholder="Type your message here!"
-                            onChange={handleChange}
-                          ></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                  ) : (
-                    noReply && (<button className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
-                      onClick={handleReply}>
-                    Reply
-                  </button>)
-                  ) } */}
           </div>
         </div>
       </div>
