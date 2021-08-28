@@ -18,7 +18,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
   const [clickReply, setClickReply] = useState(false);
   const [replyBody, setReplyBody] = useState("");
   const [bikeId, setBikeId] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
   const [addReply, {error}] = useMutation(ADD_REPLY //, {
   //   update(cache, { data: { addReply } }) {
   //     try {
@@ -58,34 +58,50 @@ const BikeMessage = ({ bikeMessages, bike }) => {
     event.preventDefault();
 
     try {
-      await addReply({
+      const reply = await addReply({
         variables: { messageId, replyBody },
       });
 
       setReplyBody("");
       setBikeId("");
-      setSubmitted(true);
+
+      if (reply) {
+        alert.success(
+          "Messege Sent"
+        );
+
+        setClickReply(false);
+
+        // hide model
+        var bikeMessageEl = document.getElementById("bikemessage");
+        var dashboardEl = document.getElementById("dashboardcontainer");
+        var addbikebtnEl = document.getElementById("addbikebtn");
+        bikeMessageEl.classList.add("hidden");
+        dashboardEl.classList.remove("hidden", "pb-10");
+        addbikebtnEl.classList.remove("hidden");
+      }
+      // setSubmitted(true);
     } catch (e) {
       console.error(e);
     }
   }
   
-  if (submitted === true) {
-    alert.success(
-      "Messege Sent"
-    );
-    setSubmitted(false);
-    setClickReply(false);
-    // window.location.reload(); // ideally find another way to refresh the messages without reloading
+  // if (submitted === true) {
+  //   alert.success(
+  //     "Messege Sent"
+  //   );
+  //   setSubmitted(false);
+  //   setClickReply(false);
+  //   // window.location.reload(); // ideally find another way to refresh the messages without reloading
 
-    // hide model
-    var bikeMessageEl = document.getElementById("bikemessage");
-    var dashboardEl = document.getElementById("dashboardcontainer");
-    var addbikebtnEl = document.getElementById("addbikebtn");
-    bikeMessageEl.classList.add("hidden");
-    dashboardEl.classList.remove("hidden", "pb-10");
-    addbikebtnEl.classList.remove("hidden");
-  }
+  //   // hide model
+  //   var bikeMessageEl = document.getElementById("bikemessage");
+  //   var dashboardEl = document.getElementById("dashboardcontainer");
+  //   var addbikebtnEl = document.getElementById("addbikebtn");
+  //   bikeMessageEl.classList.add("hidden");
+  //   dashboardEl.classList.remove("hidden", "pb-10");
+  //   addbikebtnEl.classList.remove("hidden");
+  // }
 
   return (
     <div className="flex justify-center w-8/12 p-20 pb-0 pt-0 mt-1">

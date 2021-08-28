@@ -23,22 +23,27 @@ const MessageForm = () => {
     event.preventDefault();
 
     try {
-      await addMessage({
+      const message = await addMessage({
         variables: { bikeId, messageBody },
       });
 
       setMessageBody("");
       setBikeId("");
+
+      if (message) {
+        alert.success(
+          "Messege Sent"
+        );
+      }
+      
       setSubmitted(true);
+
     } catch (e) {
       console.error(e);
     }
   }
 
   if (submitted === true) {
-    alert.success(
-      "Messege Sent"
-    );
     return <Redirect to="/Search" />;
   }
 
