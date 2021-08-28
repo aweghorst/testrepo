@@ -132,14 +132,27 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                     className="bg-gray-50 p-6 m-2 rounded-3xl mx-auto shadow-md w-full"
                     key={message._id}
                   >
-                    <div>{message.messageBody}</div>
-                    {message.replies.length ? (
-                    <div className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
-                      {message.replies.map(reply => (
-                        <div key={reply._id}>{reply.username} replied {reply.replyBody} on {reply.createdAt}</div>))}
-                      </div>) : (<div></div>)}
+                      <div>{message.messageBody}</div>
                   </div>
-                  {clickReply ? (
+                  {message.replies.length ? (
+                    <div>
+                      {message.replies.map(reply => (
+                        <div key={reply._id} className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
+                          {reply.username} replied 
+                            <div className="bg-gray-50 p-6 m-2 rounded-3xl mx-auto shadow-md w-full">
+                              {reply.replyBody}
+                            </div>
+                            <div>on {reply.createdAt}</div>
+                        </div>))}
+                      </div>) : (<div></div>)}
+                    {noReply && (<button data-id={message._id} 
+                        className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        onClick={handleReply}>
+                          Reply
+                      </button>)}
+                </div>
+              ))}
+              {clickReply && (
                     <form onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
                       <div className="px-4 py-5 addbackground sm:p-6">
@@ -162,15 +175,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                         Submit
                       </button>
                     </div>
-                  </form>
-                  ) : (
-                    noReply && (<button data-id={message._id} className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
-                      onClick={handleReply}> {console.log("id", message._id)}
-                    Reply
-                  </button>)
-                  ) }
-                </div>
-              ))}
+                  </form>)}
             {/* {clickReply ? (
                     <form onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">

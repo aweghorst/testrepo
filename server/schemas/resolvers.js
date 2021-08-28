@@ -235,7 +235,6 @@ const resolvers = {
         },
         addReply: async (parent, { messageId, replyBody }, context) => {
             if (context.user) {
-                console.log("mess Id, reply body: ", messageId, replyBody);
                 const updatedMessage = await Message.findOneAndUpdate(
                     { _id: messageId },
                     { $push: { replies: { replyBody, username: context.user.username } } },
