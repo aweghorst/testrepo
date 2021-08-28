@@ -12,7 +12,7 @@ const resolvers = {
             if (context.user) {
                 const user = await User.findById(context.user._id)
                     .select("-__v -password")
-                    .populate("bikes");
+                    .populate({path: "bikes", populate: {path: "messages"}});
                 return user;
             }
             throw new AuthenticationError("Not logged in");
@@ -81,9 +81,9 @@ const resolvers = {
                 return messages;
             }
         },
-        message: async (parent, { _id }, context) => {
+        message: async (parent, { messageId }, context) => {
             if (context.user) {
-                const message = await Message.findOne({ _id });
+                const message = await Message.findOne({ _id: messageId});
                 return message;
             }
         }

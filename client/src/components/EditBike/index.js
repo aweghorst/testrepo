@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries";
 import { UPDATE_BIKE, UPDATE_STATUS } from "../../utils/mutations";
+import { useAlert } from 'react-alert';
 import FileBase64 from "react-file-base64";
 import gql from "graphql-tag";
 import "../../assets/styles/editbike.css";
@@ -91,6 +92,8 @@ const EditBike = ({
       location,
     });
   };
+
+  const alert = useAlert()
   // submit form,  pass the data from the form state object as variables for our addUser mutation function
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -125,8 +128,8 @@ const EditBike = ({
     } catch (e) {
       console.error(e);
       // window.location.reload();
-      window.alert(
-        "There was an error with adding your bike. Please make sure bike image is not larger than 64 KB."
+      alert.error(
+        "Error editing bike Image too large"
       );
     }
   };

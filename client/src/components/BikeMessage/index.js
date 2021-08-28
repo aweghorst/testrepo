@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE, ADD_REPLY } from "../../utils/mutations";
-import { QUERY_USER, QUERY_MESSAGE } from "../../utils/queries";
+// import { QUERY_USER, QUERY_MESSAGE } from "../../utils/queries";
+import { useAlert } from 'react-alert';
+
 import "../../assets/styles/bikemessage.css";
 
 const BikeMessage = ({ bikeMessages, bike }) => {
   let noMessages = false;
   let noReply = true;
+  const alert = useAlert()
   
   if (bikeMessages?.length === 0) {
     noMessages = true;
@@ -68,9 +71,12 @@ const BikeMessage = ({ bikeMessages, bike }) => {
       console.error(e);
     }
   }
+  
 
   if (submitted === true) {
-    alert("Your message has been sent!");
+    alert.success(
+      "Messege Sent"
+    );
     setSubmitted(false);
     setClickReply(false);
     // window.location.reload(); // ideally find another way to refresh the messages without reloading
@@ -160,7 +166,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                   ) } */}
                 </div>
               ))}
-            {clickReply ? (
+            {/* {clickReply ? (
                     <form onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
                       <div className="px-4 py-5 addbackground sm:p-6">
@@ -189,7 +195,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                       onClick={handleReply}>
                     Reply
                   </button>)
-                  ) }
+                  ) } */}
           </div>
         </div>
       </div>
