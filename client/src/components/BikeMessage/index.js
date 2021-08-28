@@ -123,7 +123,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
             )}
             {bikeMessages &&
               bikeMessages.map(message => (
-                <div className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
+                  <div className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
                   <div className="flex justify-between mb-5">
                     <div className="message-username">{message.username}</div>
                     <div>{message.createdAt}</div>
@@ -133,8 +133,13 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                     key={message._id}
                   >
                     <div>{message.messageBody}</div>
+                    {message.replies.length ? (
+                    <div className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
+                      {message.replies.map(reply => (
+                        <div key={reply._id}>{reply.username} replied {reply.replyBody} on {reply.createdAt}</div>))}
+                      </div>) : (<div></div>)}
                   </div>
-                  {/* {clickReply ? (
+                  {clickReply ? (
                     <form onSubmit={handleFormSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
                       <div className="px-4 py-5 addbackground sm:p-6">
@@ -163,7 +168,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                       onClick={handleReply}> {console.log("id", message._id)}
                     Reply
                   </button>)
-                  ) } */}
+                  ) }
                 </div>
               ))}
             {/* {clickReply ? (

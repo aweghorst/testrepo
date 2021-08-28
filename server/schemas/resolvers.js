@@ -177,9 +177,11 @@ const resolvers = {
         },
         updateUser: async (parent, args, context) => {
             if (context.user) {
-                return await User.findByIdAndUpdate(context.user._id, args, {
+                const updatedUser = await User.findByIdAndUpdate(context.user._id, args, {
                     new: true,
                 });
+
+                return updatedUser;
             }
 
             throw new AuthenticationError("Not logged in");
