@@ -8,12 +8,12 @@ import "../../assets/styles/bikemessage.css";
 
 const BikeMessage = ({ bikeMessages, bike }) => {
   let noMessages = false;
-  let noReply = true;
+  // let noReply = true;
   const alert = useAlert()
   
   if (bikeMessages?.length === 0) {
     noMessages = true;
-    noReply = false;
+    // noReply = false;
   }
 
   const [messageId, setMessageId] = useState('');
@@ -145,7 +145,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                             <div>on {reply.createdAt}</div>
                         </div>))}
                       </div>) : (<div></div>)}
-                    {noReply && (<button data-id={message._id} 
+                    {clickReply ? (<></>) : (<button data-id={message._id} 
                         className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                         onClick={handleReply}>
                           Reply

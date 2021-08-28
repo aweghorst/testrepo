@@ -19,6 +19,7 @@ const Inbox = () => {
 
     // set inbox count
     const count = messagesWithReplies?.length;
+    
     return (        
         <div className="pt-10 pb-10 flex justify-center">
         <button
