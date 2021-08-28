@@ -125,25 +125,26 @@ const SearchBike = () => {
           <div className="pt-20">
           {searchedBikes.length ? (
             <CarouselProvider
-            naturalSlideWidth={300}
-            naturalSlideHeight={300}
+            naturalSlideWidth={80}
+            naturalSlideHeight={120}
             totalSlides={searchedBikes?.length}
             orientation={"horizontal"}
-            step={0}
+            step={1}
             dragStep={1}
-            visibleSlides={0}
+            visibleSlides={2}
             isIntrinsicHeight={true}
-            infinite={true}
-            isPlaying={true}
-            interval={5000}
+            // infinite={true}
+            // isPlaying={true}
+            // interval={5000}
           >
             <div className="pb-20 flex flex-wrap  justify-center visible">
               <Slider>
               {searchedBikes.map((bike, i) => {
                 return (
+                  <div>
                   <Slide index={i}
-                  key={bike._id}
-                  className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
+                  key={bike._id}>
+                  <div className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
                   >
                     <div className="bg-gray-600 dark:bg-gray-800 rounded-3xl">
 
@@ -200,7 +201,9 @@ const SearchBike = () => {
                       </HashRouter>
                     </div>
                 </div>
+                </div>
                 </Slide>
+                </div>
                 );
                 // }
               })}
