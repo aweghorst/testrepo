@@ -36,21 +36,10 @@ const userSchema = new Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  console.log("new", this.isNew);
+  console.log("new", this);
   console.log("modified:", this.isModified("password"));
 
   if (this.isNew || this.isModified("password")) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
-  }
-
-  next();
-});
-
-// testing to see if updateUser will trigger this
-userSchema.pre("update", async function (next) {
-  console.log(this.Modified);
-  if (this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }

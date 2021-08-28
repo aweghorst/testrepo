@@ -2,6 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Bike, Message } = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+const bcrypt = require('bcrypt');
 
 const resolvers = {
     Query: {
@@ -11,7 +12,7 @@ const resolvers = {
         user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id)
-                    .select("-__v -password")
+                    .select("-__v")
                     .populate({path: "bikes", populate: {path: "messages"}});
                 return user;
             }
@@ -177,9 +178,14 @@ const resolvers = {
         },
         updateUser: async (parent, args, context) => {
             if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate(context.user._id, args, {
-                    new: true,
-                });
+                const saltRounds = 10;
+                const updatedPassword = await bcrypt.hash(args.password, saltRounds);
+
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { password: updatedPassword },
+                    { new: true }
+                );
 
                 return updatedUser;
             }
