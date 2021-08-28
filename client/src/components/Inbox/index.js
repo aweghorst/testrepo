@@ -41,11 +41,11 @@ const Inbox = () => {
             <div className="mt-5 md:mt-0 md:col-span-2">
             {messagesWithReplies &&
                 messagesWithReplies.map(message => (
-                    <div>
+                    <div key={message._id}>
                         <div>You wrote: {message.messageBody}</div>
                         <div>
                             {message.replies.map(reply => (
-                                <div>
+                                <div key={reply._id}>
                                     <div>{reply.username} replied on {reply.createdAt}:</div>
                                     <div>{reply.replyBody}</div>
                                 </div>
