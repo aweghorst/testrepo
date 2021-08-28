@@ -27,7 +27,7 @@ const AddBike = () => {
     isLost: "",
   });
 
-  const [addBike] = useMutation(ADD_BIKE);
+  const [addBike, { error }] = useMutation(ADD_BIKE);
   const [addStatus] = useMutation(UPDATE_STATUS);
 
   // update state based on form input changes
@@ -310,6 +310,7 @@ const AddBike = () => {
                       </div>
                       <div className="px-4 py-3 bg-gray-50 text-right sm:px-6"></div>
                     </div>
+                    {error && <div>Something went wrong.. Please try again</div>}
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                       <button
                         type="submit"

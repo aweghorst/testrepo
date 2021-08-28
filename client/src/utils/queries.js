@@ -171,8 +171,8 @@ export const QUERY_BIKE_MESSAGES = gql`
 `;
 
 export const QUERY_MESSAGES_FROM_USER = gql`
-    query userMessages($username: String!) {
-        userMessages(username: $username) {
+    {
+        userMessages {
             _id
             messageBody
             createdAt

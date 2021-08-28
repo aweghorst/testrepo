@@ -65,7 +65,7 @@ const EditBike = ({
   //   ],
   // });
 
-  const [updateBike] = useMutation(UPDATE_BIKE);
+  const [updateBike, { error }] = useMutation(UPDATE_BIKE);
   const [updateStatus] = useMutation(UPDATE_STATUS);
 
   // update state based on form input changes
@@ -352,6 +352,7 @@ const EditBike = ({
                       </div>
                       <div className="px-4 py-3 bg-gray-50 dark:bg-gray-600 text-right sm:px-6"></div>
                     </div>
+                    {error && <div>Something went wrong.. Please try again.</div>}
                     <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                       <button
                         type="submit"

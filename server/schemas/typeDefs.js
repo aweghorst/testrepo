@@ -64,7 +64,7 @@ const typeDefs = gql`
     userBikes(userId: String): [Bike]
     lostBikes(location: String): [Bike]
     checkout: Checkout
-    userMessages(username: String!): [Message]
+    userMessages: [Message]
     message(messageId: ID!): Message
   }
 

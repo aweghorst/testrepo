@@ -2,8 +2,9 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import AddBike from "../components/AddBike";
 import UserBike from "../components/UserBike";
+import Inbox from "../components/Inbox";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
+import { QUERY_USER, QUERY_USER_MESSAGES } from "../utils/queries";
 import Auth from '../utils/auth';
 
 const Dashboard = () => {
@@ -27,6 +28,7 @@ const Dashboard = () => {
        <>
 
        </>)}
+      <Inbox />
       <AddBike />
       <UserBike />
     </div>
