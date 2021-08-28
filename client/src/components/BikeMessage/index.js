@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_MESSAGE, ADD_REPLY } from "../../utils/mutations";
+import { ADD_REPLY } from "../../utils/mutations";
 // import { QUERY_USER, QUERY_MESSAGE } from "../../utils/queries";
 import { useAlert } from 'react-alert';
 
@@ -17,8 +17,8 @@ const BikeMessage = ({ bikeMessages, bike }) => {
   const [messageId, setMessageId] = useState('');
   const [clickReply, setClickReply] = useState(false);
   const [replyBody, setReplyBody] = useState("");
-  const [bikeId, setBikeId] = useState('');
-  // const [submitted, setSubmitted] = useState(false);
+  // const [bikeId, setBikeId] = useState('');
+
   const [addReply, {error}] = useMutation(ADD_REPLY //, {
   //   update(cache, { data: { addReply } }) {
   //     try {
@@ -51,7 +51,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
 
   function handleChange(event) {
     setReplyBody(event.target.value);
-    setBikeId(bike);
+    // setBikeId(bike);
   }
 
   async function handleFormSubmit(event) {
@@ -63,7 +63,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
       });
 
       setReplyBody("");
-      setBikeId("");
+      // setBikeId("");
 
       if (reply) {
         alert.success(
@@ -80,29 +80,11 @@ const BikeMessage = ({ bikeMessages, bike }) => {
         dashboardEl.classList.remove("hidden", "pb-10");
         addbikebtnEl.classList.remove("hidden");
       }
-      // setSubmitted(true);
     } catch (e) {
       console.error(e);
     }
   }
   
-  // if (submitted === true) {
-  //   alert.success(
-  //     "Messege Sent"
-  //   );
-  //   setSubmitted(false);
-  //   setClickReply(false);
-  //   // window.location.reload(); // ideally find another way to refresh the messages without reloading
-
-  //   // hide model
-  //   var bikeMessageEl = document.getElementById("bikemessage");
-  //   var dashboardEl = document.getElementById("dashboardcontainer");
-  //   var addbikebtnEl = document.getElementById("addbikebtn");
-  //   bikeMessageEl.classList.add("hidden");
-  //   dashboardEl.classList.remove("hidden", "pb-10");
-  //   addbikebtnEl.classList.remove("hidden");
-  // }
-
   return (
     <div className="flex justify-center w-8/12 p-20 pb-0 pt-0 mt-1">
       <div className="justify-center inline-block addbikecontainer align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all  sm:align-middle sm:max-w-lg sm:w-full">
@@ -136,7 +118,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
             )}
             {bikeMessages &&
               bikeMessages.map(message => (
-                  <div className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
+                  <div key={message._id} className="bg-gray-200 p-6 m-2 rounded-3xl pt-0 my-7 break-words itemboxcomment shadow-md m-auto w-auto">
                   <div className="flex justify-between mb-5">
                     <div className="message-username">{message.username}</div>
                     <div>{message.createdAt}</div>
@@ -180,6 +162,7 @@ const BikeMessage = ({ bikeMessages, bike }) => {
                         </div>
                       </div>
                     </div>
+                    {error && <div className="dark:text-gray-300 text-sm text-gray-500">Something went wrong.. Please try again</div>}
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                       <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

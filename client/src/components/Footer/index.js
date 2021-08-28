@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import "../../assets/styles/footer.css";
 import { QUERY_CHECKOUT } from "../../utils/queries";

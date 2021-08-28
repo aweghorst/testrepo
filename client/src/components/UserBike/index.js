@@ -29,7 +29,7 @@ const UserBike = () => {
 
     useEffect(() => {
         setBikeState(bikes);
-    });
+    }, [bikes]);
 
     const [deleteBike, { error }] = useMutation(DELETE_BIKE);
 
@@ -92,13 +92,13 @@ const UserBike = () => {
     addbikebtnEl.classList.remove("hidden");
   }
 
-  function handleEditClick(e) {
-    e.preventDefault();
-    console.log("clicked edit!");
+  // function handleEditClick(e) {
+  //   e.preventDefault();
+  //   console.log("clicked edit!");
 
-    // get bike id
-    const bikeId = e.target.getAttribute("data-bike-id");
-  }
+  //   // get bike id
+  //   const bikeId = e.target.getAttribute("data-bike-id");
+  // }
 
   const handleDeleteClick = async bikeId => {
     //  e.preventDefault();
@@ -183,6 +183,7 @@ const UserBike = () => {
                   >
                     Delete
                   </button>
+                  {error && <div className="dark:text-gray-300 text-sm text-gray-500">Something went wrong.. Please try deleting again</div>}
                 </div>
               </div>
             </div>

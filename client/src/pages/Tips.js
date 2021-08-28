@@ -1,5 +1,5 @@
 import React from "react";
-import biketips from "../assets/images/biketips.jpg";
+// import biketips from "../assets/images/biketips.jpg";
 import doubleLock from "../assets/images/double-lock.PNG";
 import serialNumber from "../assets/images/serial-number.PNG"
 import ulock from "../assets/images/ulock.PNG";

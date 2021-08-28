@@ -1,11 +1,11 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@apollo/client";
-import { QUERY_USER } from "../../utils/queries";
+// import { QUERY_USER } from "../../utils/queries";
 import { UPDATE_BIKE, UPDATE_STATUS } from "../../utils/mutations";
 import { useAlert } from 'react-alert';
 import FileBase64 from "react-file-base64";
-import gql from "graphql-tag";
+// import gql from "graphql-tag";
 import "../../assets/styles/editbike.css";
 
 const EditBike = ({
@@ -109,21 +109,8 @@ const EditBike = ({
       const bikeId = data?.updateBike._id;
       setBikeStatus(bikeId, statusState.isLost, statusState.location);
 
-      // setFormState({
-      //   bikeId: "",
-      //   brand: "",
-      //   bike_model: "",
-      //   year: "",
-      //   serial: "",
-      //   description: "",
-      //   image: "",
-      // });
-      // setStatusState({
-      //   location: "",
-      //   isLost: "",
-      // });
-
       console.log("form from addBike:", data);
+
       window.location.reload();
     } catch (e) {
       console.error(e);
