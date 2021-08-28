@@ -41,7 +41,7 @@ const AddBike = () => {
   const handleChangeStatus = event => {
     let isLost;
     const status = document.querySelector('[name="status"]').value;
-    if (status === "Not missing") {
+    if (status === "Not Missing") {
       isLost = false;
     } else {
       isLost = true;
@@ -189,7 +189,7 @@ const AddBike = () => {
                             onChange={handleChangeStatus}
                             className="mt-1 mb-3 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
-                            <option>Not missing</option>
+                            <option>Not Missing</option>
                             <option>Missing</option>
                           </select>
                         </div>
