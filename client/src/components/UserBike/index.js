@@ -5,6 +5,8 @@ import { QUERY_USER } from "../../utils/queries";
 import { DELETE_BIKE } from "../../utils/mutations";
 import EditBike from "../EditBike";
 import "../../assets/styles/dashboard.css";
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, DotGroup } from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const UserBike = () => {
   // const { loading, data } = useQuery(QUERY_USERS);
@@ -19,17 +21,23 @@ const UserBike = () => {
 
     // const username = data?.user.username;
     // const email = data?.user.email;
-    // const bikeCount = data?.user.bikeCount;
+    const bikeCount = data?.user.bikeCount;
     const bikes = data?.user.bikes;
 
     const [bikeMessages, setBikeMessages] = useState();
     // const [showMessages, clickedShowMessages] = useState(false);
     const [bikeState, setBikeState] = useState([bikes]);
     const [bikeId, setBikeId] = useState();
+    const [bikesRegistered, setBikesRegistered] = useState();
 
+    console.log('bikeCount', data?.user.bikeCount);
+    
     useEffect(() => {
         setBikeState(bikes);
-    }, [bikes]);
+        if (data?.user.bikeCount > 0) {
+          setBikesRegistered(true);
+        }
+    }, bikesRegistered);
 
     const [deleteBike, { error }] = useMutation(DELETE_BIKE);
 
@@ -120,8 +128,26 @@ const UserBike = () => {
         id="dashboardcontainer"
         className="pb-20 flex flex-wrap justify-center visible"
       >
-        {bikes?.map(bike => (
-          <div
+        {bikesRegistered ? (
+        <CarouselProvider
+          naturalSlideWidth={300}
+          naturalSlideHeight={300}
+          totalSlides={bikeCount}
+          orientation={"horizontal"}
+          step={1}
+          dragStep={1}
+          visibleSlides={0}
+          isIntrinsicHeight={true}
+          infinite={true}
+          touchEnables={true}
+          dragEnables={true}
+          // isPlaying={true}
+          // interval={5000}
+        >
+        <span>You have {bikeCount} bike{bikeCount > 1 ? 's ' : ' '} registered:</span>
+        <Slider>
+        {bikes?.map((bike, i) => (
+          <Slide index={i}
             className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
             key={bike._id}
           >
@@ -187,9 +213,17 @@ const UserBike = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Slide>
         ))}
-      </div>
+        </Slider>
+        <ButtonBack className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+          Back</ButtonBack>
+        <ButtonNext className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+          Next</ButtonNext>
+        <DotGroup />
+      </CarouselProvider>
+       ) : (<div>No bikes registered</div>)}
+
       <div id="bikemessage" className="hidden flex flex-col items-center">
         <BikeMessage bikeMessages={bikeMessages} bike={bikeId} />
         <button
@@ -198,6 +232,7 @@ const UserBike = () => {
         >
           Return To Bike List
         </button>
+      </div>
       </div>
     </span>
   );
