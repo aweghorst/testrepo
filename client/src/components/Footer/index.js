@@ -23,25 +23,17 @@ const Footer = () => {
     return (
         <div className=" footer-section">
             <footer className="footer-text dark:text-gray-400">
-                <div>
-                    <div className="product">
-                        <div className="description">
-                            <h3>
-                                Please consider a small donation to the
-                                BikeSleuth team hard at work recovering lost
-                                bicycles everywhere.
-                            </h3>
+                        <div class="donation">
+                            Please consider a small
+                            <span className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                                    onClick={submitCheckout}>
+                                donation
+                            </span>
+                            to the 
+                            BikeSleuth team hard at work recovering 
+                            lost bicycles everywhere.
                         </div>
-                    </div>
-                    <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                        onClick={submitCheckout}
-                    >
-                        Donate
-                    </button>
-                </div>
-                <div>&copy; 2021 by UTA Coding Bootcamp Group 1</div>
+                    <div>&copy; 2021 by UTA Coding Bootcamp Group 1</div>
             </footer>
         </div>
     );

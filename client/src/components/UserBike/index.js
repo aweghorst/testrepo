@@ -22,25 +22,25 @@ const UserBike = () => {
 
     const [deleteBike, { error }] = useMutation(DELETE_BIKE);
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+  // const responsive = {
+  //   superLargeDesktop: {
+  //     // the naming can be any, depends on you.
+  //     breakpoint: { max: 4000, min: 3000 },
+  //     items: 5,
+  //   },
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 3,
+  //   },
+  //   tablet: {
+  //     breakpoint: { max: 1024, min: 464 },
+  //     items: 2,
+  //   },
+  //   mobile: {
+  //     breakpoint: { max: 464, min: 0 },
+  //     items: 1,
+  //   },
+  // };
 
   function getMessageCount(messageCount, messageArray) {
     // map through messages to collect all reply counts
@@ -99,6 +99,10 @@ const UserBike = () => {
         id="dashboardcontainer"
         className="pb-20 flex flex-wrap justify-center visible"
       >
+        {bikes?.length === 0 ? (<h3 className="flex flex-col items-center pt-20 text-center">
+          No bikes registered yet. <br />
+          Let's get you rolling! <br />
+          Go to dashboard menu and add a bike.</h3>) : null}
         {bikes?.map(bike => (
           <div
             className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
