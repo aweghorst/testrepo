@@ -4,3 +4,12 @@
  text-align: center;
  position: relative;
 }
+
+.donation span {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.donation span:hover {
+    cursor: pointer;
+}
