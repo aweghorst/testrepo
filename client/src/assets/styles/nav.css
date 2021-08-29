@@ -96,10 +96,14 @@ ul {
 }
 .dropdown-container {
     display: none;
-    background-color: #262626;
     padding-left: 8px;
 }
 
 .dropdown-btn {
     display: block;
+}
+
+.active {
+    background-color: green;
+    color: white;
 }

@@ -36,20 +36,20 @@ useEffect(() => {
 
 useEffect(() => {
     var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
+    var i;
 
-for (i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-        dropdownContent.style.display = "none";
-        } else {
-        dropdownContent.style.display = "block";
-        }
-    });
-}
-})
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = document.querySelector(".dropdown-container");
+            if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+            } else {
+            dropdownContent.style.display = "block";
+            }
+        });
+    }
+});
 
 
     return (
@@ -99,16 +99,16 @@ for (i = 0; i < dropdown.length; i++) {
                                 <li><NavLink
                                 exact
                                 to="/Dashboard"
-                                activeClassName="current-nav"
+                                activeClassName="current-nav dropdown-btn"
                                 className="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300 dropdown-btn"
                                 replace
                             >
                                 Dashboard
                                 <i class="fa fa-caret-down"></i>
                                         <div class="dropdown-container">
-                                        <div><AddBike /></div>
-                                        <div><Inbox /></div>
-                                        <div><UpdateUserForm /></div>
+                                        <span><AddBike /></span>
+                                        <span><Inbox /></span>
+                                        <span><UpdateUserForm /></span>
                                         </div>
                                     
                             </NavLink></li>
