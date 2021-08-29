@@ -183,8 +183,8 @@ useEffect(() => {
                                         replace
                                     >
                                         Dashboard
-                                        <i class="fa fa-caret-down"></i>
-                                        <div class="subnav-content">
+                                        <i className="fa fa-caret-down"></i>
+                                        <div className="subnav-content">
                                         <AddBike />
                                         <Inbox />
                                         <UpdateUserForm />

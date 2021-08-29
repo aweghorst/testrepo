@@ -107,3 +107,7 @@ ul {
     background-color: green;
     color: white;
 }
+
+.nav-section i {
+    margin-left: 5px;
+}
