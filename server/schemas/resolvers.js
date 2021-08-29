@@ -183,7 +183,8 @@ const resolvers = {
 
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { password: updatedPassword },
+                    { email: args.email, 
+                        password: updatedPassword },
                     { new: true }
                 );
 

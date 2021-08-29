@@ -18,14 +18,13 @@ const Dashboard = () => {
     return (
         <div className="w-screen">
             {Auth.loggedIn() ? (
-                <div className=" flex flex-col items-center pt-20">
+                <div className=" flex flex-col pt-10">
                     <div className="username capitalize dark:text-gray-200">
                         Hello {username}!
                     </div>
                     <div className="welcome dark:text-gray-200">
-                        Here you can upload your bike information and if a bike
-                        is marked as missing, it will be automatically added to
-                        the Search page!
+                        Register your bike information and if a bike is marked as 
+                        missing, it will automatically be added to the Search page!
                     </div>
                 </div>
             ) : (
