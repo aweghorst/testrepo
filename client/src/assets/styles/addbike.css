@@ -1,7 +1,20 @@
-.addbikebtn:hover {
-  background-color:rgb(255, 187, 40) ;
+.addheadercontainer {
+  border-bottom: 4px solid rgb(65, 133, 13);
 }
 
-.addbikebtn {
-  margin-left: ;
+.addbikecontainer {
+  border: 5px solid rgb(6, 9, 35);
+}
+
+.addheadertext {
+  font-size: 30px;
+}
+
+.addbackground {
+  background-color: rgb(245, 245, 245);
+}
+
+.line-height {
+  line-height: 30px;
+  padding-left: 10px;
 }

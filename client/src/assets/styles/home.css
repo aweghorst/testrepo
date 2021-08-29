@@ -1,17 +1,25 @@
 /* src/assets/styles/home.css */
 
-.home-container {
+.tips-title {
     text-align: center;
-    margin: 150px;
+    margin: 20px;
 }
 
 .welcome-title {
-font-size: 3em;
+    font-size: 3em;
 }
 
 .welcome-text {
     font-size: large;
-    width:65%;
-   margin: auto;
-   padding: 10px;
+    width: 65%;
+    margin: auto;
+    padding: 10px;
+}
+
+.how-to {
+    font-size: 30px;
+    font-weight: bold;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 0px;
 }
