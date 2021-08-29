@@ -7,23 +7,12 @@ import EditBike from "../EditBike";
 import "../../assets/styles/dashboard.css";
 
 const UserBike = () => {
-  // const { loading, data } = useQuery(QUERY_USERS);
-  // const user = data?.users[6] || {};
-  // console.log(data);
-  // console.log(user);
-  // const { username, email, bikeCount, bikes } = user;
-
-    //use when logged into app. if using seeded data, uncomment lines 9-13
     const { data } = useQuery(QUERY_USER);
     console.log(data?.user);
 
-    // const username = data?.user.username;
-    // const email = data?.user.email;
-    // const bikeCount = data?.user.bikeCount;
     const bikes = data?.user.bikes;
 
     const [bikeMessages, setBikeMessages] = useState();
-    // const [showMessages, clickedShowMessages] = useState(false);
     const [bikeState, setBikeState] = useState([bikes]);
     const [bikeId, setBikeId] = useState();
 
@@ -92,18 +81,8 @@ const UserBike = () => {
     addbikebtnEl.classList.remove("hidden");
   }
 
-  // function handleEditClick(e) {
-  //   e.preventDefault();
-  //   console.log("clicked edit!");
-
-  //   // get bike id
-  //   const bikeId = e.target.getAttribute("data-bike-id");
-  // }
 
   const handleDeleteClick = async bikeId => {
-    //  e.preventDefault();
-    // console.log("clicked delete!");
-    // console.log("This is the bikeID: " + bikeId);
     try {
       await deleteBike({
         variables: { bikeId },
@@ -128,7 +107,7 @@ const UserBike = () => {
             <div className="bg-gray-600 dark:bg-gray-800 rounded-3xl">
               {bike.image ? (
                 <img
-                  className="object-cover rounded-3xl h-full w-full p-1"
+                  className="object-cover rounded-3xl img-size p-1"
                   src={bike.image}
                   alt="the users bike"
                 />
