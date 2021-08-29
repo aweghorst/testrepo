@@ -4,7 +4,7 @@ import '../assets/styles/home.css';
 const Home = () => {
 
     return (
-        <div className="home-container">
+        <div className="sm:m-0 home-container">
             <div>
                 <h2 className="welcome-title"><span className="dark:text-gray-200">Welcome to BikeSleuth!</span></h2>
             </div>

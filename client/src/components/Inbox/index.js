@@ -21,14 +21,13 @@ const Inbox = () => {
     const count = messagesWithReplies?.length;
     
     return (        
-        <div className="pt-10 pb-10 flex justify-center">
-        <button
+        <div>
+        <span
           id="addbikebtn"
-          className="rounded-md border border-transparent addbikebtn shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
           onClick={() => setOpen(open => !open)}
         >
           Inbox{` (${count})`}
-        </button>
+        </span>
         <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"

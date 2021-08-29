@@ -1,0 +1,10 @@
+.carousel__slide {
+    width: calc(100% - 25px) !important;
+    height: calc(100% - 25px) !important;
+    left: 10px;
+    top: 10px;
+}
+
+.col-container {
+    height: 100%;
+}

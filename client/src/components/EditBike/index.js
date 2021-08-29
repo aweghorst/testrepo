@@ -30,19 +30,10 @@ const EditBike = ({
     bike_model: bikeModel,
     year: year,
     serial: serialNum,
-    // location: city,
     description: description,
     image: image,
   });
-  // console.log(bikeId);
-  // console.log(status);
-  // console.log(brand);
-  // console.log(bikeModel);
-  // console.log(year);
-  // console.log(serialNum);
-  // console.log(city);
-  // console.log(description);
-  // console.log(image);
+
 
   // set status of new bike
   const [statusState, setStatusState] = useState({
@@ -50,20 +41,6 @@ const EditBike = ({
     isLost: status,
   });
 
-  // const [updateBike] = useMutation(UPDATE_BIKE, {
-  //   refetchQueries: [
-  //     {
-  //       query: QUERY_USER, // Query name
-  //     },
-  //   ],
-  // });
-  // const [updateStatus] = useMutation(UPDATE_STATUS, {
-  //   refetchQueries: [
-  //     {
-  //       query: "QUERY_USER", // Query name
-  //     },
-  //   ],
-  // });
 
   const [updateBike, { error }] = useMutation(UPDATE_BIKE);
   const [updateStatus] = useMutation(UPDATE_STATUS);
