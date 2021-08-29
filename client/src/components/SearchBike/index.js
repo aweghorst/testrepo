@@ -141,9 +141,8 @@ const SearchBike = () => {
               <Slider>
               {searchedBikes.map((bike, i) => {
                 return (
-                  <div>
-                  <Slide index={i}
-                  key={bike._id}>
+                  <div key={bike._id}>
+                  <Slide index={i}>
                   <div className="bg-gray-300 dark:bg-gray-600 p-6 itembox m-2 rounded-3xl shadow-2xl max-w-lg col-container"
                   >
                     <div className="bg-gray-600 dark:bg-gray-800 rounded-3xl">
