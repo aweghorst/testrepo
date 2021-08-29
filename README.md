@@ -37,6 +37,14 @@
 4. Navigate to https://localhost:3001/graphql to test queries and mutations  
 
 ## Snapshots 
+Home:
+![image](https://user-images.githubusercontent.com/79875711/131236146-cbb3216b-e3b7-4326-8471-f9ca24b2a2af.png)
+Home in Dark Mode: 
+![image](https://user-images.githubusercontent.com/79875711/131236157-e32a9c7c-d611-4fec-bf3e-371a407d2b0f.png)
+Search for missing bikes page:
+![image](https://user-images.githubusercontent.com/79875711/131236229-97bf2d48-dd29-496b-933e-da3da3818e23.png)
+
+
 
 ## Contributors 
 - Alex Weghorst
