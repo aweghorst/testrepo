@@ -158,7 +158,7 @@ const SearchBike = () => {
                                     <Slider>
                                         {searchedBikes.map((bike, i) => {
                                             return (
-                                                <div>
+                                                <div key={bike._id}>
                                                     <Slide
                                                         index={i}
                                                         key={bike._id}
@@ -282,8 +282,9 @@ const SearchBike = () => {
                                 <DotGroup />
                             </CarouselProvider>
                         ) : clickSearch ? (
-                            <div>
-                                There are no missing bikes reported in this area
+                            <div className="dark:text-gray-200 text-center">
+                                Wheelie great news! <br />
+                                There are no missing bikes reported in this area.
                             </div>
                         ) : (
                             <div></div>
